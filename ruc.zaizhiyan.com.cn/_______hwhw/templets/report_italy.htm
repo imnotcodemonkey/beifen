@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>报表管理</title>
+<link rel="stylesheet" type="text/css" href="img/base.css">
+<link type="text/css" rel="stylesheet" href="./css/calendar.css" />
+<script type="text/javascript" src="./js/calendar.js" ></script>
+<script type="text/javascript" src="./js/calendar-zh.js" ></script>
+<script type="text/javascript" src="./js/calendar-setup.js"></script>
+</head>
+<body leftmargin="8" topmargin="8">
+<table width="98%" border="0" cellpadding="3" cellspacing="1" bgcolor="#F1F2F4" align="center">
+<tr>
+ <td height="26">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td>
+    <div style="float:left">
+        <strong>&nbsp;报表管理</strong>
+    </div>
+    <div style="float:right">&nbsp;</div>
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#E2E2E2" align="center" style="margin-top:8px">
+<form name="form2" method="post" target="_self">
+<tr align="center" bgcolor="#FAFAF1" height="22">
+<td width="6%" bgcolor="F4F4F4">&nbsp;</td>
+<td bgcolor="F4F4F4">选项</td>
+<td bgcolor="F4F4F4">条件</td>
+</tr>
+<tr align='center' bgcolor="#FFFFFF" 	height="22" onMouseMove="javascript:this.bgColor='#E3F0FB';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+<td width="6%"><input type="radio" name="radiobutton" value="radio1" checked="checked" /></td>
+<td>当前时间</td>
+<td><input type="text" id="currentdate" name="currentdate" value="<?php print date('Y-m-d',time());?>" class="intxt" style="width:90px; color:green" readonly></td>
+</tr>
+<tr align='center' bgcolor="#FFFFFF" 	height="22" onMouseMove="javascript:this.bgColor='#E3F0FB';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+<td width="6%"><input type="radio" name="radiobutton" value="radio2" /></td>
+<td>自定义时间</td>
+<td>
+    开始时间&nbsp;<input type="text" id="selectdate1" name="selectdate1" value="" class="intxt" style="width:90px; color:blue" onclick="return showCalendar('selectdate1', 'y-mm-dd');" readonly>&nbsp;---&nbsp;结束时间&nbsp;<input type="text" id="selectdate2" name="selectdate2" value="" class="intxt" style="width:90px; color:blue" onclick="return showCalendar('selectdate2', 'y-mm-dd');" readonly>
+</td>
+</tr>
+<tr align="right" bgcolor="#F1F2F4">
+    <td height="26" colspan="3" align="center">
+        <div style="float:right; padding-right:10px;">
+            <span class='btnlft btnblue' onclick="javascript:form2.submit();" onmouseover="this.className='btnlft btnblueover'" onmouseout="this.className='btnlft btnblue'">导出报表</span>
+        </div>
+    </td>
+</tr>
+<input type="hidden" name="dopost" value="submit">
+</form>
+</table>
+
+</body>
+</html>

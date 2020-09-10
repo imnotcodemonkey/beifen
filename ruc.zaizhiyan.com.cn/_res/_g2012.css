@@ -1,0 +1,95 @@
+@charset "gb2312";
+form,table,td,input,textarea,dd,dl,dt,blockquote,body{ padding:0px; margin:0px;}
+body {font:12px/150% Verdana,ËÎÌå; background: #FFF url('bg04.gif') repeat center top ; text-align:center;color:#333 }
+ul li{ list-style:none;}
+img  { border-width:0;}
+table{ border-collapse:collapse;}
+ 
+.btm10{ border-bottom:10px #f6f5ec solid;}
+
+.c{ clear:both;}
+.l{ float:left}
+.r{ float:right}
+.h{ display:none} .c strong{ display:none}
+.none { display:none}
+.cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .cl { zoom: 1; }
+
+.red { color:#FF3300}
+.blue{ color:#0066CC}
+.gray{ color:gray}
+.green{ color:green}
+
+.TL{ text-align: left}
+.TR{ text-align: right}
+.TC{ text-align: center}
+
+input,select{ vertical-align:middle;}
+
+a span{ font-size:12px;}
+
+a{ color:#000; text-decoration:none;}
+a:hover{ color: #800000; text-decoration:underline}
+
+#counter{ display:none}
+#courseBox{width:600px;height:360px;background:#FFF;border:5px #CCC solid;position:relative;padding:0 6px 0 6px}
+#courseBox dt{ border-bottom:1px #996633 solid; font:bold 12pt/28px Î¢ÈíÑÅºÚ; color:#CC3300}
+#courseBox dt div{}
+
+#bldBox{width:600px;height:360px;background:#FFF;border:5px #CCC solid;position:relative;padding:0 6px 0 6px}
+#bldBox dt{ border-bottom:1px #996633 solid; font:bold 12pt/28px Î¢ÈíÑÅºÚ; color:#CC3300}
+#bldBox dt div{}
+
+.close {width:30px;height:30px;position:absolute;top:-15px;right:-15px;background:url('../res/closebox.png') no-repeat;_background-image:none; cursor:pointer;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src="/templets/res/closebox.png");}
+
+#counter { display:none}
+
+#outA{background:transparent url('bg.gif') repeat-x}
+
+#wrapper { width:950px; margin:0 auto;text-align:left;}
+
+#header{ }
+	#header ul{margin:0;padding:0}
+	#header #topLinks{ height:25px; line-height:26px; background:transparent url('bg_g.gif') repeat-x; padding:0 6px;overflow:hidden}
+		#topLinks li{ display:inline; line-height:28px}
+	#top{ height:180px; background: transparent url('banner2.jpg') no-repeat; }
+	
+	#Nav { background:url('bg_g.gif') repeat-x 0 -50px;height:32px}
+	#navMenu{ background: transparent url('bg_navmenu.png') repeat-x 0 0; height:35px; padding:0 0 0 6px;}
+		#navMenu li{ float:left; }
+		#navMenu li a{ display:block; float:left; font:bold 14px/34px Verdana; color:#fff; padding:0 28px; }
+		#navMenu li a:hover{ text-decoration:none; }
+
+.mold { border:1px #ccc solid}
+.mold dt{ height:29px; background: transparent url('bg_g.gif') repeat-x 0 -250px; overflow:hidden; }
+.mold dt .l{ display:block; margin-left:10px; font:bold 13px/30px Verdana;color:#b70007; background: transparent url('ico_g.gif') no-repeat 0 -142px; }
+.mold dd{ padding:4px 8px;}
+.mold li{ height:20px; overflow:hidden;}
+.mold li a{  line-height:24px;}
+
+.moldH { border:1px #c5cfd2 solid;}
+.moldH dt{ padding:0 0 0 10px; height:31px; background: transparent url('bg_g.gif') repeat-x 0 -400px; overflow:hidden}
+.moldH dt .l{ width:100px; padding:0 0 0 10px; display:block; text-align:center;font:13px/31px Verdana; color:#b70007; }
+.moldH dt .r{ width:100px; display:block; text-align:center; padding:4px 0 0 0;}
+.moldH dd{ padding:2px 8px; background-color:#f7f7f8;}
+.moldH li{ height:24px; overflow:hidden;}
+.moldH li a{  line-height:24px;}
+.icoA li{list-style:square inside ; color:#a40e25;}
+
+.moldR dt{ height:31px;background:#fefefe url('bg_g.gif') no-repeat 0 -200px; overflow:hidden; font:14px/31px Verdana;  padding:0 26px; }
+.moldR dt *{ color:#a40e25}
+.moldR dd{ background-color:#fffbf5;padding:2px 8px;}
+.moldR li{ height:24px; overflow:hidden;color:#a40e25 ; font:14px/20px 'SimSun'}
+.moldR li a{ line-height:24px;}
+
+.error_page {width: 950px; padding: 50px 0; margin: auto;background: #f9fee8; text-align:center;  font-size:14px; color:#666666;}
+		.error_page h2 {margin: 20px 0 0;}
+		.error_page p {margin: 10px 0; padding: 0;}		
+		.error_page a {color: #9caa6d; text-decoration:none;}
+		.error_page a:hover {color: #9caa6d; text-decoration:underline;}
+
+
+#footer { background: #a40e25; text-align:center;margin-top:10px}
+#footer *,#footer a{ color:#eeeeee}
+	#links { height:37px;line-height:37px; border-bottom:2px #bfbfbf solid;}
+	#copyright{ padding:10px 0; }

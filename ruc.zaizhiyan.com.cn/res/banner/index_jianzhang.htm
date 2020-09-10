@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta content="text/html; charset=gb2312" http-equiv="Content-Type" />
+		<meta content="zh-cn" http-equiv="Content-Language" />
+		<title>{dede:field.seotitle /}_{dede:global.cfg_webname/}</title>
+		<meta name="keywords" content="{dede:field name='keywords'/}" />
+		<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+		<script type="text/javascript" src="http://i.haiwen.net/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/_res/_c2012.js?2012-7-13"></script>
+		<link href="/_res/_g2012.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/res/banner/responsiveslides.css">
+		<link href="/_res/_p.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="channelpage">
+		<div id="outA">
+			<div id="outB">
+				<div id="wrapper">
+					<div id="header">
+						{dede:include file='head.htm' ismake='yes'/}
+					</div>
+					<div id="main">
+						<div class="l" id="mainLeft">
+							<div id="place"><strong>当前位置:</strong> {dede:field name='position'/}</div>
+
+							<div id="content" class="content">{dede:field.content/}</div>
+							<div id="outBox">
+								<div id="channel">
+
+
+									<div id="zhaosheng">
+										{dede:channelartlist}
+										<dl>
+											<dt><a href="{dede:field name='typeurl'/}" class="l">{dede:field name='typename'/}</a><a href="{dede:field name='typeurl'/}"
+												 class="r">更多>></a></dt>
+											<dd>
+												<ol>
+													{dede:arclist titlelen='160' row='20'}
+													<li>·<a href="[field:arcurl /]">[field:title /]</a></li>
+													{/dede:arclist}
+												</ol>
+											</dd>
+										</dl>
+										{/dede:channelartlist}
+										<div class="c"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--left -->
+
+						<div id="mainRight" class="r">
+							<dl id="lianxi">
+								<dt><strong>报名咨询</strong></dt>
+								<dd>
+									{dede:myad name='lianxiWomen'/}
+								</dd>
+							</dl>
+							<script src="/res/banner/responsiveslides.js"></script>
+							<dl id="lianxi">
+								<div class="wrap3" style='margin-bottom: 10px;'>
+									<ul class="rslides" id="dowebok3">
+										<li><a href="/zhaoshengjianzhang/xiangmuguanli/" target="_blank"><img src="/res/banner/cbanner7.jpg" alt=""></a></li>
+										<li><a href="/zhaoshengjianzhang/xinwenxueyuan/" target="_blank"><img src="/res/banner/cbanner11.jpg" alt=""></a></li>
+										<li><a href="/zhaoshengjianzhang/tongjixueyuan/" target="_blank"><img src="/res/banner/cbanner9.jpg" alt=""></a></li>
+										<li><a href="/zhaoshengjianzhang/gonggongguanlixueyuan/" target="_blank"><img src="/res/banner/cbanner1.jpg"
+												 alt=""></a></li>
+										<li><a href="/" target="_blank"><img src="/res/banner/cbanner2.jpg" alt=""></a></li>
+										<li><a href="/c/zhaoshengjianzhang/jiaoyuxueyuan/" target="_blank"><img src="/res/banner/cbanner3.jpg" alt=""></a></li>
+										<li><a href="/zhaosheng/laodongrenshixueyuan/" target="_blank"><img src="/res/banner/cbanner4.jpg" alt=""></a></li>
+										<li><a href="/c/zhaoshengjianzhang/lishixueyuan/" target="_blank"><img src="/res/banner/cbanner5.jpg" alt=""></a></li>
+										<li><a href="/zhaozhengjianzhang/makesizhuyixueyuan/" target="_blank"><img src="/res/banner/cbanner6.jpg" alt=""></a></li>
+										<li><a href="/zhaoshengjianzhang/shehuiyurenkouxueyuan/" target="_blank"><img src="/res/banner/cbanner8.jpg"
+												 alt=""></a></li>
+										<li><a href="/zhaoshengjianzhang/waiguoyuxueyuan/" target="_blank"><img src="/res/banner/cbanner10.jpg" alt=""></a></li>
+										<li><a href="/c/zhaoshengjianzhang/xinxixueyuan/" target="_blank"><img src="/res/banner/cbanner12.jpg" alt=""></a></li>
+										<li><a href="/c/zhaoshengjianzhang/yishuxueyuan/" target="_blank"><img src="/res/banner/cbanner13.jpg" alt=""></a></li>
+
+									</ul>
+								</div>
+								<script>
+									$(function() {
+									$('#dowebok3').responsiveSlides({
+										auto: true,
+										pager: true,
+										nav: true,
+										namespace: 'centered-btns',
+									});
+								});
+							</script>
+								<dd>
+
+								</dd>
+							</dl>
+
+
+							<dl id="subMenu">
+								<dt><strong>栏目列表</strong></dt>
+								<dd id="subMenuDd">
+									<ul>
+										{dede:channel type='son' currentstyle='<li><a href="~typelink~" class="Hover">
+												~typename~</a></li>'}
+										<li><a href="[field:typeurl/]">[field:typename/]</a></li>{/dede:channel}
+									</ul>
+								</dd>
+							</dl>
+							<dl id="so">
+								<dt><strong>站内搜索</strong></dt>
+								<dd>
+									<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+										<input name="keyword" id="keyword" type="text" class="searchtxt" />
+										<input type="submit" id="sobtn" value="搜索" />
+										<input type="hidden" name="kwtype" value="1" />
+										<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+									</form>
+								</dd>
+							</dl>
+
+							<!-- {dede:myad name='rightCourse'/} -->
+
+
+						</div><!-- right -->
+
+						<script type="text/javascript">
+							checkCont()
+						</script>
+						<script type="text/javascript">
+							pageCount(-2, 0);
+						</script>
+
+						<div class="c"></div>
+					</div>
+					{dede:include file='footer.htm' ismake='yes'/}
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

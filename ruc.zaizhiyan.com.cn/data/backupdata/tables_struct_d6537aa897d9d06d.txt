@@ -1,0 +1,1795 @@
+DROP TABLE IF EXISTS `a0`;
+
+CREATE TABLE `a0` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `body` mediumtext,
+  `redirecturl` varchar(255) NOT NULL default '',
+  `templet` varchar(30) NOT NULL default '',
+  `userip` char(15) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `typeid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `a1`;
+
+CREATE TABLE `a1` (
+  `id` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `typeid2` varchar(90) NOT NULL default '0',
+  `sortrank` int(10) unsigned NOT NULL default '0',
+  `flag` set('c','h','p','f','s','j','a','b') default NULL,
+  `ismake` smallint(6) NOT NULL default '0',
+  `channel` smallint(6) NOT NULL default '1',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `click` mediumint(8) unsigned NOT NULL default '0',
+  `money` smallint(6) NOT NULL default '0',
+  `title` char(200) NOT NULL default '',
+  `shorttitle` char(36) NOT NULL default '',
+  `color` char(7) NOT NULL default '',
+  `writer` char(20) NOT NULL default '',
+  `source` char(30) NOT NULL default '',
+  `litpic` char(100) NOT NULL default '',
+  `pubdate` int(10) unsigned NOT NULL default '0',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `keywords` char(30) NOT NULL default '',
+  `lastpost` int(10) unsigned NOT NULL default '0',
+  `scores` mediumint(8) NOT NULL default '0',
+  `goodpost` mediumint(8) unsigned NOT NULL default '0',
+  `badpost` mediumint(8) unsigned NOT NULL default '0',
+  `notpost` tinyint(1) unsigned NOT NULL default '0',
+  `description` varchar(255) NOT NULL default '',
+  `filename` varchar(40) NOT NULL default '',
+  `dutyadmin` mediumint(8) unsigned NOT NULL default '0',
+  `tackid` int(10) NOT NULL default '0',
+  `mtype` mediumint(8) unsigned NOT NULL default '0',
+  `weight` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `sortrank` (`sortrank`),
+  KEY `mainindex` (`arcrank`,`typeid`,`channel`,`flag`,`mid`),
+  KEY `lastpost` (`lastpost`,`scores`,`goodpost`,`badpost`,`notpost`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `a2`;
+
+CREATE TABLE `a2` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `reid` smallint(5) unsigned NOT NULL default '0',
+  `topid` smallint(5) unsigned NOT NULL default '0',
+  `sortrank` smallint(5) unsigned NOT NULL default '50',
+  `typename` char(30) NOT NULL default '',
+  `typedir` char(60) NOT NULL default '',
+  `isdefault` smallint(6) NOT NULL default '0',
+  `defaultname` char(15) NOT NULL default 'index.html',
+  `issend` smallint(6) NOT NULL default '0',
+  `channeltype` smallint(6) default '1',
+  `maxpage` smallint(6) NOT NULL default '-1',
+  `ispart` smallint(6) NOT NULL default '0',
+  `corank` smallint(6) NOT NULL default '0',
+  `tempindex` char(50) NOT NULL default '',
+  `templist` char(50) NOT NULL default '',
+  `temparticle` char(50) NOT NULL default '',
+  `namerule` char(50) NOT NULL default '',
+  `namerule2` char(50) NOT NULL default '',
+  `modname` char(20) NOT NULL default '',
+  `description` char(150) NOT NULL default '',
+  `keywords` varchar(60) NOT NULL default '',
+  `seotitle` varchar(80) NOT NULL default '',
+  `moresite` tinyint(1) unsigned NOT NULL default '0',
+  `sitepath` char(60) NOT NULL default '',
+  `siteurl` char(50) NOT NULL default '',
+  `ishidden` smallint(6) NOT NULL default '0',
+  `cross` tinyint(1) NOT NULL default '0',
+  `crossid` text,
+  `content` text,
+  `smalltypes` text,
+  PRIMARY KEY  (`id`),
+  KEY `reid` (`reid`,`isdefault`,`channeltype`,`ispart`,`corank`,`topid`,`ishidden`),
+  KEY `sortrank` (`sortrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `a3`;
+
+CREATE TABLE `a3` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `typeid2` varchar(90) NOT NULL default '0',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `channel` smallint(5) NOT NULL default '1',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `sortrank` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `sortrank` (`sortrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addonarticle`;
+
+CREATE TABLE `addonarticle` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `body` mediumtext,
+  `redirecturl` varchar(255) NOT NULL default '',
+  `templet` varchar(30) NOT NULL default '',
+  `userip` char(15) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `typeid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addonimages`;
+
+CREATE TABLE `addonimages` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `pagestyle` smallint(6) NOT NULL default '1',
+  `maxwidth` smallint(6) NOT NULL default '600',
+  `imgurls` text,
+  `row` smallint(6) NOT NULL default '0',
+  `col` smallint(6) NOT NULL default '0',
+  `isrm` smallint(6) NOT NULL default '0',
+  `ddmaxwidth` smallint(6) NOT NULL default '200',
+  `pagepicnum` smallint(6) NOT NULL default '12',
+  `templet` varchar(30) NOT NULL default '',
+  `userip` char(15) NOT NULL default '',
+  `redirecturl` varchar(255) NOT NULL default '',
+  `body` mediumtext,
+  PRIMARY KEY  (`aid`),
+  KEY `imagesMain` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addoninfos`;
+
+CREATE TABLE `addoninfos` (
+  `aid` int(11) NOT NULL default '0',
+  `typeid` int(11) NOT NULL default '0',
+  `channel` smallint(6) NOT NULL default '0',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `click` int(10) unsigned NOT NULL default '0',
+  `title` varchar(60) NOT NULL default '',
+  `litpic` varchar(60) NOT NULL default '',
+  `userip` varchar(15) NOT NULL default ' ',
+  `senddate` int(11) NOT NULL default '0',
+  `flag` set('c','h','p','f','s','j','a','b') default NULL,
+  `lastpost` int(10) unsigned NOT NULL default '0',
+  `scores` mediumint(8) NOT NULL default '0',
+  `goodpost` mediumint(8) unsigned NOT NULL default '0',
+  `badpost` mediumint(8) unsigned NOT NULL default '0',
+  `nativeplace` smallint(5) unsigned NOT NULL default '0',
+  `infotype` char(20) NOT NULL default '0',
+  `body` mediumtext,
+  `endtime` int(11) NOT NULL default '0',
+  `tel` varchar(50) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `address` varchar(100) NOT NULL default '',
+  `linkman` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `typeid` (`typeid`,`nativeplace`,`infotype`),
+  KEY `channel` (`channel`,`arcrank`,`mid`,`click`,`title`,`litpic`,`senddate`,`flag`,`endtime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addonshop`;
+
+CREATE TABLE `addonshop` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `body` mediumtext,
+  `price` float NOT NULL default '0',
+  `trueprice` float NOT NULL default '0',
+  `brand` varchar(250) NOT NULL default '',
+  `units` varchar(250) NOT NULL default '',
+  `templet` varchar(30) NOT NULL,
+  `userip` char(15) NOT NULL,
+  `redirecturl` varchar(255) NOT NULL,
+  `vocation` char(20) NOT NULL default '0',
+  `infotype` char(20) NOT NULL default '0',
+  `uptime` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`aid`),
+  KEY `typeid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addonsoft`;
+
+CREATE TABLE `addonsoft` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `filetype` varchar(10) NOT NULL default '',
+  `language` varchar(10) NOT NULL default '',
+  `softtype` varchar(10) NOT NULL default '',
+  `accredit` varchar(10) NOT NULL default '',
+  `os` varchar(30) NOT NULL default '',
+  `softrank` mediumint(8) unsigned NOT NULL default '0',
+  `officialUrl` varchar(30) NOT NULL default '',
+  `officialDemo` varchar(50) NOT NULL default '',
+  `softsize` varchar(10) NOT NULL default '',
+  `softlinks` text,
+  `introduce` text,
+  `daccess` smallint(5) NOT NULL default '0',
+  `needmoney` smallint(5) NOT NULL default '0',
+  `templet` varchar(30) NOT NULL default '',
+  `userip` char(15) NOT NULL default '',
+  `redirecturl` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `softMain` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `addonspec`;
+
+CREATE TABLE `addonspec` (
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `note` text,
+  `templet` varchar(30) NOT NULL default '',
+  `userip` char(15) NOT NULL default '',
+  `redirecturl` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `typeid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+  `id` int(10) unsigned NOT NULL,
+  `usertype` float unsigned default '0',
+  `userid` char(30) NOT NULL default '',
+  `pwd` char(32) NOT NULL default '',
+  `uname` char(20) NOT NULL default '',
+  `tname` char(30) NOT NULL default '',
+  `email` char(30) NOT NULL default '',
+  `typeid` text,
+  `logintime` int(10) unsigned NOT NULL default '0',
+  `loginip` varchar(20) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `admintype`;
+
+CREATE TABLE `admintype` (
+  `rank` float NOT NULL default '1',
+  `typename` varchar(30) NOT NULL default '',
+  `system` smallint(6) NOT NULL default '0',
+  `purviews` text,
+  PRIMARY KEY  (`rank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `advancedsearch`;
+
+CREATE TABLE `advancedsearch` (
+  `mid` int(11) NOT NULL,
+  `maintable` varchar(256) NOT NULL default '',
+  `mainfields` text,
+  `addontable` varchar(256) default '',
+  `addonfields` text,
+  `forms` text,
+  `template` varchar(256) NOT NULL default '',
+  UNIQUE KEY `mid` (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arc_reffer`;
+
+CREATE TABLE `arc_reffer` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `aid` smallint(6) NOT NULL default '0',
+  `tit` varchar(200) NOT NULL,
+  `url` varchar(250) NOT NULL,
+  `reffer` text NOT NULL,
+  `ip` varchar(16) NOT NULL,
+  `dateline` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `aid` (`aid`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章访问来源';
+
+DROP TABLE IF EXISTS `arcatt`;
+
+CREATE TABLE `arcatt` (
+  `sortid` smallint(6) NOT NULL default '0',
+  `att` char(10) NOT NULL default '',
+  `attname` char(30) NOT NULL default '',
+  PRIMARY KEY  (`att`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arccache`;
+
+CREATE TABLE `arccache` (
+  `md5hash` char(32) NOT NULL default '',
+  `uptime` int(11) NOT NULL default '0',
+  `cachedata` mediumtext,
+  PRIMARY KEY  (`md5hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `archives`;
+
+CREATE TABLE `archives` (
+  `id` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `typeid2` varchar(90) NOT NULL default '0',
+  `sortrank` int(10) unsigned NOT NULL default '0',
+  `flag` set('c','h','p','f','s','j','a','b') default NULL,
+  `ismake` smallint(6) NOT NULL default '0',
+  `channel` smallint(6) NOT NULL default '1',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `click` mediumint(8) unsigned NOT NULL default '0',
+  `money` smallint(6) NOT NULL default '0',
+  `title` char(200) NOT NULL default '',
+  `shorttitle` char(36) NOT NULL default '',
+  `color` char(7) NOT NULL default '',
+  `writer` char(20) NOT NULL default '',
+  `source` char(30) NOT NULL default '',
+  `litpic` char(100) NOT NULL default '',
+  `pubdate` int(10) unsigned NOT NULL default '0',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `keywords` char(30) NOT NULL default '',
+  `lastpost` int(10) unsigned NOT NULL default '0',
+  `scores` mediumint(8) NOT NULL default '0',
+  `goodpost` mediumint(8) unsigned NOT NULL default '0',
+  `badpost` mediumint(8) unsigned NOT NULL default '0',
+  `voteid` mediumint(8) NOT NULL,
+  `notpost` tinyint(1) unsigned NOT NULL default '0',
+  `description` varchar(255) NOT NULL default '',
+  `filename` varchar(40) NOT NULL default '',
+  `dutyadmin` mediumint(8) unsigned NOT NULL default '0',
+  `tackid` int(10) NOT NULL default '0',
+  `mtype` mediumint(8) unsigned NOT NULL default '0',
+  `weight` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `sortrank` (`sortrank`),
+  KEY `mainindex` (`arcrank`,`typeid`,`channel`,`flag`,`mid`),
+  KEY `lastpost` (`lastpost`,`scores`,`goodpost`,`badpost`,`notpost`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arcmulti`;
+
+CREATE TABLE `arcmulti` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `tagid` char(60) NOT NULL default '',
+  `uptime` int(11) NOT NULL default '0',
+  `innertext` varchar(255) NOT NULL default '',
+  `pagesize` int(11) NOT NULL default '0',
+  `arcids` text NOT NULL,
+  `ordersql` varchar(255) default '',
+  `addfieldsSql` varchar(255) default '',
+  `addfieldsSqlJoin` varchar(255) default '',
+  `attstr` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arcrank`;
+
+CREATE TABLE `arcrank` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `rank` smallint(6) NOT NULL default '0',
+  `membername` char(20) NOT NULL default '',
+  `adminrank` smallint(6) NOT NULL default '0',
+  `money` smallint(8) unsigned NOT NULL default '500',
+  `scores` mediumint(8) NOT NULL default '0',
+  `purviews` mediumtext,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arctiny`;
+
+CREATE TABLE `arctiny` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `typeid2` varchar(90) NOT NULL default '0',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `channel` smallint(5) NOT NULL default '1',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `sortrank` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `sortrank` (`sortrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arctiny2`;
+
+CREATE TABLE `arctiny2` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `typeid2` varchar(90) NOT NULL default '0',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `channel` smallint(5) NOT NULL default '1',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `sortrank` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `sortrank` (`sortrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `arctype`;
+
+CREATE TABLE `arctype` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `reid` smallint(5) unsigned NOT NULL default '0',
+  `topid` smallint(5) unsigned NOT NULL default '0',
+  `sortrank` smallint(5) unsigned NOT NULL default '50',
+  `typename` char(30) NOT NULL default '',
+  `typedir` char(60) NOT NULL default '',
+  `isdefault` smallint(6) NOT NULL default '0',
+  `defaultname` char(15) NOT NULL default 'index.html',
+  `issend` smallint(6) NOT NULL default '0',
+  `channeltype` smallint(6) default '1',
+  `maxpage` smallint(6) NOT NULL default '-1',
+  `ispart` smallint(6) NOT NULL default '0',
+  `corank` smallint(6) NOT NULL default '0',
+  `tempindex` char(50) NOT NULL default '',
+  `templist` char(50) NOT NULL default '',
+  `temparticle` char(50) NOT NULL default '',
+  `namerule` char(50) NOT NULL default '',
+  `namerule2` char(50) NOT NULL default '',
+  `modname` char(20) NOT NULL default '',
+  `description` char(150) NOT NULL default '',
+  `keywords` varchar(60) NOT NULL default '',
+  `seotitle` varchar(80) NOT NULL default '',
+  `moresite` tinyint(1) unsigned NOT NULL default '0',
+  `sitepath` char(60) NOT NULL default '',
+  `siteurl` char(50) NOT NULL default '',
+  `ishidden` smallint(6) NOT NULL default '0',
+  `cross` tinyint(1) NOT NULL default '0',
+  `crossid` text,
+  `content` text,
+  `smalltypes` text,
+  PRIMARY KEY  (`id`),
+  KEY `reid` (`reid`,`isdefault`,`channeltype`,`ispart`,`corank`,`topid`,`ishidden`),
+  KEY `sortrank` (`sortrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `area`;
+
+CREATE TABLE `area` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(20) NOT NULL default '',
+  `reid` int(10) unsigned NOT NULL default '0',
+  `disorder` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `ask`;
+
+CREATE TABLE `ask` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `tid` mediumint(8) unsigned NOT NULL default '0',
+  `tidname` char(50) NOT NULL default '',
+  `tid2` mediumint(8) unsigned NOT NULL default '0',
+  `tid2name` char(50) NOT NULL default '',
+  `uid` mediumint(8) unsigned NOT NULL default '0',
+  `anonymous` tinyint(1) NOT NULL default '0',
+  `title` varchar(80) NOT NULL,
+  `digest` tinyint(1) NOT NULL default '0',
+  `reward` smallint(6) unsigned NOT NULL default '0',
+  `dateline` int(10) unsigned NOT NULL default '0',
+  `expiredtime` int(10) unsigned NOT NULL default '0',
+  `solvetime` int(10) unsigned NOT NULL default '0',
+  `bestanswer` int(10) unsigned NOT NULL default '0',
+  `status` tinyint(1) NOT NULL default '0',
+  `disorder` smallint(6) NOT NULL default '0',
+  `views` int(10) unsigned NOT NULL default '0',
+  `replies` mediumint(8) unsigned NOT NULL default '0',
+  `ip` char(15) NOT NULL default '',
+  `content` mediumtext NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `disorder` (`tid`,`tid2`,`status`,`dateline`),
+  KEY `digest` (`digest`),
+  KEY `expiredtime` (`expiredtime`),
+  KEY `reward` (`reward`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `ask_scores`;
+
+CREATE TABLE `ask_scores` (
+  `mid` int(11) NOT NULL,
+  `userid` char(20) NOT NULL,
+  `ascores` mediumint(8) unsigned NOT NULL default '0',
+  `mscores` mediumint(8) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `askanswer`;
+
+CREATE TABLE `askanswer` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `askid` mediumint(8) unsigned NOT NULL default '0',
+  `ifanswer` tinyint(1) NOT NULL default '0',
+  `tid` smallint(6) unsigned NOT NULL default '0',
+  `tid2` smallint(6) unsigned NOT NULL default '0',
+  `uid` mediumint(8) unsigned NOT NULL default '0',
+  `username` char(32) NOT NULL default '',
+  `anonymous` tinyint(1) NOT NULL default '0',
+  `goodrate` smallint(6) unsigned NOT NULL default '0',
+  `badrate` smallint(6) unsigned NOT NULL default '0',
+  `userip` char(15) NOT NULL default '',
+  `dateline` int(10) unsigned NOT NULL default '0',
+  `content` mediumtext NOT NULL,
+  `ifcheck` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`),
+  KEY `askid` (`askid`),
+  KEY `uid` (`uid`),
+  KEY `dateline` (`askid`,`dateline`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `asktype`;
+
+CREATE TABLE `asktype` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` char(50) NOT NULL default '',
+  `reid` int(10) unsigned NOT NULL default '0',
+  `disorder` int(10) unsigned NOT NULL default '0',
+  `asknum` mediumint(8) unsigned NOT NULL default '0',
+  `askwarrnum` mediumint(8) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `disorder` (`disorder`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `channeltype`;
+
+CREATE TABLE `channeltype` (
+  `id` smallint(6) NOT NULL default '0',
+  `nid` varchar(20) NOT NULL default '',
+  `typename` varchar(30) NOT NULL default '',
+  `maintable` varchar(50) NOT NULL default 'archives',
+  `addtable` varchar(50) NOT NULL default '',
+  `addcon` varchar(30) NOT NULL default '',
+  `mancon` varchar(30) NOT NULL default '',
+  `editcon` varchar(30) NOT NULL default '',
+  `useraddcon` varchar(30) NOT NULL default '',
+  `usermancon` varchar(30) NOT NULL default '',
+  `usereditcon` varchar(30) NOT NULL default '',
+  `fieldset` text,
+  `listfields` text,
+  `allfields` text,
+  `issystem` smallint(6) NOT NULL default '0',
+  `isshow` smallint(6) NOT NULL default '1',
+  `issend` smallint(6) NOT NULL default '0',
+  `arcsta` smallint(6) NOT NULL default '-1',
+  `usertype` char(10) NOT NULL default '',
+  `sendrank` smallint(6) NOT NULL default '10',
+  `isdefault` smallint(6) NOT NULL default '0',
+  `needdes` tinyint(1) NOT NULL default '1',
+  `needpic` tinyint(1) NOT NULL default '1',
+  `titlename` varchar(20) NOT NULL default '标题',
+  `onlyone` smallint(6) NOT NULL default '0',
+  `dfcid` smallint(5) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `nid` (`nid`,`isshow`,`arcsta`,`sendrank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `co_htmls`;
+
+CREATE TABLE `co_htmls` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `nid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `title` varchar(60) NOT NULL default '',
+  `litpic` varchar(100) NOT NULL default '',
+  `url` varchar(100) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `isdown` tinyint(1) unsigned NOT NULL default '0',
+  `isexport` tinyint(1) NOT NULL default '0',
+  `result` mediumtext,
+  PRIMARY KEY  (`aid`),
+  KEY `nid` (`nid`),
+  KEY `typeid` (`typeid`,`title`,`url`,`dtime`,`isdown`,`isexport`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `co_mediaurls`;
+
+CREATE TABLE `co_mediaurls` (
+  `nid` mediumint(8) unsigned NOT NULL default '0',
+  `hash` char(32) NOT NULL default '',
+  `tofile` char(60) NOT NULL default '',
+  KEY `hash` (`hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `co_note`;
+
+CREATE TABLE `co_note` (
+  `nid` mediumint(8) unsigned NOT NULL auto_increment,
+  `channelid` smallint(5) unsigned NOT NULL default '0',
+  `notename` varchar(50) NOT NULL default '',
+  `sourcelang` varchar(10) NOT NULL default 'gb2312',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  `cotime` int(10) unsigned NOT NULL default '0',
+  `pnum` smallint(5) unsigned NOT NULL default '0',
+  `isok` tinyint(1) unsigned NOT NULL default '0',
+  `usemore` tinyint(1) unsigned NOT NULL default '0',
+  `listconfig` text,
+  `itemconfig` text,
+  PRIMARY KEY  (`nid`),
+  KEY `isok` (`isok`,`channelid`,`cotime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `co_onepage`;
+
+CREATE TABLE `co_onepage` (
+  `id` int(11) NOT NULL auto_increment,
+  `url` varchar(60) NOT NULL default '',
+  `title` varchar(60) NOT NULL default '',
+  `issource` smallint(6) NOT NULL default '1',
+  `lang` varchar(10) NOT NULL default 'gb2312',
+  `rule` text,
+  PRIMARY KEY  (`id`),
+  KEY `url` (`url`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `co_urls`;
+
+CREATE TABLE `co_urls` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `hash` varchar(32) NOT NULL default '',
+  `nid` smallint(5) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `diyforms`;
+
+CREATE TABLE `diyforms` (
+  `diyid` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL default '',
+  `posttemplate` varchar(50) NOT NULL,
+  `viewtemplate` varchar(50) NOT NULL,
+  `listtemplate` varchar(50) NOT NULL,
+  `table` varchar(50) NOT NULL default '',
+  `info` text,
+  `public` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`diyid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `downloads`;
+
+CREATE TABLE `downloads` (
+  `hash` char(32) NOT NULL,
+  `id` int(10) unsigned NOT NULL default '0',
+  `downloads` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `erradd`;
+
+CREATE TABLE `erradd` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `aid` mediumint(8) unsigned NOT NULL,
+  `mid` mediumint(8) unsigned default NULL,
+  `title` char(60) NOT NULL default '',
+  `type` smallint(6) NOT NULL default '0',
+  `errtxt` mediumtext,
+  `oktxt` mediumtext,
+  `sendtime` int(10) unsigned NOT NULL default '0',
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `feedback`;
+
+CREATE TABLE `feedback` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `username` char(20) NOT NULL default '',
+  `arctitle` varchar(60) NOT NULL default '',
+  `ip` char(15) NOT NULL default '',
+  `ischeck` smallint(6) NOT NULL default '0',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `bad` mediumint(8) unsigned NOT NULL default '0',
+  `good` mediumint(8) unsigned NOT NULL default '0',
+  `ftype` set('feedback','good','bad') NOT NULL default 'feedback',
+  `face` smallint(5) unsigned NOT NULL default '0',
+  `msg` text,
+  PRIMARY KEY  (`id`),
+  KEY `aid` (`aid`,`ischeck`,`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `flink`;
+
+CREATE TABLE `flink` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `sortrank` smallint(6) NOT NULL default '0',
+  `url` char(60) NOT NULL default '',
+  `webname` char(30) NOT NULL default '',
+  `msg` char(200) NOT NULL default '',
+  `email` char(50) NOT NULL default '',
+  `logo` char(60) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `flinktype`;
+
+CREATE TABLE `flinktype` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `typename` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `freelist`;
+
+CREATE TABLE `freelist` (
+  `aid` int(11) NOT NULL auto_increment,
+  `title` varchar(50) NOT NULL default '',
+  `namerule` varchar(50) NOT NULL default '',
+  `listdir` varchar(60) NOT NULL default '',
+  `defaultpage` varchar(20) NOT NULL default '',
+  `nodefault` smallint(6) NOT NULL default '0',
+  `templet` varchar(50) NOT NULL default '',
+  `edtime` int(11) NOT NULL default '0',
+  `maxpage` smallint(5) unsigned NOT NULL default '100',
+  `click` int(11) NOT NULL default '1',
+  `listtag` mediumtext,
+  `keywords` varchar(100) NOT NULL default '',
+  `description` varchar(250) NOT NULL default '',
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_guestbook`;
+
+CREATE TABLE `group_guestbook` (
+  `bid` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(80) NOT NULL default '',
+  `uname` char(15) NOT NULL default '',
+  `userid` int(11) unsigned NOT NULL default '0',
+  `gid` int(11) unsigned NOT NULL default '0',
+  `stime` int(10) unsigned NOT NULL default '0',
+  `message` text NOT NULL,
+  `ip` varchar(15) NOT NULL default '',
+  PRIMARY KEY  (`bid`),
+  KEY `userid` (`userid`,`gid`),
+  KEY `sitme` (`stime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_notice`;
+
+CREATE TABLE `group_notice` (
+  `id` smallint(6) unsigned NOT NULL auto_increment,
+  `uname` char(15) NOT NULL default '',
+  `userid` int(11) unsigned NOT NULL default '0',
+  `title` varchar(80) NOT NULL default '',
+  `notice` text NOT NULL,
+  `stime` int(10) unsigned NOT NULL default '0',
+  `gid` mediumint(8) unsigned NOT NULL default '0',
+  `ip` varchar(15) NOT NULL default '',
+  PRIMARY KEY  (`id`),
+  KEY `stime` (`stime`),
+  KEY `userid` (`userid`),
+  KEY `gid` (`gid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_posts`;
+
+CREATE TABLE `group_posts` (
+  `pid` int(10) unsigned NOT NULL auto_increment,
+  `gid` smallint(6) unsigned NOT NULL default '0',
+  `tid` mediumint(8) unsigned NOT NULL default '0',
+  `first` tinyint(1) NOT NULL default '0',
+  `author` char(15) NOT NULL default '',
+  `subject` varchar(80) NOT NULL default '',
+  `dateline` int(10) unsigned NOT NULL default '0',
+  `message` mediumtext NOT NULL,
+  `useip` varchar(15) NOT NULL default '',
+  `anonymous` tinyint(1) unsigned NOT NULL default '0',
+  `status` tinyint(1) unsigned NOT NULL default '0',
+  `authorid` mediumint(8) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`pid`),
+  KEY `gid` (`gid`,`tid`,`author`),
+  KEY `dateline` (`dateline`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_smalltypes`;
+
+CREATE TABLE `group_smalltypes` (
+  `id` smallint(6) unsigned NOT NULL auto_increment,
+  `gid` int(10) unsigned NOT NULL default '0',
+  `userid` int(11) unsigned NOT NULL default '0',
+  `name` char(15) NOT NULL,
+  `disorder` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `disorder` (`disorder`),
+  KEY `userid` (`userid`,`gid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_threads`;
+
+CREATE TABLE `group_threads` (
+  `tid` mediumint(8) unsigned NOT NULL auto_increment,
+  `gid` smallint(6) unsigned NOT NULL default '0',
+  `smalltype` smallint(6) unsigned NOT NULL default '0',
+  `subject` char(80) NOT NULL default '',
+  `displayorder` tinyint(1) unsigned NOT NULL default '0',
+  `author` char(15) NOT NULL default '',
+  `authorid` mediumint(8) unsigned NOT NULL default '0',
+  `views` int(10) unsigned NOT NULL default '0',
+  `dateline` int(10) unsigned NOT NULL default '0',
+  `lastpost` int(10) unsigned NOT NULL default '0',
+  `lastposter` char(15) NOT NULL default '',
+  `replies` mediumint(8) unsigned NOT NULL default '0',
+  `digest` tinyint(1) unsigned NOT NULL default '0',
+  `closed` mediumint(8) NOT NULL default '0',
+  PRIMARY KEY  (`tid`),
+  KEY `digest` (`digest`),
+  KEY `authorid` (`authorid`,`dateline`),
+  KEY `displayorder` (`gid`,`lastpost`,`displayorder`,`smalltype`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_user`;
+
+CREATE TABLE `group_user` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `uid` int(11) unsigned NOT NULL default '0',
+  `username` varchar(15) NOT NULL default '',
+  `gid` int(11) unsigned NOT NULL default '0',
+  `posts` int(10) unsigned NOT NULL default '0',
+  `replies` int(10) unsigned NOT NULL default '0',
+  `jointime` int(10) unsigned NOT NULL default '0',
+  `isjoin` tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `uid` (`uid`,`gid`),
+  KEY `jointime` (`jointime`),
+  KEY `posts` (`posts`),
+  KEY `replies` (`replies`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `groups`;
+
+CREATE TABLE `groups` (
+  `groupid` int(10) unsigned NOT NULL auto_increment,
+  `groupname` varchar(75) NOT NULL default '',
+  `des` text,
+  `groupimg` varchar(200) NOT NULL default '0',
+  `rootstoreid` int(10) unsigned NOT NULL default '0',
+  `storeid` int(10) unsigned NOT NULL default '0',
+  `smalltype` text,
+  `uid` int(10) unsigned NOT NULL default '0',
+  `creater` char(15) NOT NULL default '',
+  `ismaster` text,
+  `issystem` tinyint(1) unsigned NOT NULL default '0',
+  `isindex` tinyint(1) unsigned NOT NULL default '0',
+  `ishidden` tinyint(1) unsigned NOT NULL default '0',
+  `hits` int(13) unsigned NOT NULL default '0',
+  `threads` int(13) unsigned NOT NULL default '0',
+  `members` int(13) unsigned NOT NULL default '0',
+  `stime` int(10) unsigned NOT NULL default '0',
+  `theme` char(20) NOT NULL default 'default',
+  PRIMARY KEY  (`groupid`),
+  KEY `uid` (`uid`),
+  KEY `stime` (`stime`),
+  KEY `storeid` (`storeid`,`rootstoreid`),
+  KEY `hits` (`hits`),
+  KEY `threads` (`threads`,`members`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `guestbook`;
+
+CREATE TABLE `guestbook` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `title` varchar(240) NOT NULL default '',
+  `tid` varchar(20) default NULL,
+  `mid` varchar(20) default NULL,
+  `posttime` int(10) unsigned NOT NULL default '0',
+  `uname` varchar(30) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `homepage` varchar(255) NOT NULL default '',
+  `qq` varchar(15) NOT NULL default '',
+  `face` varchar(10) NOT NULL default '',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  `msg` text,
+  `sex` varchar(4) default NULL,
+  `url` varchar(255) default NULL,
+  `seo` text,
+  PRIMARY KEY  (`id`),
+  KEY `ischeck` (`ischeck`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `guestbook_bk`;
+
+CREATE TABLE `guestbook_bk` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `title` varchar(240) NOT NULL default '',
+  `tid` varchar(20) default NULL,
+  `mid` varchar(20) default NULL,
+  `posttime` int(10) unsigned NOT NULL default '0',
+  `uname` varchar(30) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `homepage` varchar(255) NOT NULL default '',
+  `qq` varchar(15) NOT NULL default '',
+  `face` varchar(10) NOT NULL default '',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  `msg` text,
+  `sex` varchar(4) default NULL,
+  `url` varchar(255) default NULL,
+  `seo` text,
+  PRIMARY KEY  (`id`),
+  KEY `ischeck` (`ischeck`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `guestbook_italy`;
+
+CREATE TABLE `guestbook_italy` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `uname` varchar(30) NOT NULL default '',
+  `sex` varchar(4) NOT NULL default '',
+  `mobile` varchar(20) NOT NULL default '',
+  `posttime` int(10) unsigned NOT NULL default '0',
+  `email` varchar(50) NOT NULL default '',
+  `address` varchar(255) default NULL,
+  `select_specialty` varchar(50) NOT NULL default '',
+  `education` varchar(20) default NULL,
+  `diploma` varchar(20) NOT NULL default '',
+  `graduate_school` varchar(100) NOT NULL default '',
+  `learning_specialty` varchar(100) default NULL,
+  `language` varchar(20) default NULL,
+  `questioninfo` mediumtext COMMENT '咨询留言',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  `url` varchar(255) default NULL,
+  `seo` text,
+  PRIMARY KEY  (`id`),
+  KEY `ischeck` (`ischeck`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `guestbook_italy_bk`;
+
+CREATE TABLE `guestbook_italy_bk` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `uname` varchar(30) NOT NULL default '',
+  `sex` varchar(4) NOT NULL default '',
+  `mobile` varchar(20) NOT NULL default '',
+  `posttime` int(10) unsigned NOT NULL default '0',
+  `email` varchar(50) NOT NULL default '',
+  `address` varchar(255) default NULL,
+  `select_specialty` varchar(50) NOT NULL default '',
+  `education` varchar(20) default NULL,
+  `diploma` varchar(20) NOT NULL default '',
+  `graduate_school` varchar(100) NOT NULL default '',
+  `learning_specialty` varchar(100) default NULL,
+  `language` varchar(20) default NULL,
+  `questioninfo` mediumtext COMMENT '咨询留言',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  `url` varchar(255) default NULL,
+  `seo` text,
+  PRIMARY KEY  (`id`),
+  KEY `ischeck` (`ischeck`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `homepageset`;
+
+CREATE TABLE `homepageset` (
+  `templet` char(50) NOT NULL default '',
+  `position` char(30) NOT NULL default '',
+  `showmod` tinyint(2) NOT NULL default '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `keywords`;
+
+CREATE TABLE `keywords` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `keyword` char(16) NOT NULL default '',
+  `rank` mediumint(8) unsigned NOT NULL default '0',
+  `sta` smallint(6) NOT NULL default '1',
+  `rpurl` char(60) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `keyword` (`keyword`,`rank`,`sta`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `log`;
+
+CREATE TABLE `log` (
+  `lid` mediumint(8) unsigned NOT NULL auto_increment,
+  `adminid` smallint(8) unsigned NOT NULL default '0',
+  `filename` char(60) NOT NULL default '',
+  `method` char(10) NOT NULL default '',
+  `query` char(200) NOT NULL default '',
+  `cip` char(15) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`lid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member`;
+
+CREATE TABLE `member` (
+  `mid` mediumint(8) unsigned NOT NULL auto_increment,
+  `mtype` varchar(20) NOT NULL default '个人',
+  `userid` char(20) NOT NULL default '',
+  `pwd` char(32) NOT NULL default '',
+  `uname` char(36) NOT NULL default '',
+  `sex` enum('男','女','保密') NOT NULL default '保密',
+  `rank` smallint(5) unsigned NOT NULL default '0',
+  `uptime` int(11) NOT NULL default '0',
+  `exptime` smallint(6) NOT NULL default '0',
+  `money` mediumint(8) unsigned NOT NULL default '0',
+  `email` char(50) NOT NULL default '',
+  `scores` mediumint(8) unsigned NOT NULL default '0',
+  `matt` smallint(5) unsigned NOT NULL default '0',
+  `spacesta` smallint(6) NOT NULL default '0',
+  `face` char(50) NOT NULL default '',
+  `safequestion` smallint(5) unsigned NOT NULL default '0',
+  `safeanswer` char(30) NOT NULL default '',
+  `jointime` int(10) unsigned NOT NULL default '0',
+  `joinip` char(16) NOT NULL default '',
+  `logintime` int(10) unsigned NOT NULL default '0',
+  `loginip` char(16) NOT NULL default '',
+  `checkmail` smallint(6) NOT NULL default '-1',
+  PRIMARY KEY  (`mid`),
+  KEY `userid` (`userid`,`sex`),
+  KEY `logintime` (`logintime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_company`;
+
+CREATE TABLE `member_company` (
+  `mid` mediumint(8) NOT NULL auto_increment,
+  `company` varchar(36) NOT NULL default '',
+  `product` varchar(50) NOT NULL default '',
+  `place` smallint(5) unsigned NOT NULL default '0',
+  `vocation` smallint(5) unsigned NOT NULL default '0',
+  `cosize` smallint(5) unsigned NOT NULL default '0',
+  `tel` varchar(30) NOT NULL default '',
+  `fax` varchar(30) NOT NULL default '',
+  `linkman` varchar(20) NOT NULL default '',
+  `address` varchar(50) NOT NULL default '',
+  `mobile` varchar(30) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `url` varchar(50) NOT NULL default '',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  `checked` tinyint(1) unsigned NOT NULL default '0',
+  `introduce` text,
+  `comface` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_feed`;
+
+CREATE TABLE `member_feed` (
+  `fid` mediumint(8) unsigned NOT NULL auto_increment,
+  `mid` smallint(8) unsigned NOT NULL default '0',
+  `userid` char(20) NOT NULL default '',
+  `uname` char(36) NOT NULL default '',
+  `type` char(20) character set gb2312 NOT NULL default '0',
+  `aid` mediumint(8) NOT NULL default '0',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `title` char(253) NOT NULL,
+  `note` char(200) NOT NULL default '',
+  `ischeck` smallint(6) NOT NULL,
+  PRIMARY KEY  (`fid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_flink`;
+
+CREATE TABLE `member_flink` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `title` varchar(30) NOT NULL default '',
+  `url` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_friends`;
+
+CREATE TABLE `member_friends` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `fid` mediumint(8) unsigned NOT NULL default '0',
+  `floginid` char(20) NOT NULL default '',
+  `funame` char(36) NOT NULL default '',
+  `mid` mediumint(8) NOT NULL default '0',
+  `addtime` int(10) unsigned NOT NULL default '0',
+  `ftype` tinyint(4) NOT NULL default '0',
+  `groupid` int(8) NOT NULL default '1',
+  `description` varchar(200) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fid` (`fid`,`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_group`;
+
+CREATE TABLE `member_group` (
+  `id` int(10) NOT NULL auto_increment,
+  `groupname` varchar(50) NOT NULL,
+  `mid` int(8) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_guestbook`;
+
+CREATE TABLE `member_guestbook` (
+  `aid` int(10) unsigned NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `gid` varchar(20) NOT NULL default '0',
+  `title` varchar(60) NOT NULL default '',
+  `uname` varchar(50) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `qq` varchar(50) NOT NULL default '',
+  `tel` varchar(50) NOT NULL default '',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `msg` text,
+  PRIMARY KEY  (`aid`),
+  KEY `mid` (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_model`;
+
+CREATE TABLE `member_model` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(20) NOT NULL,
+  `table` varchar(30) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `state` int(2) NOT NULL default '0',
+  `issystem` int(2) NOT NULL default '0',
+  `info` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_msg`;
+
+CREATE TABLE `member_msg` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `userid` char(20) NOT NULL default '',
+  `ip` char(15) NOT NULL default '',
+  `ischeck` smallint(6) NOT NULL default '0',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `msg` text,
+  PRIMARY KEY  (`id`),
+  KEY `id` (`ischeck`,`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_operation`;
+
+CREATE TABLE `member_operation` (
+  `aid` int(11) NOT NULL auto_increment,
+  `buyid` varchar(80) NOT NULL default '',
+  `pname` varchar(50) NOT NULL default '',
+  `product` varchar(10) NOT NULL default '',
+  `money` int(11) NOT NULL default '0',
+  `mtime` int(11) NOT NULL default '0',
+  `pid` int(11) NOT NULL default '0',
+  `mid` int(11) NOT NULL default '0',
+  `sta` int(11) NOT NULL default '0',
+  `oldinfo` varchar(200) NOT NULL default '',
+  PRIMARY KEY  (`aid`),
+  KEY `buyid` (`buyid`),
+  KEY `pid` (`pid`,`mid`,`sta`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_person`;
+
+CREATE TABLE `member_person` (
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `onlynet` tinyint(1) unsigned NOT NULL default '1',
+  `sex` enum('男','女','保密') NOT NULL default '男',
+  `uname` char(30) NOT NULL default '',
+  `qq` char(12) NOT NULL default '',
+  `msn` char(50) NOT NULL default '',
+  `tel` varchar(15) NOT NULL default '',
+  `mobile` varchar(15) NOT NULL default '',
+  `place` smallint(5) unsigned NOT NULL default '0',
+  `oldplace` smallint(5) unsigned NOT NULL default '0',
+  `birthday` date NOT NULL default '1980-01-01',
+  `star` smallint(6) unsigned NOT NULL default '1',
+  `income` smallint(6) NOT NULL default '0',
+  `education` smallint(6) NOT NULL default '0',
+  `height` smallint(5) unsigned NOT NULL default '160',
+  `bodytype` smallint(6) NOT NULL default '0',
+  `blood` smallint(6) NOT NULL default '0',
+  `vocation` smallint(6) NOT NULL default '0',
+  `smoke` smallint(6) NOT NULL default '0',
+  `marital` smallint(6) NOT NULL default '0',
+  `house` smallint(6) NOT NULL default '0',
+  `drink` smallint(6) NOT NULL default '0',
+  `datingtype` smallint(6) NOT NULL default '0',
+  `language` set('普通话','上海话','广东话','英语','日语','韩语','法语','意大利语','德语','西班牙语','俄语','阿拉伯语') default NULL,
+  `nature` set('性格外向','性格内向','活泼开朗','豪放不羁','患得患失','冲动','幽默','稳重','轻浮','沉默寡言','多愁善感','时喜时悲','附庸风雅','能说会道','坚强','脆弱','幼稚','成熟','快言快语','损人利己','狡猾善变','交际广泛','优柔寡断','自私','真诚','独立','依赖','难以琢磨','悲观消极','郁郁寡欢','胆小怕事','乐观向上','任性','自负','自卑','拜金','温柔体贴','小心翼翼','暴力倾向','逆来顺受','不拘小节','暴躁','倔强','豪爽','害羞','婆婆妈妈','敢做敢当','助人为乐','耿直','虚伪','孤僻','老实','守旧','敏感','迟钝','婆婆妈妈','武断','果断','刻薄') default NULL,
+  `lovemsg` varchar(100) NOT NULL default '',
+  `address` varchar(50) NOT NULL default '',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_pms`;
+
+CREATE TABLE `member_pms` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `floginid` varchar(20) NOT NULL default '',
+  `fromid` mediumint(8) unsigned NOT NULL default '0',
+  `toid` mediumint(8) unsigned NOT NULL default '0',
+  `tologinid` char(20) NOT NULL default '',
+  `folder` enum('inbox','outbox') default 'inbox',
+  `subject` varchar(60) NOT NULL default '',
+  `sendtime` int(10) unsigned NOT NULL default '0',
+  `writetime` int(10) unsigned NOT NULL default '0',
+  `hasview` tinyint(1) unsigned NOT NULL default '0',
+  `isadmin` tinyint(1) NOT NULL default '0',
+  `message` text,
+  PRIMARY KEY  (`id`),
+  KEY `sendtime` (`sendtime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_snsmsg`;
+
+CREATE TABLE `member_snsmsg` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `userid` varchar(20) NOT NULL,
+  `sendtime` int(10) unsigned NOT NULL default '0',
+  `msg` varchar(250) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_space`;
+
+CREATE TABLE `member_space` (
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `pagesize` smallint(5) unsigned NOT NULL default '10',
+  `matt` smallint(6) NOT NULL default '0',
+  `spacename` varchar(50) NOT NULL default '',
+  `spacelogo` varchar(50) NOT NULL default '',
+  `spacestyle` varchar(20) NOT NULL default '',
+  `sign` varchar(100) NOT NULL default '没签名',
+  `spacenews` text,
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_stow`;
+
+CREATE TABLE `member_stow` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `aid` mediumint(8) unsigned NOT NULL default '0',
+  `title` char(60) NOT NULL default '',
+  `addtime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `uid` (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_tj`;
+
+CREATE TABLE `member_tj` (
+  `mid` mediumint(8) NOT NULL auto_increment,
+  `article` smallint(5) unsigned NOT NULL default '0',
+  `album` smallint(5) unsigned NOT NULL default '0',
+  `archives` smallint(5) unsigned NOT NULL default '0',
+  `homecount` int(10) unsigned NOT NULL default '0',
+  `pagecount` int(10) unsigned NOT NULL default '0',
+  `feedback` mediumint(8) unsigned NOT NULL default '0',
+  `friend` smallint(5) unsigned NOT NULL default '0',
+  `stow` smallint(5) unsigned NOT NULL default '0',
+  `soft` int(10) NOT NULL default '0',
+  `info` int(10) NOT NULL default '0',
+  `shop` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_type`;
+
+CREATE TABLE `member_type` (
+  `aid` int(11) NOT NULL auto_increment,
+  `rank` int(11) NOT NULL default '0',
+  `pname` varchar(50) NOT NULL default '',
+  `money` int(11) NOT NULL default '0',
+  `exptime` int(11) NOT NULL default '30',
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `member_vhistory`;
+
+CREATE TABLE `member_vhistory` (
+  `id` int(10) NOT NULL auto_increment,
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  `loginid` char(20) NOT NULL default '',
+  `vid` mediumint(8) unsigned NOT NULL default '0',
+  `vloginid` char(20) NOT NULL default '',
+  `count` smallint(5) unsigned NOT NULL default '0',
+  `vip` char(15) NOT NULL default '',
+  `vtime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `vtime` (`vtime`),
+  KEY `mid` (`mid`,`vid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `moneycard_record`;
+
+CREATE TABLE `moneycard_record` (
+  `aid` int(11) NOT NULL auto_increment,
+  `ctid` int(11) NOT NULL default '0',
+  `cardid` varchar(50) NOT NULL default '',
+  `uid` int(11) NOT NULL default '0',
+  `isexp` smallint(6) NOT NULL default '0',
+  `mtime` int(11) NOT NULL default '0',
+  `utime` int(11) NOT NULL default '0',
+  `money` int(11) NOT NULL default '0',
+  `num` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`aid`),
+  KEY `ctid` (`ctid`),
+  KEY `cardid` (`cardid`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `moneycard_type`;
+
+CREATE TABLE `moneycard_type` (
+  `tid` int(11) NOT NULL auto_increment,
+  `num` int(11) NOT NULL default '500',
+  `money` int(11) NOT NULL default '50',
+  `pname` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`tid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `mtypes`;
+
+CREATE TABLE `mtypes` (
+  `mtypeid` mediumint(8) unsigned NOT NULL auto_increment,
+  `mtypename` char(40) NOT NULL,
+  `channelid` smallint(6) NOT NULL default '1',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`mtypeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `multiserv_config`;
+
+CREATE TABLE `multiserv_config` (
+  `remoteuploads` smallint(6) NOT NULL default '0',
+  `remoteupUrl` text NOT NULL,
+  `rminfo` text,
+  `servinfo` mediumtext,
+  PRIMARY KEY  (`remoteuploads`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `myad`;
+
+CREATE TABLE `myad` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `clsid` smallint(5) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `tagname` varchar(30) NOT NULL default '',
+  `adname` varchar(60) NOT NULL default '',
+  `timeset` smallint(6) NOT NULL default '0',
+  `starttime` int(10) unsigned NOT NULL default '0',
+  `endtime` int(10) unsigned NOT NULL default '0',
+  `normbody` text,
+  `expbody` text,
+  PRIMARY KEY  (`aid`),
+  KEY `tagname` (`tagname`,`typeid`,`timeset`,`endtime`,`starttime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `myadtype`;
+
+CREATE TABLE `myadtype` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `typename` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `mynews`;
+
+CREATE TABLE `mynews` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `title` varchar(60) NOT NULL default '',
+  `writer` varchar(20) NOT NULL default '',
+  `senddate` int(10) unsigned NOT NULL default '0',
+  `body` text,
+  PRIMARY KEY  (`aid`),
+  KEY `senddate` (`typeid`,`senddate`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `mytag`;
+
+CREATE TABLE `mytag` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `tagname` varchar(30) NOT NULL default '',
+  `timeset` smallint(6) NOT NULL default '0',
+  `starttime` int(10) unsigned NOT NULL default '0',
+  `endtime` int(10) unsigned NOT NULL default '0',
+  `normbody` text,
+  `expbody` text,
+  PRIMARY KEY  (`aid`),
+  KEY `tagname` (`tagname`,`typeid`,`timeset`,`endtime`,`starttime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `payment`;
+
+CREATE TABLE `payment` (
+  `id` tinyint(3) unsigned NOT NULL auto_increment,
+  `code` varchar(20) NOT NULL default '',
+  `name` varchar(120) NOT NULL default '',
+  `fee` varchar(10) NOT NULL default '0',
+  `description` text NOT NULL,
+  `rank` tinyint(3) unsigned NOT NULL default '0',
+  `config` text NOT NULL,
+  `enabled` tinyint(1) unsigned NOT NULL default '0',
+  `cod` tinyint(1) unsigned NOT NULL default '0',
+  `online` tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `plus`;
+
+CREATE TABLE `plus` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `plusname` varchar(30) NOT NULL default '',
+  `menustring` varchar(200) NOT NULL default '',
+  `mainurl` varchar(50) NOT NULL default '',
+  `writer` varchar(30) NOT NULL default '',
+  `isshow` smallint(6) NOT NULL default '1',
+  `filelist` text,
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `purview`;
+
+CREATE TABLE `purview` (
+  `mid` mediumint(8) default '0',
+  `typeid` smallint(5) default '0',
+  `rank` smallint(6) default NULL,
+  `pkey` varchar(30) character set latin1 NOT NULL,
+  `pvalue` text NOT NULL,
+  KEY `pkey` USING BTREE (`pkey`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `pwd_tmp`;
+
+CREATE TABLE `pwd_tmp` (
+  `mid` mediumint(8) NOT NULL,
+  `membername` char(16) NOT NULL default '',
+  `pwd` char(32) NOT NULL default '',
+  `mailtime` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`mid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `ratings`;
+
+CREATE TABLE `ratings` (
+  `id` varchar(11) NOT NULL,
+  `total_votes` int(11) NOT NULL default '0',
+  `total_value` int(11) NOT NULL default '0',
+  `used_ips` longtext,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `scores`;
+
+CREATE TABLE `scores` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `titles` char(15) NOT NULL,
+  `icon` smallint(6) unsigned default '0',
+  `integral` int(10) NOT NULL default '0',
+  `isdefault` tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `integral` (`integral`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `search_cache`;
+
+CREATE TABLE `search_cache` (
+  `hash` char(32) NOT NULL,
+  `lasttime` int(10) unsigned NOT NULL default '0',
+  `rsnum` mediumint(8) unsigned NOT NULL default '0',
+  `ids` mediumtext,
+  PRIMARY KEY  (`hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `search_keywords`;
+
+CREATE TABLE `search_keywords` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `keyword` char(30) NOT NULL default '',
+  `spwords` char(50) NOT NULL default '',
+  `count` mediumint(8) unsigned NOT NULL default '1',
+  `result` mediumint(8) unsigned NOT NULL default '0',
+  `lasttime` int(10) unsigned NOT NULL default '0',
+  `channelid` smallint(5) unsigned NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sgpage`;
+
+CREATE TABLE `sgpage` (
+  `aid` smallint(5) unsigned NOT NULL auto_increment,
+  `title` varchar(60) NOT NULL default '',
+  `ismake` smallint(6) NOT NULL default '1',
+  `filename` varchar(60) NOT NULL default '',
+  `keywords` varchar(30) NOT NULL default '',
+  `template` varchar(30) NOT NULL default '',
+  `likeid` varchar(20) NOT NULL default '',
+  `description` varchar(250) NOT NULL default '',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  `body` mediumtext,
+  PRIMARY KEY  (`aid`),
+  KEY `ismake` (`ismake`,`uptime`),
+  KEY `likeid` (`likeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shops_delivery`;
+
+CREATE TABLE `shops_delivery` (
+  `pid` int(10) unsigned NOT NULL auto_increment,
+  `dname` char(80) NOT NULL,
+  `price` float(13,2) NOT NULL default '0.00',
+  `des` char(255) default NULL,
+  `orders` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`pid`),
+  KEY `orders` (`orders`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shops_orders`;
+
+CREATE TABLE `shops_orders` (
+  `oid` varchar(80) NOT NULL,
+  `userid` int(10) NOT NULL,
+  `pid` int(10) NOT NULL default '0',
+  `paytype` tinyint(2) NOT NULL default '1',
+  `cartcount` int(10) NOT NULL default '0',
+  `dprice` float(13,2) NOT NULL default '0.00',
+  `price` float(13,2) NOT NULL default '0.00',
+  `priceCount` float(13,2) NOT NULL,
+  `state` tinyint(1) NOT NULL default '0',
+  `ip` char(15) NOT NULL default '',
+  `stime` int(10) NOT NULL default '0',
+  KEY `stime` (`stime`),
+  KEY `userid` (`userid`),
+  KEY `oid` (`oid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shops_products`;
+
+CREATE TABLE `shops_products` (
+  `aid` mediumint(8) NOT NULL default '0',
+  `oid` varchar(80) NOT NULL default '',
+  `userid` int(10) NOT NULL,
+  `title` varchar(80) NOT NULL default '',
+  `price` float(13,2) NOT NULL default '0.00',
+  `buynum` int(10) NOT NULL default '9',
+  KEY `oid` (`oid`),
+  KEY `userid` (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shops_userinfo`;
+
+CREATE TABLE `shops_userinfo` (
+  `userid` int(10) NOT NULL,
+  `oid` varchar(80) NOT NULL default '',
+  `consignee` char(15) NOT NULL default '',
+  `address` varchar(255) NOT NULL default '',
+  `zip` int(10) NOT NULL default '0',
+  `tel` varchar(255) NOT NULL default '',
+  `email` varchar(255) NOT NULL default '',
+  `des` varchar(255) NOT NULL default '',
+  KEY `oid` (`oid`),
+  KEY `userid` (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `softconfig`;
+
+CREATE TABLE `softconfig` (
+  `downtype` smallint(6) NOT NULL default '0',
+  `ismoresite` smallint(6) NOT NULL default '0',
+  `gotojump` smallint(6) NOT NULL default '0',
+  `islocal` smallint(5) unsigned NOT NULL default '1',
+  `sites` text,
+  `downmsg` text,
+  `moresitedo` smallint(5) unsigned NOT NULL default '1',
+  `dfrank` smallint(5) unsigned NOT NULL default '0',
+  `dfywboy` smallint(5) unsigned NOT NULL default '0',
+  `argrange` smallint(5) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`downtype`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sphinx`;
+
+CREATE TABLE `sphinx` (
+  `countid` int(11) unsigned NOT NULL,
+  `maxaid` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`countid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `stepselect`;
+
+CREATE TABLE `stepselect` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `itemname` char(30) default '',
+  `egroup` char(20) default '',
+  `issign` tinyint(1) unsigned default '0',
+  `issystem` tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `store_groups`;
+
+CREATE TABLE `store_groups` (
+  `storeid` mediumint(8) unsigned NOT NULL auto_increment,
+  `storename` char(20) NOT NULL default '',
+  `tops` mediumint(8) unsigned NOT NULL default '0',
+  `orders` smallint(6) unsigned NOT NULL default '0',
+  `nums` int(13) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`storeid`),
+  KEY `orders` (`orders`,`tops`),
+  KEY `nums` (`nums`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sys_enum`;
+
+CREATE TABLE `sys_enum` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `ename` char(30) NOT NULL default '',
+  `evalue` char(20) NOT NULL default '0',
+  `egroup` char(20) NOT NULL default '',
+  `disorder` smallint(5) unsigned NOT NULL default '0',
+  `issign` tinyint(1) unsigned NOT NULL default '1',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sys_module`;
+
+CREATE TABLE `sys_module` (
+  `id` int(11) NOT NULL auto_increment,
+  `hashcode` char(32) NOT NULL default '',
+  `modname` varchar(30) NOT NULL default '',
+  `indexname` varchar(20) NOT NULL default '',
+  `indexurl` varchar(30) NOT NULL default '',
+  `ismember` tinyint(4) NOT NULL default '1',
+  `menustring` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sys_set`;
+
+CREATE TABLE `sys_set` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `sname` char(20) NOT NULL default '',
+  `items` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sys_task`;
+
+CREATE TABLE `sys_task` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `taskname` varchar(50) NOT NULL,
+  `dourl` varchar(100) NOT NULL,
+  `islock` tinyint(1) unsigned NOT NULL default '0',
+  `runtype` tinyint(1) unsigned NOT NULL default '0',
+  `runtime` varchar(10) default '0000',
+  `starttime` int(10) unsigned NOT NULL default '0',
+  `endtime` int(10) unsigned NOT NULL default '0',
+  `freq` tinyint(2) unsigned NOT NULL default '0',
+  `lastrun` int(10) unsigned NOT NULL default '0',
+  `description` varchar(250) NOT NULL,
+  `parameter` text,
+  `settime` int(10) unsigned NOT NULL default '0',
+  `sta` enum('运行','成功','失败') default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sysconfig`;
+
+CREATE TABLE `sysconfig` (
+  `aid` smallint(8) unsigned NOT NULL default '0',
+  `varname` varchar(20) NOT NULL default '',
+  `info` varchar(100) NOT NULL default '',
+  `groupid` smallint(6) NOT NULL default '1',
+  `type` varchar(10) NOT NULL default 'string',
+  `value` text,
+  PRIMARY KEY  (`varname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tagindex`;
+
+CREATE TABLE `tagindex` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `tag` char(12) NOT NULL default '',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `count` int(10) unsigned NOT NULL default '0',
+  `total` int(10) unsigned NOT NULL default '0',
+  `weekcc` int(10) unsigned NOT NULL default '0',
+  `monthcc` int(10) unsigned NOT NULL default '0',
+  `weekup` int(10) unsigned NOT NULL default '0',
+  `monthup` int(10) unsigned NOT NULL default '0',
+  `addtime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `taglist`;
+
+CREATE TABLE `taglist` (
+  `tid` int(10) unsigned NOT NULL default '0',
+  `aid` int(10) unsigned NOT NULL default '0',
+  `arcrank` smallint(6) NOT NULL default '0',
+  `typeid` smallint(5) unsigned NOT NULL default '0',
+  `tag` varchar(12) NOT NULL default '',
+  PRIMARY KEY  (`tid`,`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `uploads`;
+
+CREATE TABLE `uploads` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `arcid` mediumint(8) unsigned NOT NULL default '0',
+  `title` char(60) NOT NULL default '',
+  `url` char(80) NOT NULL default '',
+  `mediatype` smallint(6) NOT NULL default '1',
+  `width` char(10) NOT NULL default '',
+  `height` char(10) NOT NULL default '',
+  `playtime` char(10) NOT NULL default '',
+  `filesize` mediumint(8) unsigned NOT NULL default '0',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  `mid` mediumint(8) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`aid`),
+  KEY `memberid` (`mid`),
+  KEY `arcid` (`arcid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `verifies`;
+
+CREATE TABLE `verifies` (
+  `nameid` char(32) NOT NULL default '',
+  `cthash` varchar(32) NOT NULL default '',
+  `method` enum('local','official') NOT NULL default 'official',
+  `filename` varchar(254) NOT NULL default '',
+  PRIMARY KEY  (`nameid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `vote`;
+
+CREATE TABLE `vote` (
+  `aid` mediumint(8) unsigned NOT NULL auto_increment,
+  `votename` varchar(50) NOT NULL default '',
+  `starttime` int(10) unsigned NOT NULL default '0',
+  `endtime` int(10) unsigned NOT NULL default '0',
+  `totalcount` mediumint(8) unsigned NOT NULL default '0',
+  `ismore` tinyint(6) NOT NULL default '0',
+  `isallow` tinyint(6) NOT NULL default '0',
+  `votenote` text,
+  `view` tinyint(6) NOT NULL default '0',
+  `spec` int(20) unsigned NOT NULL default '0',
+  `isenable` tinyint(6) NOT NULL default '0',
+  PRIMARY KEY  (`aid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `vote_member`;
+
+CREATE TABLE `vote_member` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `voteid` int(10) unsigned NOT NULL default '0',
+  `userid` varchar(50) NOT NULL default '',
+  `uptime` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `zixunhui`;
+
+CREATE TABLE `zixunhui` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `title` varchar(240) NOT NULL default '',
+  `tid` varchar(20) default NULL,
+  `mid` varchar(20) default NULL,
+  `posttime` int(10) unsigned NOT NULL default '0',
+  `uname` varchar(30) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `homepage` varchar(255) NOT NULL default '',
+  `qq` varchar(15) NOT NULL default '',
+  `face` varchar(10) NOT NULL default '',
+  `ip` varchar(20) NOT NULL default '',
+  `dtime` int(10) unsigned NOT NULL default '0',
+  `ischeck` smallint(6) NOT NULL default '1',
+  `msg` text,
+  `sex` varchar(4) default NULL,
+  `currentPage` varchar(255) default NULL,
+  `fromUrl` text,
+  PRIMARY KEY  (`id`),
+  KEY `ischeck` (`ischeck`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

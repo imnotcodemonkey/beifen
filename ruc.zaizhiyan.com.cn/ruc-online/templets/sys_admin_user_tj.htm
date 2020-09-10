@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=gbk'>
+<title>管理员帐号--绩效统计</title>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<script language='javascript' src='../include/js/dedeajax2.js'></script>
+<script language='javascript'>
+	//gcontainer,mShowError,mShowWait,mErrCon,mErrDisplay,mWaitDisplay
+	function LoadUser(uid)
+	{
+		var loadhtml = $DE('loaddiv').innerHTML;
+		var ajaxdiv = $DE('userct'+uid);
+		var myajax = new DedeAjax(ajaxdiv, true, true, '载入失败！', loadhtml);
+		myajax.SendGet2('sys_admin_user_tj.php?dopost=getone&uid='+uid);
+	}
+</script>
+<style>
+.userct1 {
+	padding-top:1px;
+}
+td strong{ color:#990000}
+#list td strong{ text-align:right;padding-right:6px}
+#list td.uname{width:160px;text-align:right}
+.db td{ border:1px #D6D6D6 solid;border-top:none;padding:3px 0}
+.db span,.db em,.db tt{ display:inline-block ;width:48px;text-align:right; float:left}
+.db em{width:36px; font-style:normal}
+.db tt{width:36px;}
+#list td.num,.dbtitle{ width:140px}
+table{border-collapse: collapse;}
+</style>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<div id='loaddiv' style='display:none'>
+	<p align='center'><img src='images/loadinglit.gif' /> 请稍后，正在载入中...</p>
+</div>
+<table border="1" cellpadding="3" cellspacing="0" bordercolor="#D6D6D6">
+  <tr>
+    <td height="28" background="images/tbg.gif" bgcolor="#E7E7E7"> 
+      <a href="sys_admin_user.php" style="padding-left:10px;"><strong><u>管理员帐号</u></strong></a> &gt; <strong>编辑绩效统计</strong>
+    </td>
+</tr>
+<tr>
+  <td valign="top" bgcolor="#FFFFFF" id="list" style="text-align:left">
+  <table border='1' cellpadding='0' cellspacing='0' bordercolor='#D6D6D6'>
+        <tr align='center' bgcolor="#E7E7E7">
+          <td class="uname" height='26'><strong>管理员&darr;|统计信息&rarr;</strong></td>
+          <td class="dbtitle"><strong>全部(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>今年(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>本季(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>上月(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>当月(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>上周(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>本周(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>昨天(点击|文档|平均)</strong></td>
+          <td class="dbtitle"><strong>当天(点击|文档|平均)</strong></td>
+        </tr>
+   </table><?php
+  $dsql->Execute('me', 'Select * From `#@__admin` order by logintime desc');
+  while( $arr = $dsql->GetArray('me') )
+  {
+  	echo "<div id='userct{$arr['id']}' class='userct'><p align='center'><img src='img/loadinglit.gif' /> 请稍后，正在载入中...</p></div>\r\n<script language='javascript'>LoadUser({$arr['id']});</script>\r\n";
+  }
+  ?>
+  </td>
+</tr>
+</table>
+</body>
+</html>

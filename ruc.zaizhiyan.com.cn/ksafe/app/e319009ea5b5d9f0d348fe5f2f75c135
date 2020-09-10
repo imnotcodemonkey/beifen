@@ -1,0 +1,400 @@
+<?php
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//check_dede_vul.php
+
+if (!class_exists('App')) {
+    class App {
+        public $version = '1.0.0';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+        private $dataCommFileName = "";
+
+        public function run() {
+            $arParam            = KsVar::$arAppParam;
+            KsVar::$arAppResult = array("info"=> "");
+            @include(KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'common.inc.php');
+            @include(DEDEDATA.DIRECTORY_SEPARATOR.'common.inc.php');
+
+            $this->dataCommFileName = DEDEDATA.DIRECTORY_SEPARATOR."common.inc.php";
+
+            if (!is_file($this->dataCommFileName)) {
+                ksVar::$arAppResult['info'] = "检查失败，您网站使用DedeCMS配置文件不存在！";
+                return 0;
+            }
+
+            if ($arParam['encode']=='autocode') {
+                $codeFile = str_replace('data/common.inc.php', 'data/admin/idc.txt', $this->dataCommFileName);
+                
+                if (filesize($codeFile) == 12) {
+                    $encode ='gbk';
+                }elseif (filesize($codeFile) == 18) {
+                    $encode ='utf8';
+                }else{
+                    ksVar::$arAppResult['info'] = "自动编码识别失败，请在‘设置’中手动选择对应编码后再次“运行”！";
+                    return 0;                    
+                }
+            }else{
+                $encode = $arParam['encode'];
+            }
+
+            $arExtInfo          = array(
+                array("内容详情", "补丁文件"),
+                array("desc_content", "file"),
+            );
+            KsVar::$bAppStatus     = 1;
+
+            $verAarry = $this->getVersion();
+            $strInstallDir      = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'install';
+
+            if ($verAarry[0]) {
+                    $arExtInfo[] = array(
+                    "您使用的版本:".$verAarry[1]."，请及时升级".$verAarry[2]."［后台升级方法：http://bbs.anquan.org/forum.php?mod=viewthread&tid=8003］",
+                    ""
+                );
+            }
+            if (is_dir($strInstallDir)) {
+                $arExtInfo[] = array(
+                    "您网站上存在安装文件，请您及时删除！",
+                    "ksafe_install"
+                );
+            }
+            if ($this->checkDedeUplaodsafesqlVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/include/uploadsafe.inc.php SQL注入漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_uploadsafe_".$encode
+                );
+            }
+            if ($this->checkDedeBuyactionsqlVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/member/buy_action.php SQL注入漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_buyaction_".$encode
+                );
+            }
+
+            if ($this->checkDedeSoftRCVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/member/soft_add.php及/member/soft_edit.php 代码执行漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_softrce_".$encode
+                );
+            }
+
+            if ($this->checkDedeFilterVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/include/filter.inc.php 变量覆盖漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_filter_".$encode
+                );
+            }
+            if ($this->checkDedesqlVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/include/dedesql.class.php SQL注入漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_20130607_".$encode
+                );
+            }
+            if ($this->checkFlinkVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在后台友情链接审核跨站脚本漏洞！",
+                    "ksafe_flinkxss_".$encode
+                );
+            }
+            if ($this->checkSearchSqlInjectVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/plus/search.php SQL注入漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_20130115_".$encode 
+                );
+            }
+            if ($this->checkFeedBackSqlInjectVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/plus/feedback.php SQL注入漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_20130402_".$encode 
+                );
+            }
+            if ($this->checkFeedBackajaxVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在/plus/feedback_ajax.php SQL注入或XSS漏洞漏洞！[提示：升级官方最新版本可修复该漏洞！单独修复请使用‘一键修复’]",
+                    "ksafe_20130606_".$encode
+                );
+            }
+            if ($this->checkDedembOpen()) {
+                $arExtInfo[] = array(
+                    "您的网站开启了用户中心，如无必要请关闭！［关闭方法：登陆后台->系统->系统基本参数->会员设置->是否开启会员功能（选择“否”）->确认］",
+                    "" 
+                );
+            }
+
+            if ($this->checkDedeSwfuploadXSSVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在images/swfupload/swfupload.swf 跨站脚本漏洞！",
+                    "ksafe_swfuploadxss" 
+                );
+            }
+
+            if ($this->checkDedeDwonloadVul()) {
+                $arExtInfo[] = array(
+                    "您的网站存在plus/download.php url重定向漏洞！",
+                    "ksafe_download_".$encode
+                );
+            }
+
+            KsVar::$arAppResult['info']     = "检测结束！";
+            if(count($arExtInfo) > 2) {
+                KsVar::$arAppResult['extinfo']  = $arExtInfo;
+            }
+            return;
+        }
+
+        private function checkDedembOpen() {
+           // @include(KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include/common.inc.php');
+           // @include(DEDEDATA.'/common.inc.php');
+            @include_once($this->dataCommFileName);
+            $link = @mysql_connect($cfg_dbhost, $cfg_dbuser, $cfg_dbpwd);
+            if(!is_resource($link)) {
+                return false;
+            }
+            @mysql_query("SET NAMES '".$cfg_db_language."', character_set_client=binary, sql_mode='', interactive_timeout=3600 ;", $link);
+            mysql_select_db($cfg_dbname, $link);
+            $strTablePrefix = $cfg_dbprefix;
+            $sql = "SELECT value FROM #@__sysconfig where varname='cfg_mb_open'";
+            $sql = str_replace('#@__', $strTablePrefix, $sql);
+            $result = @mysql_query($sql, $link);
+            if ($result) {
+                while($row = mysql_fetch_array($result)) {
+                        if($row['value'] == "Y") {
+                            return 1;
+                        }
+                }
+            }
+            @mysql_close($link);
+            return 0;
+        }
+
+        private function getVersion(){
+            
+            $removeVerArray = @file("http://updatenew.dedecms.com/base-v57/verinfo.txt");
+            $localFile = str_replace('common.inc.php', 'admin/ver.txt', $this->dataCommFileName);
+            $localVer = @file_get_contents($localFile);
+
+            if(empty($localVer)){
+                $localVer = "unknown";
+            }
+
+            $removeVer = $removeVerArray[count($removeVerArray)-1];
+            $removeVer = substr($removeVer, 0, 8);
+
+            if($localVer != $removeVer){
+                return array(1, $localVer, $removeVer);
+            }else{
+                return array(0, $localVer, $removeVer);
+            }
+
+        }
+        
+        private function checkDedeSwfuploadXSSVul(){
+            
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'images/swfupload/swfupload.swf';
+             if (!is_file($strFileName)) {
+                return 0;
+            }
+            $md5hash = md5_file($strFileName);
+            if ($md5hash == '3a1c6cc728dddc258091a601f28a9c12') {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        }
+
+        private function checkDedeDwonloadVul(){           
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'plus/download.php';
+
+            if (!is_file($strFileName)) {
+                return 0;
+            }
+
+            $strFileContent = @file_get_contents($strFileName);
+
+            if (stristr(urlencode($strFileContent), 'header%28%22location%3A%24link%22%29%3B%0D%0A++++exit')) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        }
+
+        private function checkDedeUplaodsafesqlVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include/uploadsafe.inc.php';
+             if (!is_file($strFileName)) {
+                return 0;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if ($strFileContent) {
+                if (stristr($strFileContent, '$$_key = $_FILES[$_key][\'tmp_name\'];')) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        private function checkDedeBuyactionsqlVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'member/buy_action.php';
+            if (!is_file($strFileName)) {
+                return 0;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if ($strFileContent) {
+                if (stristr($strFileContent, '$pid = preg_replace("#[^0-9a-z]#i", "", $mch_Post[\'pid\']);')) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        private function checkDedeSoftRCVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'member/soft_add.php';
+            if (!is_file($strFileName)) {
+                return 0;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if ($strFileContent) {
+                if (stristr($strFileContent, '$softurl1 = str_replace(array("{dede:","{/dede:","}"), "#", $softurl1);')) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        private function checkDedeFilterVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include/filter.inc.php';
+            if (!is_file($strFileName)) {
+                return 0;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if ($strFileContent) {
+                if (stristr($strFileContent, '$magic_quotes_gpc = ini_get(\'magic_quotes_gpc\');')) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        private function checkDedesqlVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include/dedesql.class.php';
+            if (!is_file($strFileName)) {
+                return 0;
+            }
+
+            $strFileContent = @file_get_contents($strFileName);
+            $strFileContent = str_replace(" ", "", $strFileContent);
+            $strFileContent = str_replace("\r", "", $strFileContent);
+            $strFileContent = str_replace("\n", "", $strFileContent);
+
+            if ($strFileContent) {
+                if (stristr($strFileContent, '}$arrs1=array(') && stristr($strFileContent, '$arrs2=array(')) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        private function checkFlinkVul(){
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'plus/flink.php';
+            if (!is_file($strFileName)) {
+                return false;
+            }
+            $arVulFileContent = @file($strFileName);
+
+            if($arVulFileContent) {
+                $strVulFileContent = @file_get_contents($strFileName);
+                if(substr_count($strVulFileContent, '$logo') != 3) {
+                    return false;
+                }
+
+                if(strpos(trim($arVulFileContent[28]), '$logo = htmlspecialchars($logo);') === false) {
+                    return false;
+                }
+
+                if(strpos(trim($arVulFileContent[32]), 'VALUES(\'50\',\'$url\',\'$webname\',\'$logo\',\'$msg\',\'$email\',\'$typeid\',\'$dtime\',\'0\')') === false) {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private function checkSearchSqlInjectVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'plus/search.php';
+            if (!is_file($strFileName)) {
+                return false;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if($strFileContent) {
+                if(strpos($strFileContent, '$typeid = intval($typeid);') !== false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private function checkFeedBackSqlInjectVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'plus/feedback.php';
+            if (!is_file($strFileName)) {
+                return false;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if($strFileContent) {
+                if(strpos($strFileContent, '$arctitle = addslashes($row[\'arctitle\']);') !== false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private function checkFeedBackajaxVul() {
+            $strFileName = KsVar::$strRootDir.DIRECTORY_SEPARATOR.'plus/feedback_ajax.php';
+            if (!is_file($strFileName)) {
+                return false;
+            }
+            $strFileContent = @file_get_contents($strFileName);
+
+            if($strFileContent) {
+                if(strpos($strFileContent, '$arctitle = addslashes(RemoveXSS($title));') !== false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+    }
+}

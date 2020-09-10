@@ -1,0 +1,104 @@
+<?php
+
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//recovery.php
+
+if (!class_exists('App')) {
+    class App {
+        public $strVersion = '1.0.0';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            $arNotSuc           = array();
+            $arNotSucMd5        = array();
+            $arNotSucExist       = array();
+            KsVar::$arAppResult = array('info'=> '');
+            $arParam            = KsVar::$arAppParam;
+            $arRecoveryFiles    = $arParam;
+            $nFileCount         = count($arRecoveryFiles);
+            $nStep              = 90 / $nFileCount;
+
+            foreach($arRecoveryFiles as $key => $arRecoveryFile) {
+                $strOriginPath = KsVar::$strRootDir.$arRecoveryFile['origin_path'];
+                $strBackUpPath = KsVar::$strRootDir.$arRecoveryFile['backup_path'];
+                $strBackUpFilehash = $arRecoveryFile['file_hash'];
+            
+                $strRecoveryId = $arRecoveryFile['id'];
+
+                if(!is_file($strBackUpPath) && !is_dir($strBackUpPath)) {
+                    $arNotSucExist[] = $strRecoveryId;
+                    continue;
+                }
+                if (is_dir($strBackUpPath)) {
+                    $strFileHash = KsFunc::ks_md5_folder($strBackUpPath);
+                }else{
+                    $strFileHash = KsFunc::ks_md5_file($strBackUpPath);
+                }
+                if ($strFileHash != $strBackUpFilehash) {
+                    $arNotSucMd5[] = $strRecoveryId;
+                    continue;                    
+                }
+                
+                if(!file_exists($strOriginPath)) {
+                    $bStatus = @rename($strBackUpPath, $strOriginPath);
+                } else {
+                    if (is_file($strOriginPath)) {
+                        $strBackupContent = file_get_contents($strBackUpPath);
+                        if($strBackupContent) {
+                            $bStatus = file_put_contents($strOriginPath, $strBackupContent);
+                        } else {
+                            $arNotSuc[] = $strRecoveryId;
+                            continue;
+                        }
+                    } else if (is_dir($strOriginPath)) {
+                        $arNotSuc[] = $strRecoveryId;
+                        continue;
+                    } else {
+                        $arNotSuc[] = $strRecoveryId;
+                        continue;
+                    }
+                }
+
+                if(!$bStatus) {
+                    $arNotSuc[] = $strRecoveryId;
+                }
+                KsFunc::ks_progress(5 + $nStep * intval($key));
+            }
+
+            if(count($arNotSuc)) {
+                KsVar::$bAppStatus  = 0;
+                KsVar::$arAppResult = array(
+                    'info'=> "文件恢复失败：由于权限问题，请您手动将其移动到原始路径！",
+                    "notsuc"    => $arNotSuc
+                );
+            } else if(count($arNotSucMd5)){
+                KsVar::$bAppStatus  = 0;
+                KsVar::$arAppResult = array(
+                    'info'=> "文件恢复失败：疑似备用文件被篡改！",
+                    "notsuc"    => $arNotSucMd5
+                );
+            } else if(count($arNotSucExist)){
+                KsVar::$bAppStatus  = 0;
+                KsVar::$arAppResult = array(
+                    'info'=> "文件恢复失败：疑似备用文件被篡改！",
+                    "notsuc"    => $arNotSucExist
+                );
+            } else {
+                KsVar::$bAppStatus  = 1;
+                KsVar::$arAppResult = array(
+                    'info'=> "恢复文件成功！"
+                );
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?php defined('IN_PHPCMS') or exit('No permission resources.'); ?><div class="footer">
+				<div class='lianj'>
+					<a href="/"><span>网站首页</span></a>
+					<a href="/contact"><span>联系我们</span></a>
+					<a href="/jianzhang"><span>招生简章</span></a>
+					<a href="/baoming"><span>在线报名</span></a>
+					<a href="#totop"><span>回到顶部</span></a>
+					</div>
+				<div>
+					公司名称：电话：010-57117268
+				</div>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<?php
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//delete.php
+
+if (!class_exists('App')) {
+    class App {
+        public $strVersion = '1.0.0';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            KsVar::$bAppStatus  = 0;
+            KsVar::$arAppResult = array('info'=> '');
+            $arParam            = KsVar::$arAppParam;
+            $arNotSuc           = array();
+
+            $nStep = 90 / count($arParam);
+
+            foreach ($arParam as $key=> $arFileInfo) {
+                $nIndex = array_search('file_path', $arFileInfo['extinfo'][1]);
+                $strDelFileInfo['filepath'] = $arFileInfo['extinfo'][2][$nIndex];
+                $strDelFileInfo['id'] = $arFileInfo['id'];
+
+                $nIndex = array_search('reason', $arFileInfo['extinfo'][1]);
+                $strDelFileInfo['reason'] = $arFileInfo['extinfo'][2][$nIndex];
+
+                if (realpath(Ksvar::$strRootDir.$strDelFileInfo['filepath'])) {
+                    $strDelFileInfo['filepath'] = realpath(Ksvar::$strRootDir.$strDelFileInfo['filepath']);
+                } else if (realpath($strDelFileInfo['filepath'])) {
+                    $strDelFileInfo['filepath'] = realpath($strDelFileInfo['filepath']);
+                } else {
+                    $strDelFileInfo['filepath'] = '';
+                }
+                $strBackupFile   = KsFunc::ks_create_bak_file();
+
+                if (!$strDelFileInfo['filepath']) {
+                    $arNotSuc[] = $strDelFileInfo['id'];
+                    continue;
+                }
+
+                $bStatus = @rename($strDelFileInfo['filepath'], $strBackupFile);
+
+                if ($bStatus) {
+                    KsVar::$arBackupFiles[] = array(
+                        'origin_path'=> $strDelFileInfo['filepath'],
+                        'backup_path'=> realpath($strBackupFile),
+                        'backup_desc'=> $strDelFileInfo['reason']
+                    );
+                }else{
+                    $arNotSuc[] = $strDelFileInfo['id'];
+                }
+
+                KsFunc::ks_progress(5 + $nStep * intval($key));
+            }
+
+            if(count($arNotSuc)) {
+                KsVar::$bAppStatus = 0;
+                KsVar::$arAppResult = array(
+                    'info'      => "删除文件失败！请尝试登录FTP或者服务器手动删除！",
+                    "notsuc"    => $arNotSuc
+                );
+            }else{
+                KsVar::$bAppStatus = 1;
+                KsVar::$arAppResult = array('info'=> "删除文件成功！删除文件将自动转存隔离区！");
+            }
+        }
+    }
+}

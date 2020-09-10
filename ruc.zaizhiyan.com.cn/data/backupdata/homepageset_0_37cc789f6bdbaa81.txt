@@ -1,0 +1,1 @@
+INSERT INTO `homepageset` VALUES('ructpl2012/index.htm','../index.html','1');

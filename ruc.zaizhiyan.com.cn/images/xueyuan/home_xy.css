@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+
+#main{width:950px; margin:8px 0 0 0;}
+#pleft{width:660px; float:left;}
+#flashnews{width:320px; float:left; margin:0 10px 0 0; height:298px; overflow:hidden}	
+	#pics{ height:298px;width:320px; overflow:hidden}
+	
+	#pics a {text-decoration:none;color:#353535;}
+	.aaronShow{height:298px;}
+	.aaronShow{position:relative;float:left;width:318px;margin-bottom:12px;overflow:hidden;border:1px solid #a4011e ;}
+	.aaronShow * {margin:0;padding:0;}
+	.slide{ position:absolute; background:black}
+	.bg{ position:absolute;background:black;left:0px;bottom:0px;width:320px;height:30px;*filter:alpha(opacity=35);opacity:0.35;}
+	.aaronShow h3 {position:absolute;left:10px;top:274px;width:360px;height:30px;line-height:35px;z-index:2;}
+		.aaronShow h3 a {font:bold 16px/150% 微软雅黑;color:#FFFFFF;}
+		.aaronShow p {position:absolute;left:10px;top:270px;width:260px;height:20px;line-height:20px;;z-index:2;}
+		.aaronShow p a {color:#FFFFFF; font:12px/150% Verdana}
+		.aaronShow ul {position:absolute;right:0;bottom:0;padding-left:47px;_padding-left:46px;background:url('flashPage_bg.png') no-repeat 0 0; z-index:2;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/flashPage_bg.png',sizingMethod='crop')}
+		ol,ul {list-style:none;}
+		.aaronShow ul li {float:left;width:15px;height:18px;line-height:18px;text-align:center;margin-left:1px;background:#000000;}
+			.aaronShow ul li a {display:block;width:15px;height:18px;font-size:10px;font-family:Tahoma;font-weight:bold;color:#FFFFFF;}
+			.aaronShow ul li a:hover, .aaronShow ul li a.sel {color:#F20000;}
+
+#bignews{width:330px; float:left;}
+#jianjie{width:660px; float:left; margin:8px 0 0 0}
+	.jianjiepic{width:123px; float:left; margin:0 8px 0 0}
+		.jianjiepic li{height:90px; margin-bottom:4px;}
+		.jianjiepic li a img{border:1px #E3E3E3 solid;padding:2px;}
+		.jianjiepic li a:hover img{border-color: #aaa;}
+	.jianjietxt{width:510px; float:right; overflow:auto; zoom:1; }
+	.jianjietxt span{ display:block; text-align:right;}
+	.jianjietxt span a{ color:red; text-decoration:none;}
+	#jianjie .c{ margin:0;padding:0;border:0;}
+	
+#zzy{width:660px;float:left;margin:8px 0; padding:8px 0;}
+	.zy{ overflow:hidden;width:644px; margin:8px 0;}
+	.zyl{ width:316px; float:left; margin-right:8px;}
+	.zyr{ width:316px; float:right;}
+ 
+	#lcpic{margin-top:8px; text-align:center; background-color:#fee0e0;border:1px #d5d5d5 solid; padding:18px 0;}
+

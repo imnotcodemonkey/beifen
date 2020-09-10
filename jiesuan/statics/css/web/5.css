@@ -1,0 +1,57 @@
+@charset "gb2312";
+/* CSS Document */
+
+/*×ÉÑ¯¿ò¡¢·µ»Ø¶¥²¿------------------------*/
+.pendant{width:56px;height:260px;position:fixed;right:5px;bottom:154px;z-index:150;
+_position:absolute;
+_bottom:auto;
+_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||154)-(parseInt(this.currentStyle.marginBottom,10)||0)))}
+.pendant_s{width:22px;height:85px;display:none;cursor:pointer;position:fixed;right:5px;bottom:220px;position:fixed;
+_position:absolute;
+_bottom:auto;
+_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||220)-(parseInt(this.currentStyle.marginBottom,10)||0))); background:#cf8f23}
+.pendant_s .p_smail,.pendant a,.pendant_top,.pendant .penndant_phonenumb{background-image:url(../images/pic-icon.png); background-repeat:no-repeat;}
+.pendant_s .p_smail{width:22px;height:85px;background-position:4px -213px}
+.pendant a{display:block;width:28px;height:28px;overflow:hidden;padding:8px 14px 12px;text-align:center;font-size:14px;color:#FFF;line-height:1000px;background-position:0 8px; border-top:1px solid #fff }
+.pendant a.web_bj:hover{display:block;width:28px;height:28px;background:#D08F22;text-decoration:none;line-height:16px}
+.pendant .pendant_qqzx{background-position:0 -41px}
+.pendant .pendant_phonezx{background-position:0 -87px}
+.pendant .pendant_share{background-position:-48px 7px}
+.pendant .pendant_zxbm{background-position:-45px -41px}
+.pendant .penndant_phonenumb{width:139px;height:48px;overflow:hidden;position:absolute;bottom:99px;left:-134px;display:none; background-position:0 -157px}
+.go_top{width:1000px;height:auto;margin:0 auto}
+.pendant_top{height:40px;line-height:1000px;color:#FFF;overflow:hidden;padding: 10px 10px 0 14px;width:26px;background-position:-64px -94px;position:fixed;bottom:10px;margin-left:1010px;
+_position:absolute;
+_bottom:auto;
+_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||10)-(parseInt(this.currentStyle.marginBottom,10)||0)))}
+.pendant_top:hover{line-height:16px;background:#aaa;color:#FFF;text-decoration:none}
+.pendant_close{width:15px;font-size:15px;height:15px;overflow:hidden;margin-left:41px;color:#000;cursor:pointer}
+.pendant_gay{color:#FFF;background:#555}
+.zxbm{ background-image:url(../images/zxbm.jpg); background-repeat:no-repeat; background-position:0 0; width:404px; height:120px; position:fixed; top:50%;left:50%; margin-left:-202px; margin-top:-60px; display:none;}
+.zxbm a{ display:block;position:absolute;height:30px;}
+.zx_01{ width:80px; top:74px; left:118px; }
+.zx_02{ width:87px; top:73px; left: 208px;}
+.zx_03{ width:80px; top:74px; left:304px; }
+.sideshare{width:108px;height:60px; padding-top:8px;overflow:hidden;position:absolute;bottom:28px;left:-119px;border:1px solid 
+#D08F22; border-right:none; display:none; background:#fff}
+.sideshare a{ padding:0; width:auto;}
+.pendant .bdshare-button-style0-24 a,.pendant .bdshare-button-style0-24 .bds_more{ margin:0 6px 0px 0}
+
+
+
+
+
+
+.web_bj,.stujz_a a:hover,.ban_cen2 p a:hover,.page a:hover,.stue_01 li.current a,.map_con a:hover{ background-color:#ae0c2a}
+.web_bortop,.new_list li.current{ border-top-color:#ae0c2a}
+.tabbtn li a,.web_font,.new_list li.current a:hover,.tab_train a,.page a,.map_con a,.ban_sub,.top_logincenter li.current,.stue_01 li a,.pre_ban .center{color:#ae0c2a}
+.web_bord,.page ,.page a:hover,.major_01 .list_rule,.map_con a:hover,.list_rule,.top_logincenter li.current{ border-color:#ae0c2a}
+.direct{ border-bottom-color:#ae0c2a}
+
+.new_con dt em,.new_list li em,.new_con li em,.gray_tit em,.pos_bj,.ban_sub,.ban_sub em,.ban_cen p em, .ban_cen2 p em{background-image:url(../images/minedu/pub-pos.png); background-repeat:no-repeat;}
+.new_zx{ border-color:#910922;}
+.ban_zx{ color:#fff}
+.ban_cen p a:hover{ background-image:url(../images/pro_03_use.png);}
+.map_con a em{background-image:url(../images/map.png)}
+.lianxi_con span em{background-image:url(../images/contact_cjdx.png);}
+.list_rul_auto{background-image:url(../images/jz_hov_cjdx.png); }

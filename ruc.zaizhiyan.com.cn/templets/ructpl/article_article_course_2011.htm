@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=gb2312" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.seotitle /}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="http://i.haiwen.net/js/jquery.min.js"></script>
+<script type="text/javascript" src="/_res/_c.js?2011-8-31"></script>
+<link href="/_res/_g.css" rel="stylesheet" type="text/css" />
+<link href="/_res/_p.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="contpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+	{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong> {dede:field name='position'/}正文</div>
+		<div id="content">
+				<h1>{dede:field.title/}</h1>
+			<div class="info">
+				<small>时间:</small>{dede:field.pubdate 
+				function=&quot;MyDate('Y-m-d',@me)&quot;/}
+				<small>来源:</small>{dede:field.source/}
+				<small>点击:</small><script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}" tpye="text/javascript"></script>次
+			</div>
+            	{dede:field.description runphp='yes'} if(@me&lt;&gt;'' )@me = '<div class="intro">
+					'.@me.'</div>'; {/dede:field.description}
+			<div class="content">
+			<table width="100%">
+				<tr><td><div id="title"><h4>新闻学院在职研究生招生简章</h4></div>
+				<div class="TR">
+				<small id="Tag">Tag:</small><span id="tags">{dede:tag row='5' 
+					sort='new' getall='0'} <a href='[field:link/]'>[field:tag /]</a>{/dede:tag}</span><script type="text/javascript">if(ID('tags').innerHTML=='')ID('Tag').style.display='none'</script>
+					(责任编辑：{dede:adminname/})</div>
+				</td></tr>
+			</table>
+			</div><!-- /content -->
+			<div style="text-align:center"><a href="http://vipwebchat.tq.cn/sendmain.jsp?admiuin=8089018&uin=8349141&tag=&ltype=1&rand=88875860573066531&iscallback=1&agentid=0&comtimes=7&style=1&color=2&page=http%3A//www.ruconline.com/r/11/zzfz2bfh.html%3F1312873730&localurl=http%3A//www.ruconline.com/r/11/zzfz2bfh.html%3F1312873730&spage=http%3A//www.ruconline.com/r/09/fmfnhbm2.html%3F1312874982&nocache=0.6936833404470235" target="_blank"><img src="/images/ar_zx.gif" alt="在线咨询" /></a> <a href="/baoming.html" target="_blank"><img src="/images/ar_bm.gif" alt="在线报名" /></a></div>
+			<div id="pages">
+				<ul>
+          		  {dede:pagebreak/}
+				</ul>
+			</div><!-- /pages -->
+<div>
+<strong style="color:red">在线报名表</strong>
+<iframe id="bm" height="300" marginheight="1" border="0" src="/api/baoming.html" frameborder="0" width="650" name="bm" marginwidth="1" scrolling="no"></iframe></div>
+			<div id="prevnext">
+				<ul>
+					<li>{dede:prenext get='pre'/}</li>
+					<li>{dede:prenext get='next'/}</li>
+				</ul>
+			</div><!-- /prevnext -->
+		</div><!-- /cont-->
+
+	</div><!-- //左边内容结束 -->
+
+<!-- //右边内容开始 -->
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>报名咨询</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+<dl id="subMenu">
+<dt><strong>栏目列表</strong></dt>
+<dd id="subMenuDd">
+<ul>
+	{dede:channel type='son' currentstyle='<li><a href="~typelink~" class="Hover">
+	~typename~</a></li>'}
+<li><a href="[field:typeurl/]">[field:typename/]</a></li>{/dede:channel}
+</ul>
+</dd>
+</dl>
+<dl id="so">
+<dt><strong>站内搜索</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" />
+<input type="submit" id="sobtn" value="搜索" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+		{dede:myad name='rightCourse'/}
+
+
+<dl id="hot">
+<dt>热点内容</dt>
+<dd>
+<ol class="c1 ico2">
+	{dede:arclist row=10 orderby=click}
+<li>·<a href="[field:arcurl/]">[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+</div><!-- /right -->
+
+
+
+<div class="c"><strong>{dede:field.title/}</strong></div>
+</div>
+
+	{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+{dede:include file='inc/kefu.html' ismake='yes'/}
+</body>
+</html>
+

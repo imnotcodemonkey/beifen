@@ -1,0 +1,58 @@
+*{ margin:0; padding:0; font:12px/18px Verdana, Geneva, sans-serif; color:#333}
+img{border:none}
+body{ overflow-x: hidden}
+html { overflow-x: hidden; overflow-y: auto; }
+
+.l{ float:left}
+.r{ float:right}
+a{ color:#09F; text-decoration:none}
+.none{ display:none;}
+
+h2,h2 *{font:bold 14px/180% Verdana, Geneva, sans-serif;}
+h2 span{ font-size:12px;font-weight:normal}
+
+h3{ padding:20px 0 15px 40px; background: #eefcff; border-bottom:#7bd5fb 1px solid;}
+h3 div{ width:562px; height:18px}
+h3 img{ vertical-align:middle}
+
+form{ padding:10px 40px; width:562px; z-index:10; position:relative}
+.forms form{ padding:0 0 0 0; margin:0}
+form p{}
+#cont{overflow:hidden;width:552px; padding:5px; height:72px; font-family:SimSun;word-wrap:break-word;word-break:break-all;}
+textarea,input{ background:#F5F5F5; border:1px #CCC solid;}
+#picname{ width:360px; padding:2px 5px; height:18px;}
+#t{ height:30px; padding-top:5px}
+	#smt{ height:24px; padding:3px 6px; color:#FFF; font-weight:bold; font-size:14px; background:#09F; border:1px #06F solid}
+	#smt.disabled{ border:1px #AAA solid; background:#EEE;color:#AAA}
+#btns,#showpic { border-top:1px #dae3e8 solid; padding:6px 0 }
+#btns #imgurl{ width:400px; height:24px; line-height:22px; padding:0 5px;}
+	#showpic img{max-width:300px; max-height:300px;}
+#msg{ padding:10px; border:1px #FF6600 solid; background:#FDF2E8; text-align:center}
+	#t .l input{ display:inline; margin:0 6px 0 0}
+
+#list{padding:10px 40px; width:562px; position:relative; z-index:1}
+	#list dl{ border-top:1px #dae3e8 solid;margin-top:10px; padding:10px 10px 10px 60px; position:relative}
+	#list dt{ width:50px; position:absolute; left:0px; top:10px}
+	#list dd{ width:500px; min-height:50px;}
+	#contTip{ color:#666}
+	
+	#list .pic{ padding-top:10px}
+	#list blockquote{border:1px #dae3e8 solid; padding:10px 10px 0 10px; background:#fafafa; margin-top:5px; border-radius:3px }
+	.vt0,.vt3{ display:inline-block; width:15px; background:url('http://img.t.sinajs.cn/t4/style/images/common/ico.png') no-repeat 0 -205px; height:12px}
+	.vt3{ background-position:0 -230px}
+	
+	.info{ padding:8px 0; height:18px}
+	.info .l span{ padding-right:8px;}
+	.info .r span{ padding-left:8px;}
+	
+	#url{ width:450px; height:20px; padding:0 3px; line-height:20px;}
+	
+#show{padding:10px 40px; width:562px;}
+#show .msg{ font:14px/180% Verdana, Geneva, sans-serif; padding-bottom:10px}
+#show .img{ padding:25px; background:#EEE; border:1px #CCC solid; border-radius:5px}
+
+#nav a{ display:inline-block; padding:5px 12px;}
+#nav .Hover{ background:#EEE; font-weight: bold;}
+.date,.gray{ color:#888; }
+
+#list div.gary{ margin:10px 0 0 0}

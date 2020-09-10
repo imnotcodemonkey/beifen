@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title><?php echo $cfg_webname; ?> - 在线报名</title>
+<link href="/images/style.css" rel="stylesheet" type="text/css" media="screen" />
+<style>
+body{ background:#FFF; text-align:left;font:12px/150% Verdana}
+dl{ height:24px;width:630px; clear:both;padding:3px 0 0 0}
+dl.txt{ height:96px}
+dt{ float:left;width:96px; text-align:right}
+dd{ float:left;width:75%;}
+input { }
+label{padding:0 2px 0 0}
+.TR{ width:90px; text-align:right}
+td{ border:1px gray solid;padding:2px 6px}
+ul,li{ display:inline;margin:0;padding:0}
+</style>
+<script type="text/javascript">
+function show(o){
+if(o.checked==true)document.getElementById('other').style.display='';
+else document.getElementById('other').style.display='none';
+
+}
+function getlaiyuan(){
+str='';
+for(i=1;i<=8;i++){
+	o=document.getElementById('l'+i);
+	if(o.checked==true)str+=o.value+'|';
+	else str=str.replace(o.value+'|',"");
+}
+document.getElementById('homepage').value=str+document.getElementById('other').value;
+}
+</script>
+<script language="JavaScript">
+function xxg()
+{
+    if (form1.uname.value=="")
+    {
+    	alert("您没有填姓名");
+    	document.form1.uname.focus();
+    	return false;
+    }
+    if (form1.address.value=="")
+    { 
+    	alert("您没有填地址");
+    	document.form1.address.focus();
+    	return false;
+    }
+    if (form1.select_specialty.value=="0")
+    {
+    	alert("请选择一个专业");
+    	return false;
+	}
+    if (form1.mobile.value=="")
+    { 
+    	alert("您没有填手机电话");
+    	document.form1.mobile.focus();
+    	return false;
+    }
+    if (form1.mobile.value.length<7 || form1.mobile.value.length>13)
+    { 
+    	alert("手机电话格式不正确");
+    	document.form1.mobile.focus();
+    	return false;
+    }
+	 
+return true;
+
+}
+</script>
+<style type="text/css">
+td {
+    border:1px solid #CCCCCC;
+}
+</style>
+</head>
+<body style="padding-left:20px;">
+
+
+<?php
+if(!empty($_GET['gotopagerank'])){
+?><p>
+　以下是 <font color="blue">佛罗伦萨大学</font> 在线报名情况：<a href="/hw-ruc/report_italy.php">[报表导出]</a></p>
+  {dede:datalist}
+
+ <dl><dt>ID&nbsp;:&nbsp;<?php echo $fields['id']; ?></dt><dd>　录入时间：<font color="#3366CC"><?php echo MyDate('Y-m-d H:i',$fields['dtime']); ?></font>
+ </dd></dl>
+<table cellpadding="0" style="width: 90%;border-collapse: collapse;">
+	<tr>
+		<td class="TR">姓名：</td>
+		<td style="width:40%"><font color="#3366CC"><?php echo $fields['uname']; ?></font></td>
+		<td class="TR">最高学历：</td>
+		<td><font color="#3366CC"><?php echo $fields['education']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">性别：</td>
+		<td><font color="#3366CC"><?php echo $fields['sex']; ?></font></td>
+		<td class="TR">学士学位：</td>
+		<td><font color="#3366CC"><?php echo $fields['diploma']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">手机号码：</td>
+		<td><font color="#3366CC"><?php echo $fields['mobile']; ?></font></td>
+		<td class="TR">毕业院校：</td>
+		<td><font color="#3366CC"><?php echo $fields['graduate_school']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">Email：</td>
+		<td><font color="#3366CC"><?php echo $fields['email']; ?></font></td>
+		<td class="TR">所学专业：</td>
+		<td><font color="#3366CC"><?php echo $fields['learning_specialty']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">地址：</td>
+		<td><font color="#3366CC"><?php echo $fields['address']; ?></font></td>
+	    <td class="TR">外语语种：</td>
+	    <td><font color="#3366CC"><?php echo $fields['language']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">报名的专业：</td>
+		<td colspan="3"><font color="#3366CC"><?php echo $fields['select_specialty']; ?></font></td>
+	</tr>
+	<tr>
+		<td class="TR">咨询留言：</td>
+		<td colspan="3"><font color="#3366CC"><?php echo nl2br(htmlentities($fields['questioninfo'],ENT_QUOTES,GB2312)); ?></font></td>
+	</tr>
+</table>
+
+ <dl><dt> <a style="display:none" href='?action=admin&id=<?php echo $fields['id']; ?>&job=del' style="color:red">[删除]</a> IP地址：</dt><dd><a href="http://www.ip.cn/?ip=<?php echo $fields['ip']; ?>" target="_blank"><?php echo $fields['ip']; ?></a></dd></dl>
+<div style="height:20px;overflow:hidden;"><strong> 填写报名表页面：</strong><a href="<?php echo $fields['url']; ?>" target="_blank"><?php echo $fields['url']; ?></a></div>
+<div style="height:24px;overflow:hidden;"><strong> 系统监测到的来源：</strong><a style="color:red" href="<?php echo $fields['seo']; ?>" target="_blank"><?php echo $fields['seo']; ?></a></div>
+<hr style="width:150px" />
+
+    {/dede:datalist}
+  {dede:pagelist listsize='5'/}   
+<?php
+}
+else{
+?>
+<!-- 报名表单 开始 -->
+<div class="biao">
+<form onsubmit="return xxg();" method="post" action="/plus/guestbook_italy.php" name="form1" id="form1">
+<ul>
+<li class="L"><span>*</span>姓名：</li>
+<li class="R"><input type="text" msg="字符长度必须为0到30位" max="30" min="0" datatype="limit" require="false" id="uname" name="uname"><span>（请填写真实姓名）</span></li>
+<li class="L"><span>*</span>性别：</li>
+<li class="R"><label><input type="radio" style="border: 0px none;" value="男" id="sex" name="sex"> 男</label> <label><input type="radio" style="border: 0px none;" value="女" id="sex" name="sex"> 女</label></li>
+<li class="L"><span>*</span>手机：</li>
+<li class="R"><input name="mobile" id="mobile" onkeyup="value=value.replace(/\D+/g,'')"><span>（请填写正确的联系方式，方便我们与您联系）</span></li>
+<li class="L"><span>*</span>Email：</li>
+<li class="R"><input name="email" id="email"></li>
+<li class="L">地址：</li><li class="R"><input name="address" id="address"><span>（请填写常住地址）</span></li>
+<li class="L"><span>*</span>专业：</li>
+<li class="R"><select name="select_specialty" id="select_specialty">
+<option selected="selected" value="">请选择</option>
+<option value="金融保险精算与风险管理专业">金融保险精算与风险管理专业</option>
+<option value="能源管理专业">能源管理专业</option>
+</select>
+<span>（请填写您要报名的专业）</span>
+</li>
+<li class="L">最高学历：</li><li class="R"><input type="radio" name="education" value="大学本科" style="border: 0px none;"> 
+						大学本科 <input type="radio" name="education" value="本科以上" style="border: 0px none;">
+						本科以上 <input type="radio" name="education" value="其他" style="border: 0px none;"> 其他
+						</li>
+<li class="L"><span>*</span>学士学位：</li><li class="R"><input type="radio" name="diploma" value="已获得" style="border: 0px none;"> 
+						已获得 <input type="radio" name="diploma" value="2011年获得" style="border: 0px none;">
+						2011年获得 <input type="radio" name="diploma" value="其他" style="border: 0px none;"> 
+						其他
+						</li>
+
+<li class="L"><span>*</span>毕业院校：</li><li class="R"><input type="text" ;="" id="graduate_school" name="graduate_school"></li>
+<li class="L">所学专业：</li><li class="R"><input type="text" ;="" id="learning_specialty" name="learning_specialty"></li>
+<li class="L">外语语种：</li><li class="R"><input type="checkbox" value="英语" name="language">英语
+<input type="checkbox" value="意大利语" name="language">意大利语
+<input type="checkbox" value="西班牙语" name="language">西班牙语
+<input type="checkbox" value="法语" name="language">法语
+<input type="checkbox" value="日语" name="language">日语
+<input type="checkbox" value="韩语" name="language">韩语
+<input type="checkbox" value="其他" name="language">其他
+<input type="checkbox" value="无外语基础" name="language">无外语基础
+</li>
+<li class="L">咨询留言：</li><li class="R"><textarea id="questioninfo " name="questioninfo" style="width:480px; height:130px"></textarea></li>
+
+</ul>
+<div class="tijiao">请准确填写下列表格，我们会尽快安排老师为您解答问题。咨询热线：<font color="#cc0000">010－82500131 </font></div>
+<div class="tijiao"><input type="hidden" value="" name="seo" id="seo" /><!--监测来源-->
+<input type="hidden" value="" name="url" id="url" /><!--提交页面--><input type='hidden' name='action' value='save' />
+<input type="submit" class="btn" value="提交" name="Submit"></div>
+</form>
+</div>
+<!-- 报名表单 结束 -->
+<?php
+}
+?>
+      </body>
+</html>

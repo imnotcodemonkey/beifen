@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>在职研究生报考条件_2011年人大在职研究生招生简章-人大在职研究生招生网</title>
+<meta name="keywords" content="{dede:global.cfg_keywords/}" />
+<meta name="description" content="{dede:global.cfg_description/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/home.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="homepage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+<div id="scroll" class="h">
+<h1>{dede:global.cfg_webname/}</h1>
+<dfn>{dede:global.cfg_description/}{dede:global.cfg_homeintro/}</dfn>
+</div>
+</div>
+
+<div id="cont0" class="t08">
+
+<dl class="l mold" id="zhaosheng">
+<dt><a class="l" href="/c/list-4.html">在职研简章</a></dt>
+<dd>
+{dede:channelartlist typeid=4}
+<h3><a href="{dede:field name='typeurl'/}">{dede:field name='typename'/}</a></h3>
+<ol>
+{dede:arclist titlelen='60' row='8'}
+<li id="stitle">·<a target="_blank" href="[field:arcurl /]" class="changejz" title="[field:shorttitle1/]">[field:title /]</a></li>
+{/dede:arclist}
+</ol>
+{/dede:channelartlist}
+</dd>
+</dl>
+
+<script src="jquery-1.6.2.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+var shorttitle=$("#stitle.changejz").arr("title");
+$(".changejz").html(shorttitle);
+});
+</script>
+
+<div class="l" id="center">
+<div id="pics"><div class="aaronShow">
+{dede:arclist type='image' flag='f' row='6' typeid='18' titlelen='136' orderby='pubdate'}
+	<div id="Switch_[field:global name=autoindex/]" class="slide">
+	<a href="[field:arcurl/]" rel="[field:global name=autoindex/]"><img alt="[field:title/]" onmouseout="goonSwitch();" onmouseover="pauseSwitch();" src="[field:picname/]" /></a></div>
+	{/dede:arclist}
+		<div id="SwitchTitle" onmouseout="goonSwitch();" onmouseover="pauseSwitch();"></div>
+		<ul id="SwitchNav"></ul>
+		<div class="bg" onmouseover="pauseSwitch();"  onmouseout="goonSwitch();"></div>
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+//--------
+
+var Switcher = new Array();
+{dede:arclist type='image' flag='f' row='6' typeid='18' titlelen='136' orderby='pubdate'}
+Switcher[[field:global name=autoindex/]] = Array() ;
+Switcher[[field:global name=autoindex/]]['link'] = "[field:arcurl/]";
+Switcher[[field:global name=autoindex/]]['desc']  = "[field:desc/]";
+Switcher[[field:global name=autoindex/]]['title']  = "[field:title/]";
+{/dede:arclist}
+var MaxScreen = Switcher.length-1;
+
+var refreshSwitchTimer = null;
+switchPic(1);
+refreshSwitchTimer = setTimeout('reSwitchPic();', 3000);
+
+//-->
+</script>
+
+<dl class="mold">
+<dt><a class="l" href="/c/list-18.html">教务信息</a></dt>
+<dd>
+<ol>
+{dede:arclist row='14' typeid="18" titlelen="200" orderby='pubdate'}
+<li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a target="_blank" href="[field:arcurl /]">[field:title /]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+<dl class="mold">
+<dt><a class="l" href="/c/list-44.html">在职研究生</a></dt>
+<dd>
+<ol>
+
+{dede:arclist row='4' flag='c'  typeid="19,21,24,25,60,65,63,61,59,57,58,46,45,64" titlelen="200" orderby='pubdate'}
+<li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a target="_blank" href="[field:arcurl /]">[field:title /]</a></li>
+{/dede:arclist}
+
+{dede:arclist row='6' noflag='c' typeid="19,21,24,25,60,65,63,61,59,57,58,46,45,64" titlelen="200" orderby='pubdate'}
+<li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a target="_blank" href="[field:arcurl /]">[field:title /]</a></li>
+{/dede:arclist}
+
+</ol>
+</dd>
+</dl>
+<dl class="mold">
+<dt><a class="l" href="/c/list-20.html">人大新闻</a></dt>
+<dd>
+<ol class="img">
+{dede:arclist row=2 typeid="20"  orderby=pubdate type='image.' imgwidth='170' imgheight='120'}
+<li><a href="[field:arcurl/]">[field:image/]<span class="title">[field:title/]</span></a></li>{/dede:arclist}
+</ol>
+<ol>
+{dede:arclist row='10' typeid="47,48,49,50,51,52,53,54,55,56" titlelen="200" orderby='pubdate'}
+<li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a target="_blank" href="[field:arcurl /]">[field:title /]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+</div>
+
+
+
+<dl class="r">
+<!--dt>快速连接</dt-->
+<dd>
+{dede:myad name='homeQuick'/}
+</dd>
+</dl>
+
+<div id="zixunNews" class="l">
+<dl class="mold">
+<dt><a class="l" href="/c/list-34.html">最近更新</a></dt>
+<dd>
+<ol>
+{dede:arclist row=24 titlelen=200 orderby=pubdate}
+<li><a target="_blank" href="[field:arcurl /]">[field:title /]</a><span class="r">[field:pubdate function="MyDate('Y-m-d',@me)"/]</span></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+</div>
+
+<div id="photo" class="l">
+<dl class="mold">
+<dt><a class="l" href="/c/list-37.html" id="test">名师风采</a></dt>
+<dd><div id="fgpic"><div id="infgpic">
+<div id="fgpic1">
+{dede:arclist row=10 typeid="37,38,39,40,41,52,43,62" flag='s' titlelen=80 orderby=pubdate type='image.' imgwidth='120' imgheight='160'}
+<a href="[field:arcurl/]">[field:image/]</a>
+{/dede:arclist}
+</div>
+<div id="fgpic2"></div>
+</div></div>
+</dd>
+</dl>
+<script type="text/javascript">
+var speed=20;
+var tab=document.getElementById("fgpic");
+var tab1=document.getElementById("fgpic1");
+var tab2=document.getElementById("fgpic2");
+tab2.innerHTML=tab1.innerHTML;
+function Marquee(){
+if(tab2.offsetWidth-tab.scrollLeft<=0)tab.scrollLeft-=tab1.offsetWidth
+else{tab.scrollLeft++;}
+}
+var MyMar=setInterval(Marquee,speed);
+tab.onmouseover=function() {clearInterval(MyMar)};
+tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
+
+</script>
+
+<dl class="mold" id="xiaoyuan">
+<dt><a class="l" href="/c/list-34.html">校园风光</a></dt>
+<dd>
+<ol>
+{dede:arclist row=5 typeid=34 titlelen=80 orderby=pubdate type='image.' imgwidth='150' imgheight='100'}
+<li><a href="[field:arcurl/]">[field:image/]<span class="title">[field:title/]</span></a></li>{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+</div>
+
+
+
+<div class="c"></div>
+</div>
+
+
+
+
+<dl id="linkres" class="mold">
+<dt><strong class="l">在职研究生</strong></dt>
+<dd><ul>
+<li><a rel="nofollow" href='http://www.ruc.edu.cn/' target='_blank'>人大主页</a> </li>
+<li><a href='http://www.ruconline.com/' target='_blank'>人大在职研究生招生</a> </li>
+<li><a rel="nofollow" href='http://www.pku.edu.cn/' target='_blank'>北京大学</a> </li>
+<li><a rel="nofollow" href='http://www.tsinghua.edu.cn/' target='_blank'>清华大学</a> </li>
+<li><a rel="nofollow" href='http://www.lib.ruc.edu.cn/' target='_blank'>图书馆</a> </li>
+<li><a rel="nofollow" href='http://www.philosophyol.com/' target='_blank'>哲学在线</a> </li>
+<li><a rel="nofollow" href='http://www.bjedu.gov.cn/' target='_blank'>北京市教委</a> </li>
+<li><a rel="nofollow" href='http://www.pinggu.org/bbs/' target='_blank'>人大经济论坛</a> </li>
+<li><a rel="nofollow" href='http://www.moe.edu.cn/edoas/website18/index.htm' target='_blank'>教育部</a> </li>
+<li><a rel="nofollow" href='http://www.sociologyol.org/' target='_blank'>社会学视野</a> </li>
+<li><a href='http://www.ruconline.com/jianzhang/' target='_blank'>在职研究生招生简章</a> </li>
+<br/>
+{dede:flink row='34' typeid='3'/}</ul></dd>
+</dl>
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+</div>
+</div>
+</div>
+
+</body>
+
+</html>

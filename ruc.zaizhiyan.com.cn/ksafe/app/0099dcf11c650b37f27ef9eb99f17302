@@ -1,0 +1,86 @@
+<?php
+
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//pdelete.php
+
+if (!class_exists('App')) {
+    class App {
+        public $strVersion = '1.0.0';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            $arParam        = KsVar::$arAppParam;
+            $arNotSuc       = array();
+
+            $nStep = 90 / count($arParam);
+
+            foreach ($arParam as $key=> $arFileInfo) {
+                $strDelFileInfo['filepath'] = $arFileInfo['backup_path'];
+                $strDelFileInfo['id'] = $arFileInfo['id'];
+
+                if (realpath(Ksvar::$strRootDir.$strDelFileInfo['filepath'])) {
+                    $strDelFileInfo['filepath'] = realpath(Ksvar::$strRootDir.$strDelFileInfo['filepath']);
+                } else if (realpath($strDelFileInfo['filepath'])) {
+                    $strDelFileInfo['filepath'] = realpath($strDelFileInfo['filepath']);
+                } else {
+                    $strDelFileInfo['filepath'] = '';
+                }
+
+                if(!$strDelFileInfo['filepath']) {
+                    $arNotSuc[] = $strDelFileInfo['id'];
+                    continue;
+                }
+
+                //fixed不能删除目录bug 2014.03.10 
+                if (is_dir($strDelFileInfo['filepath'])) {
+                    $bStatus = $this->delTree($strDelFileInfo['filepath']);
+                }else{
+                    if (file_exists($strDelFileInfo['filepath'])) {
+                        $bStatus = @unlink($strDelFileInfo['filepath']);
+                    }else{
+                        $bStatus = true;
+                    }
+                    
+                }
+
+                if(!$bStatus) {
+                    $arNotSuc[] = $strDelFileInfo['id'];
+                }
+
+                KsFunc::ks_progress(5 + $nStep * intval($key));
+            }
+
+            if(count($arNotSuc)) {
+                KsVar::$bAppStatus  = 0;
+                KsVar::$arAppResult = array(
+                    'info'      => "删除失败",
+                    "notsuc"    => $arNotSuc
+                );
+            }else{
+                KsVar::$bAppStatus  = 1;
+                KsVar::$arAppResult = array(
+                    'info'=> "删除成功"
+                );
+            }
+        }
+
+        //fixed不能删除目录bug 2014.03.10 
+        public function delTree($dir) {
+            $files = array_diff(scandir($dir), array('.','..'));
+            foreach ($files as $file) {
+                (is_dir("$dir/$file")) ? $this->delTree("$dir/$file") : unlink("$dir/$file");
+            }
+            return rmdir($dir);
+        }
+    }
+}

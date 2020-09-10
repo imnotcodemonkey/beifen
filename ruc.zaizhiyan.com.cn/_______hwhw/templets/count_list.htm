@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>站外来源列表</title>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<link href='css/tb-box.css' rel='stylesheet' type='text/css' />
+<script lang='javascript' src='js/tb-box.js'></script>
+<script language='javascript' src="js/main.js"></script>
+<script type="text/javascript" src="js/calendar/calendar.js"></script>
+<style type="text/css">
+.tit div{text-align:left; height:18px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display:block; width:300px}
+.reffer {text-align:left;}
+.reffer a{ float:left; margin-top:3px; padding:0 4px}
+</style>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6" align="center">
+
+  <tr align="center" bgcolor="#ffffff"> 
+    <td colspan="6" style="text-align:left; padding-left:12px">
+     <form name='formsearch'>
+		  查看类型:<select name="urltype" id="urltype">
+			<?php echo $urllist; ?>
+		  </select>
+		  查看来路:<select name="reffer" id="reffer">
+			<?php echo $solist; ?>
+		  </select>
+		  IP地址:<input name="cip" type="text" id="cip" size="15" style="width:100px" />
+      	时间:<input name="day" value="<?php echo $day;?>" type="text" id="pubdate" style="width:60px">	                                  
+				 <script language="javascript" type="text/javascript">
+				    var showX = getElementLeft($Obj("pubdate")) - 130;
+					var showY = (window.navigator.userAgent.indexOf("MSIE") >=1 )? getElementTop($Obj("pubdate")) + 35 :  getElementTop($Obj("pubdate")) + 25;
+					if((window.navigator.userAgent.indexOf("MSIE 7.0") >=1 )) {
+						showX = getElementLeft($Obj("pubdate"))+205;
+						showY = getElementTop($Obj("pubdate"))+35;
+					}
+					if(window.navigator.userAgent.indexOf("MSIE 6.0")>=1)
+					{
+						Calendar.setup({
+							inputField     :    "pubdate",
+							ifFormat       :    "%Y-%m-%d",
+							showsTime      :    true,
+							timeFormat     :    "24"
+						});
+					} else {
+						Calendar.setup({
+							inputField     :    "pubdate",
+							ifFormat       :    "%Y-%m-%d",
+							showsTime      :    true,
+							position       :    [showX, showY],
+							timeFormat     :    "24"
+						});
+					}
+				 </script>
+			   &nbsp;
+        <input type="submit" name="Submit" value="搜索" />
+		</form>
+   </td>
+  </tr>
+  <tr align="center" bgcolor="#FBFCE2"> 
+    <td width="36">ID</td>
+    <td width="120">时间</td>
+    <td width="90">访问IP</td>
+    <td width="40">位置</td>
+    <td width="300">访问页</td>
+    <td>来路页面</td>
+  </tr>
+  <form name="form1">
+{dede:datalist}
+    <tr align="center" bgcolor="#FFFFFF" height="26" align="center" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';"> 
+      <td>
+      	{dede:field.id/}
+      </td>
+      <td class="time"> 
+        {dede:field.dateline function="MyDate('Y.m.d H:i:s',@me)" /}
+      </td>
+      <td style="text-align:left">
+        <a href="http://www.baidu.com/baidu?word={dede:field.ip/}&ch=3" target="_blank">{dede:field.ip/}</a>
+      </td>
+       <td title="{dede:field.aid/}">
+     	{dede:field.aid function=wz(@me)/}
+      </td>
+     <td class="tit">
+      <div><a target="_blank" href="{dede:field.url /}">{dede:field.tit function=str_replace('_北京小升初网','',@me)/}</a></div>
+      </td>
+      <td class="reffer">
+     	<a href="{dede:field.reffer function=furl(@me)/}" target="_blank">{dede:field.reffer function=toIco(@me)/}</a> <input class="np" type="text" value="{dede:field.reffer function=furl(@me)/}" name="t1" style="width:400px" />
+      </td>
+    </tr>
+{/dede:datalist}
+  </form>
+  <tr bgcolor="#F9FCEF"> 
+    <td height="24" colspan="6" align="center"> 
+      {dede:pagelist listsize='5' /}
+    </td>
+  </tr>
+</table>
+</body>
+</html>

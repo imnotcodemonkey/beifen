@@ -1,0 +1,13 @@
+INSERT INTO `sys_module` VALUES('1','0cce60bc0238aa03804682c801584991','百度新闻','','','0','');
+INSERT INTO `sys_module` VALUES('2','1f35620fb42d452fa2bdc1dee1690f92','文件管理器','','','0','');
+INSERT INTO `sys_module` VALUES('3','72ffa6fabe3c236f9238a2b281bc0f93','广告管理','','','0','');
+INSERT INTO `sys_module` VALUES('4','b437d85a7a7bc778c9c79b5ec36ab9aa','友情链接','','','0','');
+INSERT INTO `sys_module` VALUES('5','acb8b88eb4a6d4bfc375c18534f9439e','投票模块','','','0','');
+INSERT INTO `sys_module` VALUES('6','572606600345b1a4bb8c810bbae434cc','挑错管理','','','0','');
+INSERT INTO `sys_module` VALUES('14','0a7bea5dbe571d35def883cbec796437','留言簿模块','','','0','');
+INSERT INTO `sys_module` VALUES('15','8964eda9013d1df0afea08ed63243436','站内新闻','','','0','');
+INSERT INTO `sys_module` VALUES('16','be722dbfa3cb3cb5628aab2d767ff62e','问答模块','问答','../ask/?ct**myask','1','<m:top name=\'问答管理\' c=\'6,\' display=\'block\' rank=\'\'>\r\n  <m:item name=\'栏目管理\' link=\'../ask/admin.php?ct=asktype\' rank=\'\' target=\'main\' />\r\n  <m:item name=\'问题管理\' link=\'../ask/admin.php?ct=issue\' rank=\'\' target=\'main\' />\r\n  <m:item name=\'答案管理\' link=\'../ask/admin.php?ct=answer\' rank=\'\' target=\'main\' />\r\n  <m:item name=\'幻灯片管理\' link=\'../ask/admin.php?ct=slide\' rank=\'\' target=\'main\' />\r\n</m:top>');
+INSERT INTO `sys_module` VALUES('17','dfcb5cd4d7bc0e3f7eb655e62dd6bc64','圈子模块','圈子','../group/mygroup.php','1','<m:top name=\'圈子管理\' c=\'6,\' display=\'block\'>\r\n<m:item name=\'分类设置\' link=\'group_store.php\' rank=\'group_All\' target=\'main\'/>\r\n<m:item name=\'圈子列表\' link=\'group_main.php\' rank=\'group_All\' target=\'main\'/>\r\n<m:item name=\'主题管理\' link=\'group_threads.php\' rank=\'group_All\' target=\'main\'/>\r\n</m:top>');
+INSERT INTO `sys_module` VALUES('18','8a4773468b800900dcfefbc5988833ed','UCenter模块','','','0','<m:top name=\'UCenter模块\' c=\'6,\' display=\'block\' rank=\'\'>\r\n<m:item name=\'UCenter配置\' link=\'api_ucenter.php\' rank=\'\' target=\'main\' />\r\n</m:top>');
+INSERT INTO `sys_module` VALUES('12','96e157ebac534c56b7b4c7e930123573','在线报名Italy','','','0','');
+INSERT INTO `sys_module` VALUES('13','2f512b3b772019796a9eb53824d1db3c','在线报名Ruc','','','0','');

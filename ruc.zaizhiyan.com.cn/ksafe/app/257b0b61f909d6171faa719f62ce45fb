@@ -1,0 +1,269 @@
+<?php
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//check_database.php
+
+if (!class_exists('App')) {
+    class App {
+        public  $strVersion = '1.1.0';
+
+        private $_cfg_dbhost = '';
+
+        private $_cfg_dbname = '';
+
+        private $_cfg_dbuser = '';
+
+        private $_cfg_dbpwd = '';
+
+        private $_cfg_dbprefix = '';
+
+        private $_cfg_db_language = '';
+
+        private $_rDbLink = '';
+
+        private $_strConfigFile = '';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            KsVar::$bAppStatus      = 0;
+            KsVar::$arAppResult     = array('info'=> '');
+
+            @include(KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'common.inc.php');
+            @include(DEDEDATA.DIRECTORY_SEPARATOR.'common.inc.php');
+  
+            $this->_strConfigFile = DEDEDATA.DIRECTORY_SEPARATOR.'common.inc.php';
+
+            $this->_cfg_dbhost      = isset($cfg_dbhost)        ? $cfg_dbhost:      '';
+            $this->_cfg_dbname      = isset($cfg_dbname)        ? $cfg_dbname:      '';
+            $this->_cfg_dbuser      = isset($cfg_dbuser)        ? $cfg_dbuser:      '';
+            $this->_cfg_dbpwd       = isset($cfg_dbpwd)         ? $cfg_dbpwd:       '';
+            $this->_cfg_dbprefix    = isset($cfg_dbprefix)      ? $cfg_dbprefix:    '';
+            $this->_cfg_db_language = isset($cfg_db_language)   ? $cfg_db_language: '';
+
+
+            $arExtInfo = array(
+                array("表名","垃圾数据详情","数量"),
+                array("tb_name","data_content","num")
+            );
+
+            # 检测配置文件是否正确
+            if (!($this->_cfg_dbhost && $this->_cfg_dbname && $this->_cfg_dbuser && $this->_cfg_db_language)) {
+                KsVar::$arAppResult['info'] = "检测失败，您的数据库配置文件不合法";
+                return 0;
+            }
+
+            # 检测配置文件是否正确
+            if (!$this->db_connect()) {
+                KsVar::$arAppResult['info'] = "检测失败，数据库连接出错";
+                return 0;
+            }
+
+            $arData = $this->checkFlinkData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+
+            $arData = $this->checkGuestBookData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+
+            $arData = $this->checkErrAddData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+            
+            $arData = $this->checkSkeywordsData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+            
+            $arData = $this->checkMemberData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+
+            $arData = $this->checkMyadData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+
+            $arData = $this->checkMytagData();
+            if ($arData) {
+                $arExtInfo = array_merge($arExtInfo, $arData);
+            }
+
+            if (count($arExtInfo) > 2) {
+                KsVar::$bAppStatus      = 1;
+                KsVar::$arAppResult     = array('info'=> "检测完成，您的网站数据库中检测到可疑数据", 'extinfo'=> $arExtInfo);
+            } else {
+                KsVar::$bAppStatus      = 1;
+                KsVar::$arAppResult     = array('info'=> "检测完成，您的网站数据库中没有检测到可疑数据");
+            }
+
+            $this->db_close();
+            return true;
+        }
+
+        private function checkFlinkData() {
+            $arFlinkData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__flink where url='http://' or url not like 'http://%' or msg =1");
+            if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $arFlinkData[] = array(
+                            "#@__flink",
+                            "发现友情链接申请数据库里存在可疑垃圾及恶意数据！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $arFlinkData;
+        }
+
+        private function checkGuestBookData() {
+            $arGuestBookData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__guestbook WHERE msg =1 or title=1 or qq=1");
+            if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $arGuestBookData[] = array(
+                            "#@__guestbook",
+                            "发现留言板数据库里存在可疑垃圾及恶意数据！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $arGuestBookData;
+        }
+
+        private function checkErrAddData() {
+            $arErrAddData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM  #@__erradd WHERE title='' or errtxt =1 or oktxt = 1 or errtxt =1234");
+            if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $arErrAddData[] = array(
+                            "#@__erradd",
+                            "发现错误管理数据库里存在可疑垃圾及恶意数据！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $arErrAddData;
+        }
+
+        private function checkSkeywordsData() {
+            $arSkeywordsData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__search_keywords");
+            if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $arSkeywordsData[] = array(
+                            "#@__search_keywords",
+                            "发现数据库里存在记录搜素关键词！（可选）",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $arSkeywordsData;
+        }
+
+        private function checkMemberData() {
+            $arMemberData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__member where email ='sample@email.tst'");
+            if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $arMemberData[] = array(
+                            "#@__member",
+                            "发现用户数据库里存在非法注册的用户！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $arMemberData;
+        }
+
+        private function checkMytagData() {
+            $evilData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__mytag WHERE INSTR(normbody,'<?')>0 or INSTR(expbody,'<?')>0");
+
+             if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                       if ($row[0]>0) {
+                        $evilData[] = array(
+                            "#@__mytag",
+                            "发现数据库表存在可疑恶意后门代码数据！建议清理数据同时对网站查杀木马修复漏洞！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $evilData;
+        }
+
+        private function checkMyadData() {
+            $evilData = array();
+            $sResult = $this->db_execute("SELECT count(*) FROM #@__myad WHERE INSTR(normbody,'<?')>0 or INSTR(expbody,'<?')>0");
+
+             if ($sResult) {
+                while($row = mysql_fetch_array($sResult)) {
+                    if ($row[0]>0) {
+                        $evilData[] = array(
+                            "#@__myad",
+                            "发现数据库表存在可疑恶意后门代码数据！建议清理数据同时对网站查杀木马修复漏洞！",
+                            $row[0]."条"
+                        );
+                    }
+                }
+            }
+            return $evilData;
+        }
+
+        private function db_connect() {
+            $link = @mysql_connect($this->_cfg_dbhost, $this->_cfg_dbuser, $this->_cfg_dbpwd);
+            if(!is_resource($link)) {
+                return false;
+            }
+            @mysql_query("SET NAMES '".$this->_cfg_db_language."', character_set_client=binary, sql_mode='', interactive_timeout=3600 ;", $link);
+            mysql_select_db($this->_cfg_dbname, $link);
+            $this->_rDbLink = $link;
+            return true;
+        }
+
+        private function db_execute($sql) {
+            if (!is_resource($this->_rDbLink)) {
+                $this->db_connect();
+            }
+            $strTablePrefix = $this->_cfg_dbprefix;
+            $sql = str_replace('#@__', $strTablePrefix, $sql);
+
+            $result = @mysql_query($sql, $this->_rDbLink);
+
+            return $result;
+        }
+
+        private function db_close() {
+            if (is_resource($this->_rDbLink)) {
+                @mysql_close($this->_rDbLink);
+            }
+        }
+
+
+    }
+}

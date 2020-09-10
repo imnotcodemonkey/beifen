@@ -1,0 +1,75 @@
+﻿
+* {margin:0;padding:0}
+body {font: 12px/1.5 Arial; background:#edf4f5 url('bg_left.png') repeat-y 129px 0;_background-color:#d8e9ec;}
+img{ border:none}
+table{border-collapse: collapse;}
+a *{ cursor:pointer}
+.red{ color:#F80000}
+
+#nav{ width:130px;float:left;}
+#nav li { padding:2px 0 0 0;}
+#nav li a{ display:block;text-decoration:none;font:12px/23px 'Microsoft Yahei'}
+#nav li a:hover{ background:transparent url('bg_hover.png') repeat-x; border-right:1px #d9d9d9 solid}
+#nav strong{ font-weight:normal; display:block;height:23px;margin:0 0 0 6px;padding-left:40px; background:transparent url('folder.png') no-repeat 20px center; width:80px;}
+#nav .Lib strong { background: url('folderLib.png') no-repeat 0px center;padding-left:20px;}
+#nav .Photo strong{ background-image: url('folderPhoto.png')}
+#nav .Flash strong{ background-image: url('folderFlash.png')}
+#nav .Movie strong{ background-image: url('folderMovie.png')}
+#nav .Docs strong{ background-image: url('folderDocs.png')}
+#nav .Userup strong{ background-image: url('folderUserup.png')}
+
+#files { float:right; margin-left:-130px;width:100%}
+#filesInner{ margin-left:130px;background: transparent url('bg_top.png') repeat-x 0 -46px;}
+#files dl{width:210px; float:left; padding-left:15px}
+.folder{ height:70px;}
+.folder dd{ display:block;width:48px;height:48px;padding:0 6px 0 0; float:left;}
+.folder dd img{ cursor:pointer}
+.folder .title,.folder .info{ display:block;float:left;width:150px;}
+.folder .title { display:inline-block;}
+.folder .title a{ font:14px/200% 'Microsoft Yahei'; color:#006699; text-decoration: none}
+.folder .info { color: #9aa3a6;}
+
+#floderInfo { height:53px;overflow:hidden; padding-bottom:23px;}
+#files #infoDl { width:500px;}
+#infoDl dt{ font:18px/30px 'Microsoft Yahei'; height:30px; color:#008743}
+#infoDl dd{ color:gray}
+#infoDl dd span{ color:#0066cc}
+#infoDl #upInfo{color:#F80000; font-size:12px;padding-left:12px;}
+#floderInfo form { width:290px; float:right; padding:5px 0 0 0;}
+
+#postion { padding-left:12px;}
+
+
+.file{ height:70px;}
+.file dd{ display:block;width:48px;height:48px;padding:0 6px 0 0; float:left;}
+.file dd img{ cursor:pointer}
+.file .title,.file .info{ display:block;float:left;width:150px;}
+.file .title { display:inline-block; padding:4px 0 0 0; min-height:20px; word-wrap:break-word; word-break:break-all; }
+.file .title a{ font:bold 12px/14px 'Microsoft Yahei',Arial; color:#006699; text-decoration: none; word-wrap:break-word; word-break:break-all;}
+.file .info *{ color: #9aa3a6; font:10px/16px Arial;}
+.file .info small{ padding: 0 0 0 12px;}
+
+.pic { height:230px; position:relative}
+.pic dd{ display:block;width:210px;height:210px; background:#FFF; overflow:hidden;text-align:center;vertical-align:middle}
+.pic dd img{ cursor:pointer; max-height:210px; max-height:210px;}
+/*
+.pic .title,.pic .info{ display:block;float:left;position:absolute; width:200px;left:20px; padding:0 5px; background:transparent url('bg_black.png');}
+.pic .title { display:inline-block; word-wrap:break-word; word-break:break-all;height: auto; top:0; padding:3px 5px}
+.pic .title a{ font:bold 12px/16px 'Microsoft Yahei',Arial; color:#006699; text-decoration: none; word-wrap:break-word; word-break:break-all;}
+.pic .info { height:20px; bottom:20px;}
+.pic .info *{ color: #B8C2C5; font:10px/18px Arial; float:left}
+.pic .info small{ float:right}
+*/
+.pic table{width: 100%; height: 210px;}
+.pic dt{ display:block;position:absolute; width:200px;left:15px; padding:0 5px; }
+.pic .title { height: auto; bottom:40px; padding-top:5px; z-index:3;overflow:hidden}
+.pic .title a{ font:bold 12px/18px 'Microsoft Yahei',Arial; color:#FFF; text-decoration: none; cursor: pointer;position:relative;height:20px}
+.pic .info { height:20px; bottom:20px; color:#EEE; line-height:20px;z-index:2;cursor:pointer}
+.pic dt span{float:left;font-size:10px;}
+.pic dt small{float:right;font-size:10px;}
+.pic .alpha{background:transparent url('bg_black.png'); color:#FFF;height:40px;bottom:20px; z-index:1;
+	_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/lhbico/bg_black.png', sizingMethod='scale');}
+.pic .px{ height:20px; padding:0 5px; color:#FFF; width:auto; display:block;position:absolute;left:15px;top:0;  line-height:20px;
+	background:transparent url('bg_black.png');_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/lhbico/bg_black.png', sizingMethod='scale');}
+
+#files .red *{color:#F80000}

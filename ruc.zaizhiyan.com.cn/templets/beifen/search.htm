@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=gb2312" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>站内搜索_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="http://i.haiwen.net/js/jquery.min.js"></script>
+<script type="text/javascript" src="/_res/_c2012.js?2012-7-13"></script>
+<link href="/_res/_g2012.css" rel="stylesheet" type="text/css" />
+<link href="/_res/_p.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="listpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+	{dede:include file='head.htm' /}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong> 搜索 <strong style="color:red">
+			{dede:global name='keyword' function='RemoveXSS(@me)'/}</strong> 的结果</div>
+		<div class="place"> </div><!-- /place -->
+		<div id="listbox">
+			{dede:list perpage='20'}
+<dl>
+	<dt><a href="[field:arcurl/]" class="tit">[field:title/]</a> </dt>
+	<dd>[field:description/]...　<span>_[field:pubdate function="GetDateMK(@me)"/]</span>　<a href="[field:arcurl/]">详细&gt;&gt;</a></dd></dl>
+			{/dede:list}
+		</div>
+		<div id="pages"><ul>{dede:pagelist listsize='4'/}</ul></div>
+	</div><!-- /left -->
+
+<div id="mainRight" class="r">
+
+	<dl id="so">
+	<dt><strong>站内搜索</strong></dt>
+	<dd>
+	<form action="../ructpl/{dede:field%20name='phpurl'/}/search.php" name="formsearch">
+	<input name="keyword" id="keyword" type="text" class="searchtxt" value="{dede:global name='keyword' function='RemoveXSS(@me)'/}" />
+	<input type="submit" id="sobtn" value="搜索" />
+	<input type="hidden" name="kwtype" value="1" />
+	<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+	</form>
+	</dd>
+	</dl>
+
+</div><!-- /right -->
+
+<script type="text/javascript">checkCont()</script>
+<script type="text/javascript">
+pageCount(-5,0);
+</script>
+
+<div class="c"></div>
+</div>
+	{dede:include file='footer.htm' /}
+	</div>
+</div>
+</div>
+
+</body>
+</html>

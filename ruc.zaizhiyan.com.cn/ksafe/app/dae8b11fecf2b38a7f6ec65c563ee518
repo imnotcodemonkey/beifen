@@ -1,0 +1,153 @@
+<?php
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//dede_delete.php
+
+if (!class_exists('App')) {
+    class App {
+        public $strVersion = '1.0.0';
+
+        private $_cfg_dbhost = '';
+
+        private $_cfg_dbname = '';
+
+        private $_cfg_dbuser = '';
+
+        private $_cfg_dbpwd = '';
+
+        private $_cfg_dbprefix = '';
+
+        private $_cfg_db_language = '';
+
+        private $_rDbLink = '';
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            KsVar::$arAppResult = array('info'=> '');
+            KsVar::$bAppStatus  = 0;
+
+            @include(KsVar::$strRootDir.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'common.inc.php');
+            @include(DEDEDATA.DIRECTORY_SEPARATOR.'common.inc.php');
+  
+            $this->_strConfigFile = DEDEDATA.DIRECTORY_SEPARATOR.'common.inc.php';
+
+            $this->_cfg_dbhost      = isset($cfg_dbhost)        ? $cfg_dbhost:      '';
+            $this->_cfg_dbname      = isset($cfg_dbname)        ? $cfg_dbname:      '';
+            $this->_cfg_dbuser      = isset($cfg_dbuser)        ? $cfg_dbuser:      '';
+            $this->_cfg_dbpwd       = isset($cfg_dbpwd)         ? $cfg_dbpwd:       '';
+            $this->_cfg_dbprefix    = isset($cfg_dbprefix)      ? $cfg_dbprefix:    '';
+            $this->_cfg_db_language = isset($cfg_db_language)   ? $cfg_db_language: '';
+
+            # 检测配置文件是否正确
+            if (!($this->_cfg_dbhost && $this->_cfg_dbname && $this->_cfg_dbuser && $this->_cfg_db_language)) {
+                KsVar::$bAppStatus = 0;
+                KsVar::$arAppResult = array(
+                    "info"  => "检测失败，DedeCMS的配置文件路径不合法"
+                );
+                return 0;
+            }
+
+            # 检测配置文件是否正确
+            if (!$this->db_connect()) {
+                KsVar::$bAppStatus = 0;
+                KsVar::$arAppResult = array(
+                    "info"  => "检测失败，数据库连接出错"
+                );
+                return 0;
+            }
+
+            $arParam        = KsVar::$arAppParam;
+            $arNotSec       = array();
+
+            foreach($arParam as $arDataInfo) {
+                $nTBIndex = array_search('tb_name', $arDataInfo['extinfo'][1]);
+                $strDataTable   = $arDataInfo['extinfo'][2][$nTBIndex];
+
+                if ($strDataTable == '#@__flink') {
+                    $result = $this->db_execute("DELETE FROM #@__flink WHERE url='http://' or url not like 'http://%' or msg =1");
+                } else if ($strDataTable == '#@__guestbook') {
+                     $result = $this->db_execute("DELETE FROM #@__guestbook WHERE msg =1 or title=1 or qq=1");
+                } else if ($strDataTable == '#@__erradd') {
+                     $result = $this->db_execute("DELETE FROM #@__erradd WHERE title='' or errtxt =1 or oktxt = 1 or errtxt =1234");
+                } else if ($strDataTable == '#@__search_keywords') {
+                     $result = $this->db_execute("DELETE FROM #@__search_keywords");     
+                } else if ($strDataTable == '#@__member') {
+                     $this->db_execute("DELETE FROM #@__member_person WHERE mid IN (SELECT mid FROM #@__member WHERE email='sample@email.tst')");  
+                     $this->db_execute("DELETE FROM #@__member_flink WHERE mid IN (SELECT mid FROM #@__member WHERE email='sample@email.tst')");  
+                     $this->db_execute("DELETE FROM #@__member_space WHERE mid IN (SELECT mid FROM #@__member WHERE email='sample@email.tst')");  
+                     $this->db_execute("DELETE FROM #@__member_tj WHERE mid IN (SELECT mid FROM #@__member WHERE email='sample@email.tst')");  
+                     $result = $this->db_execute("DELETE FROM #@__member WHERE email='sample@email.tst'"); 
+                } else if ($strDataTable == '#@__mytag') {
+                    $result = $this->db_execute("DELETE FROM #@__mytag WHERE INSTR(normbody,'<?')>0 or INSTR(expbody,'<?')>0");
+                } else if ($strDataTable == '#@__myad') {
+                    $result = $this->db_execute("DELETE FROM #@__myad WHERE INSTR(normbody,'<?')>0 or INSTR(expbody,'<?')>0");
+                } else {
+                    $result = null;
+                }
+
+                if (!$result) {
+                    $arNotSec[] = $strDataTable;
+                }
+
+            }
+
+            if (!$arNotSec) {
+                KsVar::$bAppStatus = 1;
+                KsVar::$arAppResult = array(
+                    "info"      => "清理数据完毕",
+                );
+            } else {
+                KsVar::$bAppStatus = 0;
+                KsVar::$arAppResult = array(
+                    "info"      => "清理数据失败",
+                    "notsec"    => $arNotSec
+                );
+            }
+
+            $this->db_close();
+            return true;
+        }
+
+        private function db_connect() {
+            $link = @mysql_connect($this->_cfg_dbhost, $this->_cfg_dbuser, $this->_cfg_dbpwd);
+            if(!is_resource($link)) {
+                return false;
+            }
+            @mysql_query(
+                "SET NAMES '".$this->_cfg_db_language."',
+                character_set_client=binary, sql_mode='', interactive_timeout=3600 ;",
+                $link
+            );
+            mysql_select_db($this->_cfg_dbname, $link);
+            $this->_rDbLink = $link;
+            return true;
+        }
+
+        private function db_execute($sql) {
+            if (!is_resource($this->_rDbLink)) {
+                $this->db_connect();
+            }
+            $strTablePrefix = $this->_cfg_dbprefix;
+            $sql = str_replace('#@__', $strTablePrefix, $sql);
+
+            $result = @mysql_query($sql, $this->_rDbLink);
+
+            return $result;
+        }
+
+        private function db_close() {
+            if (is_resource($this->_rDbLink)) {
+                @mysql_close($this->_rDbLink);
+            }
+        }
+    }
+}

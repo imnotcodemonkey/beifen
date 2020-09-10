@@ -1,0 +1,127 @@
+﻿
+#main{ min-height:300px; height:auto;_height:300px; margin:8px 0; background:transparent url('mainbg.gif') repeat-y right top }
+	#main.photo{ background:#F5F5F5}
+#mainLeft{ width:705px;  background-color:#FFFBF5;}
+#place{ background:#b30005;padding:4px 12px; color:#fff}
+	#place a{ color:#fff;}
+	#main.photo .picbox{ text-align:center;font:bold 14px/20px "Microsoft Yahei"}
+	#main.photo a.img{ border:1px #4D251E solid;background:#FFF;display:inline-block;width:auto;padding:6px}
+
+#listbox ,#listLi ,#content,#listTeacher,#listimg { padding:12px 20px}
+#listbox{ border:1px #ccc solid;}
+#listbox .img{width:135px; float:left;}
+#listbox .img img{width:125px;max-height:115px;}
+
+#listbox dl{ border-bottom:1px #CCCCCC dotted; padding:8px 0;margin:8px 0; clear:both}
+#listbox dt { font-family:simsun}
+#listbox dt a{ font:14px/150% Verdana}
+#listbox dt a.tit{ text-decoration:underline; color:#502423;}
+#listbox dt a.tit:hover{ text-decoration:none}
+#listbox dd{ font:12px/180% Verdana; color:#666;padding:6px 0 3px 0}
+
+#listTeacher {}
+#listTeacher dl{ width:150px ;text-align:center;float:left;height:200px; overflow:hidden; padding:0 30px 0 30px}
+#listTeacher dd{ height:165px; overflow:hidden; vertical-align:bottom}
+#listTeacher dd img{ border:1px #A4011E solid;max-height:163px}
+
+#listLi {}
+#listLi a{color:#b30005}
+#listLi dt { background: transparent url('ico_g.gif') no-repeat 0 -94px; padding:0 0 0 16px}
+#listLi dt {}
+#listLi dt a{ font:14px/140% Verdana; font-weight:bold; }
+#listLi dd{ background-color:#FFFEFB; height:60px; line-height:30px; overflow:hidden; color:#616060;margin:4px 0 10px 10px}
+
+#listimg dl{width:180px; float:left;height:180px;padding:5px 18px}
+#listimg dd{ height:120px; background:transparent url('listpicBg.gif') no-repeat}
+#listimg dd a{ width:168px;height:112px; display:block;overflow:hidden;margin:2px;}
+#listimg dd img{max-height:112px;height:auto;_height:112px;}
+#listimg dt{ height:20px; overflow:hidden;text-align:center}
+
+#pages { text-align:center; clear:both}
+#pages li{ display:inline}
+#pages a { display:inline-block;padding:0 3px}
+
+#mainRight{width:235px;}
+#mainRight *{margin:0;padding:0; list-style-type:none }
+#mainRight dl{ width:235px; border:1px #ccc solid; margin:0 0 10px 0;}
+#mainRight dt{ height:31px;background:#fefefe url('bg_g.gif') no-repeat 0 -200px; overflow:hidden; font:bold 14px/31px Verdana;  padding:0 26px; }
+#mainRight dt *{ color:#a40e25}
+#mainRight dt strong{ font-weight:normal;}
+#mainRight dd{ background-color:#fffbf5;}
+
+	#mainRight ol{ padding:10px 4px;}#subMenu li{ font-family:simsun;color:#808080;height: 24px; overflow:hidden; width:232px;}
+	#mainRight li a{ font:13px/24px Verdana;}
+	/* #lianxi dt{ background-position:0 -1px;} */
+	#lianxi dd{ padding:10px; font:13px/150% 'simsun'}
+	/* #subMenu dd,#lianxi dd,#so dd{ margin:10px 10px 10px 30px; font-family:simsun; } */
+	#so dd{ padding:12px;}
+	#subMenu li{ font:14px/220% Verdana; background:transparent url('ico_g.gif') no-repeat 10px 8px; padding-left:20px;  }
+	#subMenu a{ text-decoration:underline}
+	.c1{ font:12px/150% 'simsun'}
+	.c1 span{ color:#b30005}
+	
+
+		
+#content{ background-color:#fffefb; border:1px #ccc solid;}
+	#content h1{ font:bold 14.5pt/200% "Microsoft Yahei"; text-align: center;color:#800000; margin:12px 0;border-bottom:1px #ccc solid}
+	.intro { display:none}
+	#content .info{ text-align:center;font:12px/18px Verdana; margin:0 0 20px 0}
+	#content .info *{font:12px/18px Verdana;}
+	.content {font:14px/200% simsun;word-break:break-all; word-wrap:break-word;}
+	.content a{ text-decoration:underline; color:#990000}
+	.content a:hover{ text-decoration:none;color:#CC3300}
+	.content .title{ }
+	.content .title h4{width:646px;height:13px; padding:0 0 0 20px; background: transparent url('bg_title.gif') no-repeat 0 0;}
+	.content .title h4 strong{ width:auto; padding:4px; background-color:#fff; font:14px/14px 'SimSun'; color:#c00000;}
+	.contentTable td{ border:1px #333333 solid;}
+#bdshare{ clear:both; padding:6px;}
+		
+	#xgyd dt{ height:24px; line-height:24px; padding-left:10px; color:#b30005}
+	#xgyd ul{ padding:0; margin:0;}
+	#xgyd li{ padding-left:18px; line-height:24px;}
+	
+	#prevnext { border-top:1px #808080 dotted; border-bottom:1px #808080 dotted; }
+	#outBox{border:1px #ccc solid;}
+#channel { padding:10px 5px 0 15px; }
+#channel dl{margin:0 12px 12px 0 }
+#channel *{ margin:0;padding:0;list-style-type:none}
+	#picnews {}
+	#picnews dd{ padding:8px 0 0 10px}
+	#picnews li{ float:left;width:125px;height:120px; overflow:hidden;padding:0 3px 0 0}
+
+#channelLi { margin:0 -15px 0 0}
+#channelLi dl{ width:328px; float:left}
+#channelLi .l{ padding-left:20px;} 
+#channelLi .r{ margin:8px 8px 0 0;color:#b70007}
+#channelLi dd{ padding:8px 10px 0 0;}
+#channelLi li{ height:22px; overflow:hidden}
+#channelLi span{ font:11px/180% Tahoma; padding-right:8px}
+	#zhaosheng {}
+	#zhaosheng dt{ background:transparent url('bg_g.gif') repeat-x 0 -250px; height:28px}
+	#zhaosheng dt .l{ background: url('ico_g.gif') no-repeat 0 -146px; font:bold 16px/24px "Microsoft Yahei"; color: #990000; padding-left:22px}
+	#zhaosheng dt .r{color: #990000; padding-right:8px;}
+	#zhaosheng li{ height:24px; font-family:simsun}#zhaosheng li a{ font:14px/180% Verdana;}
+	#baomingxg li{ display:inline}
+	
+#hotZhuanye{ margin:10px auto; width:681px; height:56px; line-height:56px; background: transparent url('bg_zhuanye.gif') no-repeat 0 0; font-size:14px; }
+#hotZhuanye a { color:#0000cc;}
+  #hotZhuanye span{ display:inline-block; width:100px; height:16px; padding:20px 0; text-align:center; color :#BC0109; float:left; line-height:16px; }
+
+#jianzhang{ border:1px #ccc solid; width:676px; margin-bottom:8px;}
+	#jianzhang dt{ background:transparent url('bg_g.gif') repeat-x 0 -250px; height:28px}
+	#jianzhang dt .l{ font:bold 16px/32px "Microsoft Yahei"; color: #990000; padding-left:22px}
+	#jianzhang dt .r{color: #990000; padding-right:8px;}
+	#jianzhang dd { padding:10px 10px 0 10px;}
+	#jianzhangRight{ float:left; width:480px; padding-left:10px;}
+		#focusImg{ float:left; overflow:hidden; padding:4px; border:1px #ccc solid;}
+		#miaoshu{ font:14px/180% Verdana; margin-bottom:6px;}
+		#anniu{ text-align:right;}
+
+#contentTag{ border:1px #c8c8c8 solid; border-top:none; }
+.tagc1{font-size:12px;color:#555;}
+.tagc2{font-size:14px;font-weight:bold;color:#333;}
+.tags { line-height:200%;}
+.tags dt{font:bold 14px/200% Verdana;padding:15px 0 0 0;border-bottom:1px dotted #333;margin:0 0 8px 0;color:#CA0000 }
+
+#zixun{ text-align:center; border-bottom:1px #000 dotted; padding:20px 40px}
+#zixun a{ padding:0 20px;  }

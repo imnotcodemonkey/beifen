@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=gb2312" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.title/}-在职研究生招生网</title>
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="http://i.haiwen.net/js/jquery.min.js"></script>
+<script type="text/javascript" src="/_res/_c2012.js?2012-7-13"></script>
+<link href="/_res/_g2012.css" rel="stylesheet" type="text/css" />
+<link href="/_res/_p.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="contpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+	{dede:include file='head.htm' ismake='yes'/}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong>  {dede:field name='position'/}Tag</div>
+		<div id="contentTag">
+			<div id="listLi">
+	            		{dede:list orderby='sortrank' pagesize='10'}
+				<dl>
+					<dt><a href="[field:arcurl/]" class="tit">[field:title/]</a> </dt>
+					<dd>[field:description/]...  <span>_[field:pubdate function="GetDateMK(@me)"/]</span>  <a href="[field:arcurl/]">更多</a>&gt;&gt;</dd>
+				</dl>
+				{/dede:list}
+			</div>
+			<div id="pages"><ul>{dede:pagelist listsize='4'/}</ul></div>
+		</div><!-- /content-->
+	</div><!-- //左边内容结束 -->
+
+<!-- //右边内容开始 -->
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>报名咨询</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+<!--
+<dl id="subMenu">
+<dt><strong>栏目列表</strong></dt>
+<dd id="subMenuDd">
+<ul>
+	{dede:channel type='son' currentstyle='<li><a href="~typelink~" class="Hover">
+	~typename~</a></li>'}
+<li><a href="[field:typeurl/]">[field:typename/]</a></li>{/dede:channel}
+</ul>
+</dd>
+</dl>
+-->
+<dl id="so">
+<dt><strong>站内搜索</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" />
+<input type="submit" id="sobtn" value="搜索" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+<!-- {dede:myad name='rightCourse'/} -->
+<dl id="course">
+<dt><strong>热门课程</strong></dt>
+<dd>
+<ol class="c1 ico2">
+	{dede:arclist row=10 orderby=click typeid='5,6,8,9,10,11,12,13,14,15,122' flag='c' }
+<li><span>·</span><a href="[field:arcurl/]">[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+
+<dl id="hot">
+<dt><strong>热点内容</strong></dt>
+<dd>
+<ol class="c1 ico2">
+	{dede:arclist row=10 orderby=click}
+<li>·<a href="[field:arcurl/]">[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+</div><!-- /right -->
+
+
+<script type="text/javascript">
+pageCount(-4,0);
+</script>
+
+<div class="c"><strong>{dede:field.title/}</strong></div>
+</div>
+
+	{dede:include file='footer.htm' ismake='yes'/}
+
+	</div>
+</div>
+</div>
+
+</body>
+</html>
+

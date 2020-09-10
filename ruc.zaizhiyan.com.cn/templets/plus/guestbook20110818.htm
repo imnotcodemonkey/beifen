@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title><?php echo $cfg_webname; ?> - 在线报名</title>
+<link href="/images/style.css" rel="stylesheet" type="text/css" media="screen" />
+<style>
+body{ background:#FFF; text-align:left;font:12px/150% Verdana}
+dl{ height:24px;width:630px; clear:both;padding:3px 0 0 0}
+dl.txt{ height:96px}
+dt{ float:left;width:96px; text-align:right}
+dd{ float:left;width:75%;}
+input { }
+label{padding:0 2px 0 0}
+.TR{ width:90px; text-align:right}
+td{ border:1px gray solid;padding:2px 6px}
+ul,li{ display:inline;margin:0;padding:0}
+</style>
+<script type="text/javascript">
+function show(o){
+if(o.checked==true)document.getElementById('other').style.display='';
+else document.getElementById('other').style.display='none';
+
+}
+function getlaiyuan(){
+str='';
+for(i=1;i<=8;i++){
+	o=document.getElementById('l'+i);
+	if(o.checked==true)str+=o.value+'|';
+	else str=str.replace(o.value+'|',"");
+}
+document.getElementById('homepage').value=str+document.getElementById('other').value;
+}
+</script>
+</head>
+<body>
+
+
+<?php
+if(!empty($_GET['gotopagerank'])){
+?><p>
+　以下是在线报名情况：</p>
+  {dede:datalist}
+
+ <dl><dt>No. <?php echo $fields['id']; ?></dt><dd>　录入时间：<?php echo MyDate('Y-m-d H:i',$fields['dtime']); ?>
+ </dd></dl>
+ <table cellpadding="0" style="width: 90%;border-collapse: collapse;">
+	<tr>
+		<td class="TR">真实姓名：</td><td style="width:40%"><?php echo $fields['uname']; ?></td>
+		<td class="TR">文化程度：</td><td><?php echo $fields['face']; ?></td>
+	</tr>
+	<tr>
+		<td class="TR">申请专业：</td><td><?php echo $fields['title']; ?></td>
+		<td class="TR">电子邮箱：</td><td><?php echo $fields['email']; ?></td>
+	</tr>
+	<tr>
+		<td class="TR">手机号码：</td><td><?php echo $fields['mid']; ?></td>
+		<td class="TR">座机号码：</td><td><?php echo $fields['tid']; ?></td>
+	</tr>
+	<tr>
+		<td class="TR">有无学士学位：</td><td><?php echo $fields['qq']; ?></td>
+		<td class="TR">性别：</td><td><?php echo $fields['sex']; ?></td>
+	</tr>
+	<tr>
+		<td class="TR">信息来源：</td><td colspan="3"><?php echo $fields['homepage']; ?></td>
+	</tr>
+	<tr>
+		<td class="TR">咨询问题：</td><td colspan="3"><?php echo $fields['msg']; ?></td>
+	</tr>
+</table>
+
+ <dl><dt> <a style="display:none" href='?action=admin&id=<?php echo $fields['id']; ?>&job=del' style="color:red">[删除]</a> IP地址：</dt><dd><a href="http://www.ip.cn/?ip=<?php echo $fields['ip']; ?>" target="_blank"><?php echo $fields['ip']; ?></a></dd></dl>
+<div style="height:20px;overflow:hidden;"><strong> 填写报名表页面：</strong><a href="<?php echo $fields['url']; ?>" target="_blank"><?php echo $fields['url']; ?></a></div>
+<div style="height:24px;overflow:hidden;"><strong> 系统监测到的来源：</strong><a style="color:red" href="<?php echo $fields['seo']; ?>" target="_blank"><?php echo $fields['seo']; ?></a></div>
+<hr style="width:150px" />
+
+    {/dede:datalist}
+  {dede:pagelist listsize='5'/}   
+<?php
+}
+else{
+?>
+      <form method="post" action="?zhuanhan=true#" name="form1">
+<dl><dt></dt><dd><b>请如实详细填写下表，以方便我们联系和提交你个人的相关信息</b></dd></dl>
+<table cellpadding="0" style="width: 100%;border-collapse: collapse;">
+	<tr>
+		<td class="TR">真实姓名：</td><td><input type="text" maxlength="10" name="uname" value="<?php echo $g_name; ?>" class="ipt-txt"/></td>
+		<td class="TR">文化程度：</td><td><input name="face" value="" /></td>
+	</tr>
+	<tr>
+		<td class="TR">申请专业：</td><td><input type="text" maxlength="50" name="title" class="ipt-txt"/></td>
+		<td class="TR">电子邮箱：</td><td><input maxlength="80" type="text" name="email" class="ipt-txt"/></td>
+	</tr>
+	<tr>
+		<td class="TR">手机号码：</td><td><input name="mid" id="" value="" /></td>
+		<td class="TR">座机号码：</td><td><input name="tid" id="" value="" /></td>
+	</tr>
+	<tr>
+		<td class="TR">咨询问题：</td><td colspan="3"><textarea name="msg" cols="60" rows="5" class="textarea ipt-txt"></textarea></td>
+	</tr>
+	<tr>
+		<td class="TR">有无学士学位：</td><td><input name="qq" type="radio" id="x1" value="有" /><label for="x1">有</label><input name="qq" type="radio" id="x2" value="无" /><label for="x2">无</label></td>
+		<td class="TR">性别：</td><td><input name="sex" type="radio" id="s1" value="男" /><label for="s1">男</label><input name="sex" type="radio" id="s2" value="女" /><label for="s2">女</label></td>
+	</tr>
+	<tr>
+		<td class="TR">信息来源：</td><td colspan="3" onmouseover="getlaiyuan()" onkeyup="getlaiyuan()">
+		<input name="laiyuan" type="checkbox" value="baidu" id="l1" /><label for="l1">baidu</label>
+		<input name="laiyuan" type="checkbox" value="google" id="l2" /><label for="l2">google</label>
+		<input name="laiyuan" type="checkbox" value="新浪" id="l3" /><label for="l3">新浪</label>
+		<input name="laiyuan" type="checkbox" value="论坛" id="l4" /><label for="l4">论坛</label>
+		<input name="laiyuan" type="checkbox" value="报纸" id="l5" /><label for="l5">报纸</label>
+		<input name="laiyuan" type="checkbox" value="宣传材料" id="l6" /><label for="l6">宣传材料</label>
+		<input name="laiyuan" type="checkbox" value="朋友介绍" id="l7" /><label for="l7">朋友介绍</label><br />
+		<input name="laiyuan" type="checkbox" value="直接输入网址" id="l8" /><label for="l8">直接输入网址</label>
+		<input name="laiyuan" type="checkbox" value="其它" onclick="show(this)" id="l9" /><label for="l9">其它</label>
+		<input name="other" id="other" size="38" style="display:none" value="" />
+		<input type="hidden" value="" name="homepage" id="homepage" />
+		<input type="hidden" value="<?php echo $_COOKIE['seo'];?>" name="seo" id="seo" />
+		<input type="hidden" value="<?php echo $_GET['url'];?>" name="url" id="url" />
+		</td>
+	</tr>
+</table>
+
+        <input type='hidden' name='action' value='save' />
+<dl><dt></dt><dd><input maxlength="1000" type="submit" name="Submit" value="提 交" class="btn-2" />
+<input type="reset" name="Submit2" value="取 消" class="btn-2" /></dd></dl>
+      </form>
+<?php
+}
+?>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8678d9f40dca667b59cafa08b7dd44ee' type='text/javascript'%3E%3C/script%3E"));
+</script>
+      </body>
+</html>

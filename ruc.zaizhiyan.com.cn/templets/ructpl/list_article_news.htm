@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.seotitle /}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="listpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong> {dede:field name='position'/}列表</div>
+<div id="content" class="content">{dede:field.content/}</div>
+		<div id="listbox">
+
+{dede:list pagesize='10'}
+<dl>
+	[field:array runphp='yes']@me = (empty(@me['litpic']) ? "" : "<dt class=\"img\"><a href=\"{@me['arcurl']}\"><img onload=\"hideno(this)\" alt=\"\" src=\"{@me['litpic']}\"/></a></dt>"); [/field:array]
+	<dt><a href="[field:arcurl/]" class="tit">[field:title/]</a> </dt>
+	<dd>[field:description/]...　<span>_[field:pubdate function="GetDateMK(@me)"/]</span>　<a href="[field:arcurl/]">详细>></a></dd>
+</dl>
+{/dede:list}
+		</div>
+		<div id="pages"><ul>{dede:pagelist listitem="info,index,end,pre,next,pageno,option" listsize="5"/}</ul></div>
+	</div><!-- /left -->
+	
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>报名咨询</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+<dl id="subMenu">
+<dt><strong>栏目列表</strong></dt>
+<dd id="subMenuDd">
+<ul>
+{dede:channel type='son' currentstyle='<li><a href="~typelink~" class="Hover">~typename~</a></li>'}
+<li><a href="[field:typeurl/]">[field:typename/]</a></li>{/dede:channel}
+</ul>
+</dd>
+</dl>
+<dl id="so">
+<dt><strong>站内搜索</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" />
+<input type="submit" id="sobtn" value="搜索" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+{dede:myad name='rightCourse'/}
+
+
+</div><!-- /right -->
+
+<script type="text/javascript">checkCont()</script>
+
+<div class="c"></div>
+</div>
+
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+{dede:include file='inc/kefu.html' ismake='yes'/}
+</body>
+</html>

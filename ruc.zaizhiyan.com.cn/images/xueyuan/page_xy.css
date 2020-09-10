@@ -1,0 +1,56 @@
+﻿@charset "utf-8";
+
+#main{width:950px; margin:8px 0 0 0}
+#mainleft{width:660px;float: left;}
+	.pnext{ border-top:1px gray dotted;}
+	.pnext ul{ padding:6px 0;}
+	.pnext ul li{padding:4px 0;}
+	.xglinks{width:656px; border:1px #d3d0d0 solid; padding:0px 2px;}
+		.xglinks dt{height:22px; background-color:#ff0000;}
+		.xglinks dt .l{width:200px; text-align:center; font:14px/22px Verdana; color:#FFFFFF;}
+		.xglinks dd{padding:4px 16px;}
+		
+#listpage #mainleft{width:650px; float:left; border:1px #F00 solid; padding:8px 5px; min-height:800px;}
+#contpage #mainleft #content{width:650px; float:left; border:1px #F00 solid; padding:8px 5px; min-height:800px; margin-bottom:8px;}
+
+#pright{width:280px;float:right;}
+#place{ background: transparent url('xueyuan/ico_place.gif') no-repeat 4px 12px; padding:8px 0 0 20px ; }
+
+#listLi { padding:4px;8px;}
+#listLi dt { background:transparent url('xueyuan/ico_02.gif') no-repeat left center;padding:0 0 0 18px}
+#listLi dt a{ font:14px/140% Verdana;}
+#listLi dd{ height:18px; overflow:hidden; color:#888;margin:0 0 10px 18px}
+
+#pages { text-align:center}
+#pages li{ display:inline}
+#pages a { display:inline-block;padding:0 3px}
+
+
+#content{}
+	#content h1{ font:bold 14.5pt/200% "Microsoft Yahei"; text-align: center;color:#800000; margin:12px 0;border-bottom:1px #808080 dotted}
+	.intro { display:none}
+	#content .info{ text-align:center;font:12px/18px Verdana; margin:0 0 20px 0}
+	#content .info *{font:12px/18px Verdana;}
+	.content {font:14px/200% simsun;word-break:break-all; word-wrap:break-word; line-height:20jpx;}
+	.content a{ text-decoration:underline; color:#990000}
+	.content a:hover{ text-decoration:none;color:#CC3300}
+	#prevnext { border-top:1px #808080 dotted; vertical-align:bottom;}
+	
+#channel { padding:12px 5px 0 15px;}
+#channel dl{margin:0 12px 12px 0 }
+#channel *{ margin:0;padding:0;list-style-type:none}
+	#picnews {}
+	#picnews dd{ padding:8px 0 0 10px}
+	#picnews li{ float:left;width:125px;height:120px; overflow:hidden;padding:0 3px 0 0}
+
+#channelLi { margin:0 -15px 0 0}
+#channelLi dl{ width:322px; float:left} 
+#channelLi .r{ margin:8px 8px 0 0;color:#FFF}
+#channelLi dd{ padding:8px 10px}
+#channelLi li{ height:22px; overflow:hidden}
+#channelLi span{ font:11px/180% Tahoma; padding-right:8px}
+
+	#zhaosheng dt{ background:transparent url('dashborder_bg.gif') repeat-x 0 24px; height:26px}
+	#zhaosheng dt .l{ background: url('xueyuan/ico_place.gif') no-repeat 0 center; font:bold 16px/24px "Microsoft Yahei"; color: #990000; padding-left:18px}
+	#zhaosheng dt .r{}
+	#zhaosheng li{ height:24px; font-family:simsun}#zhaosheng li a{ font:14px/180% Verdana;}

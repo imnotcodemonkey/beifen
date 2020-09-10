@@ -1,0 +1,111 @@
+﻿@charset "utf-8";
+
+body,dd,dt,dl,form,table,tr,td,ul,li,ol{margin:0; padding:0;}
+body{font:12px/150% verdana 宋体; color:#333; text-align:center;}
+ul,ol{list-style:none;}
+img{ border-width:0;}
+
+.c{ clear:both}
+.l{ float:left;}
+.r{ float:right;}
+.hr10{ height:8px;}
+.red{ color:#dc0415}
+
+input{vertical-align:middle}
+
+a{text-decoration:none;color:#333}
+a:hover{color:#dc0415; text-decoration:underline;}
+
+#wrapper{width:950px; margin:0 auto; text-align:left;}
+#header{height:202px; position:relative;}
+	#topad{ height:172px; background: transparent url('top_bg.jpg') no-repeat top center;}
+	#topad h1{ font:30px/30px 微软雅黑; font-weight:400; position:absolute; top:80px; left:330px; margin:0; padding:0 }
+	#nav{height:30px; background: transparent url('top_nav_bg.jpg') repeat-x; overflow:hidden;} 
+		#nav ul li{float:left; text-align:center; width:auto;}
+		#nav li a{display:block; float:left; width:96px;color:#FFF; font:14px/30px Verdana; overflow:hidden}
+		#nav li a:hover{ background: transparent url('hover.gif') no-repeat; text-decoration:none;}
+		
+.mold{ background:transparent url('news_title_bg.gif') no-repeat right top;}
+	.mold dt{height:29px; background:transparent url('news_title.gif') no-repeat left top; overflow:hidden}
+		.mold dt .l{display:block; width:87px; text-align:center; font:14px/31px Verdana; color:#dc0415;}
+	.mold dd{border:1px #FF3300 solid; border-top-width:0; padding:8px}
+	.mold li{ height:21px; overflow:hidden;}
+	.mold li a{line-height:24px;}
+.ico1 li{ padding-left:20px; background:transparent url('ico_01.gif') no-repeat 4px 6px;}
+
+.mold1{}
+	.mold1 dt{background: transparent url('lb_title.gif') no-repeat left center; height:20px; overflow:hidden;}
+		.mold1 dt .l{display:block; width:120px; text-align:center; font:13px/20px Verdana; color:#534f4f}
+		.mold1 dt .r{margin:0 20px 0 0;}
+	.mold1 dd{ border-top:2px #dfdfdf solid; border-right:2px #dfdfdf solid; background-color:#f7f7f7; border-bottom:0;border-left:0; overflow:auto; zoom:1;}
+	.mold1 dd p{ text-indent:2em; line-height:24px; padding:0; margin:0;}
+	.mold1 li{height:24px;overflow:hidden;}
+	.mold1 li a{line-height:22px;}
+.ico2 li{padding-left:20px; background:transparent url('ico_02.gif') no-repeat 4px 6px;}
+
+.mold2{}
+	.mold2 dt{ background:transparent url('right_title_bg.jpg') center top no-repeat; height:25px; margin-top:8px;}
+		.mold2 dt .l{display:block; width:110px; text-align:center; font:14px/25px Verdana; color:#fff;}
+	.mold2 dd{border:1px #d5d5d5 solid; border-top-width:0px; padding:4px 8px; overflow:hidden;}
+	.mold2 li{overflow:hidden; height:22px; }
+	.mold2 li a{line-height:26px; }
+.ico3 ol{background:transparent url('rank_new.gif') 0px 4px no-repeat;}
+.ico3 li{padding-left:28px; }
+
+.mold3{padding:16px 16px 0 16px; border:1px #FF3300 solid;margin:0 0 8px 0;}
+	.mold3 dt{height:29px; background:transparent url('ptitle_bg.gif') no-repeat right top; overflow:hidden;width:192px; }
+		.mold3 dt .l{display:block; width:140px; text-align:center;font:14px/24px Verdana; color:#fff}
+	.mold3 dd{padding:0px 10px;}
+	.mold3 dd p{ line-height:16px; margin:16px 0px;}
+
+.mold4{margin:8px 0 0 0}
+	.mold4 dt{ background:transparent url('rtitle_bg.gif') center bottom no-repeat; overflow:hidden; height:28px;}
+		.mold4 dt .l{display:block; width:80px; text-align:center; font:14px/28px Verdana; }
+	.mold4 dd{border:1px #d3d3d3 solid; border-top-width:0px; padding:0px 8px;}
+	.mold4 li{ overflow:hidden; height:30px;}
+	.mold4 li a{line-height:30px; }
+.ico4 li{ background:transparent url('ico_01.gif') no-repeat 4px 10px; padding:0 0 0 16px;}
+
+.c1{overflow:hidden;clear:both;}
+.c1 li{width:286px;margin-right:6px;float:left;height:27px;line-height:27px;overflow:hidden;padding: 0 0 0 16px;background:url('ico_02.gif') 4px 10px no-repeat;}
+
+
+#tcpic{width:660px; float:left;margin:8px 0 0 0;}
+/*tcpic scroll
+----------------------------------*/
+.infiniteCarousel {width: 640px;position: relative;margin-left:auto;margin-right:auto;}
+.infiniteCarousel .picContent {width: 610px; overflow: auto;height: 150px;margin: 0 15px;top: 0;}
+.infiniteCarousel .picContent ul {width: 580px; list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0 6px 0 0px;top: 0;}
+.infiniteCarousel ul a img {border:1px solid #E3E3E3;padding:2px;width:88px;height:113px;display:block;}
+.infiniteCarousel ul li {display:block;color:#6C6D61;float:left;padding: 10px 3px;height: 147px;width: 96px;text-align:center;}
+.infiniteCarousel ul li a,.infiniteCarousel ul li a:visited{color:#6C6D61;}
+.infiniteCarousel .picContent ul li a:hover{text-decoration:underline;}
+.infiniteCarousel ul li a:hover img {border-color: #aaa;}
+.infiniteCarousel ul li a span{display:block;line-height:17px;padding-top:6px;}
+.infiniteCarousel .arrow {display: block;height: 17px;width: 14px;text-indent: -9999px;position: absolute;top: 70px;cursor: pointer;outline: 0;}
+.infiniteCarousel .forward {background:url(back.gif) left center no-repeat;right: 0;}
+.infiniteCarousel .back {background:url(forward.gif) right center no-repeat;left: 0;}
+
+
+#pright{width:280px; float:right; margin-left:8px; overflow:hidden;}
+	#kaike {border:1px #d5d5d5 solid; padding:4px 8px; overflow:hidden; margin-bottom:8px; height:288px;}
+	#kaike dd{border-top:1px #dc0415 solid; padding-top:16px; line-height:150%}
+	#liuyan{border:1px #d5d5d5 solid; padding:4px 8px; overflow:hidden; height:180px;}
+		#liuyan fieldset{border:0; margin:6px 0 0 0; color:#dc0415}
+		#liuyan label {float:left;width:60px;text-align:left;padding:4px 0;}
+		#liuyan div {clear:left;margin-bottom:4px;}
+		#liuyan .ipt-txt{width:170px; line-height:24px; max-width:1800px;}
+		#liuyan .taa-txt{height:50px; max-height:50px;}
+		#liuyan .enter{margin:16px 0 0 0; text-align:center;}
+		#liuyan .buttom{padding:2px 8px; background-color:#fff; border:1px #dc0415 solid;font:12px/24px;}
+
+
+#flinks{ clear:both; width:950px;margin-top:10px; border:1px #d5d5d5 solid; }
+	#flinks dt{height:30px; background-color:#edecec; margin:0 2px;}
+	#flinks dd{padding:4px 8px;margin:0}
+	#flinks ul{ margin:0;padding:0}
+	#flinks li{padding:0 5px;  display:inline}
+	#flinks li a{ line-height:20px;  display:inline-block; width:218px}
+
+#footer{ width:950px;margin:10px 0; text-align:center; line-height:20px;}
+

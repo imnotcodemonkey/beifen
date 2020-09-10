@@ -1,0 +1,28 @@
+<link href="/_res/_menu.css" rel="stylesheet" type="text/css" />
+<script src="/_res/ddsmoothmenu.js" type="text/javascript"></script>
+<script type="text/javascript">
+ddsmoothmenu.init({
+mainmenuid: "navMenu", //menu DIV id
+orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+classname: 'ddsmoothmenu', //class added to menu's outer DIV
+//customtheme: ["#1c5a80", "#18374a"],
+contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+</script>
+
+{dede:myad name='topLinks'/}
+<div id="top">
+<div id="logo"><dfn><strong>{dede:field name='title'/}</strong></dfn><a href="http://www.ruconline.com/" id="logoHome"></a></div>
+<div id="topAd" class="r">{dede:myad name='topAD'/}</div>
+</div>
+
+
+
+<div id="navMenu" class="ddsmoothmenu">
+<ul>
+<li id="homepage"><a onmouseover="Menu(this)" onfocus="this.blur()" href="/"><span>Ê×Ò³</span></a></li>
+{dede:channel type='top' row='12' currentstyle='<li class="Hover" id="nav~id~"><a onfocus="this.blur()" href="~typelink~"><span>~typename~</span></a></li>'}
+<li id="nav[field:id/]"><a onfocus="this.blur()" href="[field:typelink/]"><span>[field:typename/]</span></a></li>{/dede:channel}
+</ul>
+
+</div>

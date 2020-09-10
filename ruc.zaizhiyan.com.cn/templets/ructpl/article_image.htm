@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="contpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main" class="photo">
+
+		<div id="place"><strong>当前位置:</strong> {dede:field name='position'/}图集</div>
+		<div id="content">
+			<h1>{dede:field.title/}</h1>
+			<div class="info">
+				<small>时间:</small>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}
+				<small>来源:</small>{dede:field.source/}
+				<small>点击:</small><script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}" type='text/javascript' language="javascript"></script>次
+			</div>
+			<div class="picbox">
+
+             {dede:field name='pagestyle' alt='根据不同的页面风格输出不同的头信息' runphp='yes'}
+                if(@me==3) {
+                	@me = '<ul class="e8">';
+                }
+                else if(@me==2) {
+                	@me = "
+					<center>
+						<a href='javascript:dPlayBig();' class='c1'>原始图片</a>\r\n
+						<a href='javascript:dPlayPre();' class='c1'>上一张</a>\r\n
+						<a href='javascript:dPlayNext();' class='c1'>下一张</a>\r\n
+						<a href='javascript:dStopPlay();' class='c1'>自动 / 暂停播放</a>\r\n
+					</center>
+                	";
+                }
+                else {
+                	@me = '';
+                }
+             {/dede:field}
+             <!-- 如果使用的是多页单图模式(幻灯)，把href里的链接改为 javascript:dPlayNext(); 表示点击看下一页 -->
+             {dede:field name='imgurls' alt='图片输出区'}
+                [field:pagestyle runphp='yes'] @me= (@me==3 ? '<li>' : '');[/field:pagestyle]
+                <p><a class="img" href='[field:linkurl/]' [field:pagestyle runphp='yes'] @me= (@me==3 ? 'class="pic"' : ''); [/field:pagestyle]>
+                  <img src='[field:imgsrc/]' id='bigimg' [field:imgwidth /] alt='[field:alttext /]' border='0' /></a><br />
+                <a href='[field:linkurl/]' [field:pagestyle runphp='yes']@me = (@me==3 ? 'class="title"' : '');[/field:pagestyle]>
+                	[field:alttext /]
+                </a></p>
+                [field:pagestyle runphp='yes'] @me = (@me==3 ? '</li>' : ''); [/field:pagestyle]
+             {/dede:field}
+
+             {dede:field name='pagestyle' alt='根据不同的风格输出不同的结尾信息' runphp='yes'}
+                if(@me==3) {
+                @me = '</ul>';
+                }
+                else if(@me==2) {
+                	@me = "<script language='javascript'>dStartPlay();</script>\r\n";
+               	}
+               	else {
+               		@me = '';
+                }
+             {/dede:field}
+			</div>
+           	<div class="content">{dede:field.body/}</div>
+
+			<div id="prevnext">
+				<ul>
+					<li>{dede:prenext get='pre'/}</li>
+					<li>{dede:prenext get='next'/}</li>
+				</ul>
+			</div><!-- /prevnext -->
+		</div><!-- content -->
+
+</div>
+
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.title/}</title>
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="contpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main" class="photo">
+		<div id="place"><strong>当前位置:</strong> <a href="{dede:global.cfg_cmsurl/}/">首页</a> &gt;  TAG</div>
+	<div id="content">
+		<dl class="tags">
+			<dt><strong>最新标签</strong></dt>
+			<dd>
+            {dede:tag row='60' sort='new'}
+            <a href='[field:link/]' class='tagc[field:highlight /]'>[field:tag /]</a>
+            {/dede:tag}
+			</dd>
+		</dl>
+	
+
+		<dl class="tags">
+			<dt><strong>当月热门标签</strong></dt>
+			<dd>
+            {dede:tag row='60' sort='month'}
+            <a href='[field:link/]' class='tagc[field:highlight /]'>[field:tag /]</a>
+            {/dede:tag}
+			</dd>
+		</dl>
+
+		<dl class="tags">
+			<dt><strong>随机标签</strong></dt>
+			<dd>
+            {dede:tag row='100' sort='rand'}
+            <a href='[field:link/]' class='tagc[field:highlight /]'>[field:tag /]</a>
+            {/dede:tag}
+			</dd>
+		</dl>
+	</div>
+	
+
+</div>
+
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+{dede:include file='inc/kefu.html' ismake='yes'/}
+</body>
+</html>

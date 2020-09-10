@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.title/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="contpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong> <a href='/'>主页</a> &gt; {dede:field name='title'/}</div>
+		<div id="content">
+				<h1>{dede:field.title/}</h1>
+			<div class="content">
+			　　{dede:field.body/}
+		 	 </div>
+		</div><!-- /viewbox -->
+	</div>
+	
+
+<!-- //右边内容开始 -->
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>报名咨询</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+
+<dl id="so">
+<dt><strong>站内搜索</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" />
+<input type="submit" id="sobtn" value="搜索" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+{dede:myad name='rightCourse'/}
+
+<dl class="none">
+	<dt><strong>相关页面</strong></dt>
+	<dd>
+		<ol>
+{dede:likesgpage}
+<li><a href="[field:url /]">[field:title /]</a></li>
+{/dede:likesgpage}
+		</ol>
+	</dd>
+</dl>
+
+
+</div><!-- /right -->
+
+
+
+<div class="c"><strong>{dede:field.title/}</strong></div>
+</div>
+
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+
+</body>
+</html>
+

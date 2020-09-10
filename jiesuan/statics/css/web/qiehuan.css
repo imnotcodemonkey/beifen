@@ -1,0 +1,18 @@
+@charset "gb2312";
+/* CSS Document */
+
+/*banner*/
+
+/****bann new***/
+.kePublic{ position:relative; height:400px;}
+.index_focus { position: relative;width: 100%;height: 400px;margin: 0 auto;overflow: hidden;}
+.index_focus .bd li {display: none; position: absolute;left: 0;top: 0;	width:1920px;}
+.index_focus_post {z-index: 10;}
+.index_focus .pic {height: auto;display: block;margin:0 auto}
+.index_focus .slide_nav {position: absolute;left: 45%;bottom:2%; display:none;}
+.index_focus .slide_nav a {cursor:pointer;float:left;font-size:28px;font-family: arial;color: #fff;padding:5px 10px;}
+.index_focus .slide_nav li:hover,.index_focus .slide_nav .on{text-decoration: none;color: #9c0;filter: alpha(opacity=80);opacity: 0.8;}
+.index_focus_pre,.index_focus_next {display: none;position: absolute;top: 50%; margin-top: -36px;width:40px;height:43px;text-indent: 100%;white-space: nowrap;overflow: hidden;z-index: 10;background: url(../images/button.jpg) no-repeat;}
+.index_focus_pre {left: 62px;background-position: 0 0;}
+.index_focus_next {right: 62px;background-position: 0 -43px;}
+/****bann new***/

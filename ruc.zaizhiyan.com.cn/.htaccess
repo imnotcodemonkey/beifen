@@ -1,0 +1,4 @@
+
+RewriteEngine on
+rewritecond %{http_host} ^www.ruconline.com/ [nc]
+rewriterule ^(.*)$ http://zaizhi.ruc.edu.cn/$1 [r=301,nc] 

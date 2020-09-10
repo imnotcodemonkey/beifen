@@ -1,0 +1,97 @@
+﻿@charset "utf-8";
+form,table,td,input,textarea,dd,dl,dt,blockquote,body{ padding:0px; margin:0px;}
+body {font:12px/150% Verdana,宋体; background: #FFF url('bg04.gif') repeat center top ; text-align:center;color:#333 }
+ul li{ list-style:none;}
+img  { border-width:0;}
+table{ border-collapse:collapse;}
+ 
+.btm10{ border-bottom:10px #f6f5ec solid;}
+
+.c{ clear:both;}
+.l{ float:left}
+.r{ float:right}
+.h{ display:none} .c strong{ display:none}
+.none { display:none}
+
+.red { color:#FF3300}
+.blue{ color:#0066CC}
+.gray{ color:gray}
+.green{ color:green}
+
+.TL{ text-align: left}
+.TR{ text-align: right}
+.TC{ text-align: center}
+
+input,select{ vertical-align:middle;}
+
+a span{ font-size:12px;}
+
+a{ color:#000; text-decoration:none;}
+a:hover{ color: #800000; text-decoration:underline}
+
+#counter{ display:none}
+#courseBox{width:600px;height:360px;background:#FFF;border:5px #CCC solid;position:relative;padding:0 6px 0 6px}
+#courseBox dt{ border-bottom:1px #996633 solid; font:bold 12pt/28px 微软雅黑; color:#CC3300}
+#courseBox dt div{}
+
+#bldBox{width:600px;height:360px;background:#FFF;border:5px #CCC solid;position:relative;padding:0 6px 0 6px}
+#bldBox dt{ border-bottom:1px #996633 solid; font:bold 12pt/28px 微软雅黑; color:#CC3300}
+#bldBox dt div{}
+
+.close {width:30px;height:30px;position:absolute;top:-15px;right:-15px;background:url('../res/closebox.png') no-repeat;_background-image:none; cursor:pointer;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src="/templets/res/closebox.png");}
+
+#counter { display:none}
+
+#outA{background:transparent url('bg.gif') repeat-x}
+
+#wrapper { width:950px; margin:0 auto;text-align:left;}
+
+#header{ height:164px; position:relative;background: transparent url('top_01.jpg') no-repeat center 25px;z-index:100 }
+	#header ul{margin:0;padding:0}
+	#header #topLinks{ height:25px; line-height:26px; background:transparent url('bg.gif') repeat-x; padding:0 2px;overflow:hidden}
+		#topLinks li{ display:inline; line-height:28px}
+	#top{ height:90px; background: transparent url('top_02.jpg') no-repeat 640px 10px; }
+	#logo { width:310px; height:88px; float:left;background: transparent url('logo.jpg') no-repeat left 5px}
+		#logo #logoHome { display:block; height:90px; }
+	#logo dfn strong{ display:none}
+	#logo h1,#logo dfn{font:14px/150% 微软雅黑,宋体;color:#058e01;margin:0;letter-spacing:1px;position:absolute; left:5px; top:-23px;}
+	#topAd{ padding:10px 0 0 0 }
+	
+	#Nav { background:#5f5f5f url('navbg.gif') repeat-x;height:54px}
+	#header #mainNav { display:block;height:28px;overflow:hidden; padding:0}
+	#mainNav li{display:inline-block; float:left; text-align:center;width:auto;}
+		#mainNav #homepage{background:none;}
+	#mainNav li a{ display:block; float:left;color:#000; height:26px; overflow:hidden; font:14px/29px Verdana !important;border-left:1px #FFF solid; width:87px;}
+	#mainNav #homepage a{ border-left:none;width:70px}
+	#mainNav li a span{ }
+	#mainNav li.Hover a,#mainNav #homepage.Hover a,#mainNav li a:hover{background:url('hover.gif') repeat-x; color:#FFF;}
+	/*#mainNav li.Hover a span,#mainNav #homepage.Hover a span,#mainNav li a:hover span{background:url('hover.gif') no-repeat right 0;}*/
+	#mainNav li a:hover{ text-decoration:none;}
+	
+/*	#subNav { position: absolute;}
+	#subNav ul{ width:126px; margin:1px -25px; background:#af1414;float:left;position:relative;visibility: hidden;padding:5px; border:1px #990000 solid ; }
+	#subNav #first{width:84px;margin:0}
+	#subNav li{ font:12px/150% simsun;color:#FFF }
+	#subNav li a{ font:12px/20px Verdana;color:#FFF}
+	
+*/
+#subNav ul{ display:none;padding:6px 0 0 6px}
+#subNav ul.show{ display:block;overflow:hidden; }
+#subNav li{ display:inline}
+	#subNav li{ font:12px/150% simsun;color:#FFF }
+	#subNav li a{ font:12px/20px Verdana;color:#FFF}
+
+.mold { background:transparent url('new_02.png') no-repeat right top}
+.mold dt{ height:29px; background: transparent url('name.gif') no-repeat; overflow:hidden}
+.mold dt .l{ width:93px; display:block; text-align:center;font:bold 13px/30px Verdana;color:#000}
+.mold dd{ border:1px #a4011e solid;border-top-width:0;padding:4px 8px;}
+.mold li{ height:20px; overflow:hidden;}
+.mold li a{  line-height:24px}
+
+
+	
+#footer { background: #A20321; text-align:center;margin-top:10px}
+#footer *,#footer a{ color:#FFF}
+	#links { height:28px;line-height:28px; background:#666666}
+	#copyright{ padding:10px 0; }

@@ -1,0 +1,58 @@
+<div id="menus" style="display:none">
+<ul id="u"></ul>
+<ul id="u4">{dede:channel type='son' typeid='4' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u16">{dede:channel type='son' typeid='16' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u17">{dede:channel type='son' typeid='17' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u22">{dede:channel type='son' typeid='22' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u23">{dede:channel type='son' typeid='23' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u26">{dede:channel type='son' typeid='26' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u34">{dede:channel type='son' typeid='34' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u37">{dede:channel type='son' typeid='37' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u44">{dede:channel type='son' typeid='44' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+<ul id="u35">{dede:channel type='son' typeid='35' row='16'}<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}</ul>
+</div>
+<script type="text/javascript">
+function getID(str){return document.getElementById(str)}
+for(i=0;i<100;i++){
+	N='nav'+i;S='u'+i;
+	if(getID(S)&&getID(N)&&getID('navMenu')){
+		if(getID(S).innerHTML.length>10){
+		getID(N).innerHTML=getID(N).innerHTML+"<ul>"+getID(S).innerHTML+"</ul>";
+		}
+	}
+}
+</script>
+
+
+
+<div id="counter">
+<script src="http://s4.cnzz.com/stat.php?id=2148642&web_id=2148642" language="JavaScript"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17200751-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</div>
+
+<div id="footer">
+<div id="links">
+{dede:myad name='footLinks'/}
+</div>
+
+<div id="copyright">
+地址: {dede:global.cfg_address/}电话: {dede:global.cfg_tel/}Email: <a href="mailto:{dede:global.cfg_email/}">{dede:global.cfg_email/}</a><br />
+{dede:global.cfg_powerby/} <a href="http://www.ruconline.com/r/copyright.html" style="text-decoration:none">版权所有</a>{dede:global.cfg_beian/}
+<br>
+</div>
+</div>
+<script type="text/javascript">
+geturl();
+</script>
+

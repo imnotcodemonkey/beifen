@@ -1,0 +1,17 @@
+{dede:myad name='topLinks'/}
+<div id="top">
+<div id="logo"><dfn><strong>{dede:field name='title'/}</strong></dfn><a href="http://www.ruconline.com/" id="logoHome"></a></div>
+<div id="topAd" class="r">{dede:myad name='topAD'/}</div>
+</div>
+
+
+<div id="Nav">
+<ul id="mainNav">
+<li id="homepage"><a onmouseover="Menu(this)" onfocus="this.blur()" href="/"><span>Ê×Ò³</span></a></li>
+{dede:channel type='top' row='12' currentstyle='<li class="Hover" id="nav~id~"><a onmouseover="Menu(this)" onmouseout="Menu(this)" onfocus="this.blur()" href="~typelink~"><span>~typename~</span></a></li>'}
+<li id="nav[field:id/]"><a onmouseover="Menu(this)" onmouseout="Menu(this)" onfocus="this.blur()" href="[field:typelink/]"><span>[field:typename/]</span></a></li>{/dede:channel}
+</ul>
+<div id="subNav">
+</div>
+
+</div>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset={dede:global.cfg_soft_lang/}" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>վ_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="/images/common.js?2010-4-28"></script>
+<link href="/images/style.css" rel="stylesheet" type="text/css" />
+<link href="/images/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="listpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+<div id="header">
+{dede:include file='inc/top.htm' ismake='yes'/}
+</div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>ǰλ:</strong>  <strong style="color:red">{dede:global name='keyword' function='RemoveXSS(@me)'/}</strong> Ľ</div>
+		<div class="place"> </div><!-- /place -->
+		<div id="listbox">
+
+{dede:list perpage='20'}
+<dl>
+	[field:array runphp='yes']@me = (empty(@me['litpic']) ? "" : "<dt class=\"img\"><a href=\"{@me['arcurl']}\"><img onload=\"hideno(this)\" alt=\"\" src=\"{@me['litpic']}\"/></a></dt>"); [/field:array]
+	<dt><a href="[field:arcurl/]" class="tit">[field:title/]</a> </dt>
+	<dd>[field:description/]...<span>_[field:pubdate function="GetDateMK(@me)"/]</span><a href="[field:arcurl/]">ϸ&gt;&gt;</a></dd>
+</dl>
+{/dede:list}
+		</div>
+		<div id="pages"><ul>{dede:pagelist listsize='4'/}</ul></div>
+	</div><!-- /left -->
+
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>ѯ</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+<dl id="so">
+<dt><strong>վ</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" value="{dede:global name='keyword' function='RemoveXSS(@me)'/}" />
+<input type="submit" id="sobtn" value="" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+{dede:myad name='rightCourse'/}
+
+
+</div><!-- /right -->
+
+<script type="text/javascript">checkCont()</script>
+
+<div class="c"></div>
+</div>
+
+{dede:include file='inc/footer.htm' ismake='yes'/}
+
+
+	</div>
+</div>
+</div>
+
+</body>
+</html>

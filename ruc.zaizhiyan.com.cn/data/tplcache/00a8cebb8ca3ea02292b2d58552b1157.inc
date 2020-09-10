@@ -1,0 +1,1 @@
+<li><a onfocus="this.blur()" href="[field:typelink/]">[field:typename/]</a></li>

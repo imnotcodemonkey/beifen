@@ -1,0 +1,36 @@
+<?php
+$typeArr[4] = '招生简章';
+$typeArr[5] = '新闻学院';
+$typeArr[6] = '经济学院';
+$typeArr[8] = '外国语学院';
+$typeArr[9] = '财政金融学院';
+$typeArr[10] = '统计学院';
+$typeArr[11] = '社会与人口学院';
+$typeArr[12] = '环境学院';
+$typeArr[13] = '公共管理学院';
+$typeArr[14] = '哲学院';
+$typeArr[15] = '商学院';
+$typeArr[26] = '报名相关';
+$typeArr[27] = '报名地址';
+$typeArr[153] = '教育学院';
+$typeArr[28] = '缴费流程';
+$typeArr[29] = '报名表下载';
+$typeArr[31] = '校内地图';
+$typeArr[152] = '劳动人事学院';
+$typeArr[140] = '法学院';
+$typeArr[33] = '推荐教材';
+$typeArr[70] = '中意硕士';
+$typeArr[148] = '信息学院';
+$typeArr[149] = '农业农村发展学院';
+$typeArr[150] = '历史学院';
+$typeArr[122] = '艺术学院';
+$typeArr[130] = '在线报名';
+$typeArr[137] = '关于我们';
+$typeArr[151] = '马克思主义学院';
+$typeArr[141] = '教务信息';
+$typeArr[142] = '学院新闻';
+$typeArr[143] = '问题答疑';
+$typeArr[144] = '考试辅导';
+$typeArr[145] = '报考指南';
+$typeArr[154] = '财政金融学院';
+?>

@@ -1,0 +1,24 @@
+﻿/*-----------------------------------------初始化样式------------------------------------------*/
+body,html{ padding:0; margin:0 auto; background-color:#fff; color:#191919;}
+img{ border:none;}
+h1,h2,h3,h4,h5,h6,hr,blockquote,form,ul,ol,li,p,pre,dl,dt,dd,fieldset,legend,button,input,textarea,th,td{ padding:0; margin:0;}
+ul,ol,li{ list-style:none;}
+button,input,select,textarea { font-size:100%;}
+table{ border-collapse:collapse; border-spacing:0;}
+.clear{ clear:both; line-height:0px; font-size:0px;}
+.l{ float:left; display:inline;}
+.r{ float:right;}
+span.more a{ color:#c00000;}
+
+/*------------------------------------------字体样式-------------------------------------------*/
+body,button,input,select,textarea{ font-family:"宋体"; color:#191919; font-size:12px;}
+h1,h2,h3,h4,h5,h6{ font-size:100%;}
+
+/*-----------------------------------------全局元素布局----------------------------------------*/
+/*全局布局样式*/
+#wrap{ width:950px; margin:0 auto;}
+#navMain{padding:0 10px; margin:0 auto;}
+	#navMain a{ float:left; display:block; padding:4px 8px; height: 24px; line-height:24px; border-left:1px #fff solid; background:url('navmain_bg.gif') repeat-x 0 0; text-align:center; font-size:14px; color:#fbf4cb; font-weight:bold; text-decoration:none; }
+
+#txtA{ float:left; padding:0 50px; text-indent:2em; font:14px/30px "微软雅黑" bold}
+

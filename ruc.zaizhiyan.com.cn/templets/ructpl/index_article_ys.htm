@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>人大艺术学院在职研究生_艺术专业在职研- {dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field.seotitle /},{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description function='html2text(@me)'/}" />
+<script language="javascript" type="text/javascript" src="/images/common.js" ></script>
+<script language="javascript" type="text/javascript" src="/images/xueyuan/j.js" ></script>
+<script language="javascript" type="text/javascript" src="/images/xueyuan/pic_scroll.js"></script>
+
+<link href="/images/xueyuan/style_xy.css" rel="stylesheet" type="text/css" />
+<link href="/images/xueyuan/home_xy.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="wrapper">
+{dede:include file='head_ys.htm'/}
+<div id="main">
+<div id="pleft">
+<div id="flashnews">
+<div id="pics">
+<div class="aaronShow">
+    {dede:arclist type='image' flag='f' row='7' typeid="122" titlelen='136' orderby='pubdate'}
+	<div id="Switch_[field:global name=autoindex/]" class="slide">
+	<a href="[field:arcurl/]" rel="[field:global name=autoindex/]"><img alt="[field:title/]" onmouseout="goonSwitch();" onmouseover="pauseSwitch();" src="[field:picname/]" /></a></div>
+	{/dede:arclist}
+	<div id="SwitchTitle" onmouseout="goonSwitch();" onmouseover="pauseSwitch();"></div>
+	<ul id="SwitchNav"></ul>
+	<div class="bg" onmouseover="pauseSwitch();"  onmouseout="goonSwitch();"></div>
+</div>
+</div>
+<script type="text/javascript">
+<!--
+//--------
+
+var Switcher = new Array();
+{dede:arclist type='image' flag='f' row='7' typeid="122" titlelen='136' orderby='pubdate'}
+Switcher[[field:global name=autoindex/]] = Array() ;
+Switcher[[field:global name=autoindex/]]['link'] = "[field:arcurl/]";
+Switcher[[field:global name=autoindex/]]['desc']  = "[field:desc/]";
+Switcher[[field:global name=autoindex/]]['title']  = "[field:title/]";
+{/dede:arclist}
+var MaxScreen = Switcher.length-1;
+var refreshSwitchTimer = null;
+switchPic(1);
+refreshSwitchTimer = setTimeout('reSwitchPic();', 3000);
+
+//-->
+</script>
+
+</div>
+
+<div id="bignews">
+<dl class="mold ico1">
+<dt><a class="l" href="/c/list-128.html"><strong>学院新闻</strong></a></dt>
+<dd>
+<ol>
+{dede:arclist row='12' typeid="128" orderby='pubdate' titlelen='160'}
+<li>[field:textlink/]</li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+</div>
+
+<div id="tcpic">
+<dl class="mold">
+<dt><a class="l" href="/c/list-129.html"><strong>名师介绍</strong></a></dt>
+<dd>
+<div class="infiniteCarousel">
+<div class="picContent">
+<ul>
+{dede:arclist typeid='129' row=6 orderby=pubdate  type='image' imgwidth='88' imgheight='113'}
+<li><a href="[field:arcurl/]">[field:image/]<span class="title">[field:shorttitle/]</span></a></li>
+{/dede:arclist}
+</ul>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div id="jianjie">
+<dl class="mold">
+<dt><a href="/r/22/yishuxueyuan.html" class="l"><strong>学院简介</strong></a></dt>
+<dd>
+<div class="jianjiepic">
+{dede:myad name='xy_xw'/}
+</div>
+
+<div class="jianjietxt">
+{dede:sql sql="select * from #@__archives where id='4431' and channel='1'"}
+     [field:description function="cn_substr('@me',2000)"/]<br/><span class="quanwen"><a href='/plus/view.php?aid=[field:id/]' target='_blank'>
+	阅读全文</a>>></span>
+{/dede:sql}
+</div>
+<div class="c"></div>
+</dd>
+</dl>
+</div>
+<div id="zzy">
+<dl class="mold">
+<dt><a href="/c/list-122.html" class="l"><strong>艺术学在职研</strong></a></dt>
+<dd>
+
+<div class="zy">
+<div class="zyl">
+<dl class="mold1">
+<dt><a href="/r/22/22fkhh2b.html" class="l">设计艺术学专业</a></dt>
+<dd>
+{dede:myad name='kecheng-xzgl'/}
+</dd>
+</dl>
+</div>
+<div class="zyr">
+<dl class="mold1 ico2">
+<dt><a href="/c/list-125.html" class="l">设计艺术学</a><a href="http://jrc.rucedu.cn/xinwenxuezhuanye/" class="r"></a></dt>
+<dd> 
+<ol>
+{dede:arclist typeid='125' titlelen='40' row='6'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+
+<div class="zy">
+<div class="zyl">
+<dl class="mold1">
+<dt><a href="/r/22/22fkhh2y.html" class="l">音乐学专业</a></dt>
+<dd>
+{dede:myad name='kecheng-shbz'/}
+</dd>
+</dl>
+</div>
+<div class="zyr">
+<dl class="mold1 ico2">
+<dt><a href="/c/list-126.html" class="l">音乐学</a><a href="http://jrc.rucedu.cn/xinwenxuezhuanye/" class="r"></a></dt>
+<dd> 
+<ol>
+{dede:arclist typeid='126' titlelen='40' row='6'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+
+<div class="zy">
+<div class="zyl">
+<dl class="mold1">
+<dt><a href="/r/22/22fkhh2f.html" class="l">美术学专业</a></dt>
+<dd>
+{dede:myad name='kecheng-csgh'/}
+</dd>
+</dl>
+</div>
+<div class="zyr">
+<dl class="mold1 ico2">
+<dt><a href="/c/list-127.html" class="l">美术学</a><a href="http://jrc.rucedu.cn/xinwenxuezhuanye/" class="r"></a></dt>
+<dd> 
+<ol>
+{dede:arclist typeid='127' titlelen='40' row='6'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+
+</dd>
+</dl>
+</div>
+</div>
+<div id="pright">
+<dl id="kaike">
+<dt><a href="http://zaizhi.ruc.edu.cn/baoming.html" target="_blank"><img alt="" src="/images/xueyuan/lianxi.gif" /></a></dt>
+<dd>
+{dede:myad name='kaike_gg'/}
+</dd>
+</dl>
+<!--{dede:include file='zixun.htm'/}-->
+<dl class="mold2">
+<dt><a href="/c/list-122.html" class="l"><strong>招生简章</strong></a></dt>
+<dd>
+<ol>
+{dede:arclist typeid='122' titlelen='40'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+<dl class="mold2 ico3">
+<dt><a href="/c/list-23.html" class="l"><strong>相关问题</strong></a></dt>
+<dd>
+<ol>
+{dede:arclist typeid='24,25,60,65' titlelen='40' row='9'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+<dl class="mold2 ico3">
+<dt><a href="/c/list-63.html" class="l"><strong>历年真题</strong></a></dt>
+<dd>
+<ol>
+{dede:arclist typeid='63' titlelen='40' row='9'}
+<li><a href='[field:arcurl/]'>[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+<div id="lcpic">{dede:myad name='liucheng'/}</div>
+</div>
+<div class="c"></div>
+</div>
+{dede:include file='footer_xy.htm'/}
+</div>
+{dede:include file='inc/kefu.html' ismake='yes'/}
+</body>
+</html>

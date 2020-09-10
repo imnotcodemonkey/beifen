@@ -1,0 +1,120 @@
+{dede:config.pagesize value='20'/}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>挑错管理</title>
+<script language="javascript" src="js/main.js"></script>
+<script language="javascript" src="js/list.js"></script>
+<link href="css/base.css" rel='stylesheet' type='text/css'>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<script type="text/javascript">
+function getOneItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+				allSel = document.form2.id[i].value;
+				break;
+		}
+	}
+	return allSel;
+}
+function getCheckboxItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			if(allSel=="")
+				allSel=document.form2.id[i].value;
+			else
+				allSel=allSel+"`"+document.form2.id[i].value;
+		}
+	}
+	return allSel;
+}
+function selAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(!document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=true;
+		}
+	}
+}
+function noSelAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=false;
+		}
+	}
+}
+function delArc(id){
+	var qstr=getCheckboxItem();
+	location="erraddsave.php?id="+qstr+"&dopost=delete";
+}
+</script>
+	<form name="form2">
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+   <td height="28" background="images/tbg.gif" colspan="8" style="padding-left:10px;">
+     <b>文章错误管理</b>&nbsp;</td>
+</tr>
+  <tr align="center" bgcolor="#FBFCE2" height="26">
+      <td width="30">选择</td> 
+      <td width="36">编号</td>
+      <td width="100">挑错人</td>
+      <td width="100">挑错时间</td>
+      <td width="">文章名称</td>
+      <td width="">错误内容</td>
+      <td width="">修改建议</td>
+      <td width="">联系方式</td>
+      </tr>
+   {dede:datalist}
+    <tr align="center" bgcolor="#FFFFFF" height="26" align="center" onMouseMove="javascript:this.bgColor='#FCFDEE';" 
+
+onMouseOut="javascript:this.bgColor='#FFFFFF';">
+        <td><input name="id" type="checkbox" id="id" value="{dede:field.id/}" class="np"></td> 
+        <td>{dede:field.id /}</td>
+        <td>{dede:field.mid function='username(@me)'/}</td>
+        <td>{dede:field.sendtime function='GetDateMk(@me)'/}</td>
+        <td style="text-align:left">
+		<img src='images/part-list.gif' title="预览" alt="预览" onClick="viewArc({dede:field.aid/});" style='cursor:pointer' border='0' width='16' height='16' />
+        		<img src='images/gtk-edit.png' title="编辑" alt="编辑" onClick="editArc({dede:field.aid/});" style='cursor:pointer' border='0' width='16' height='16' />
+<a href='archives_do.php?dopost=editArchives&aid={dede:field.aid/}'><u>{dede:field.title /}</u></a>
+        </td>
+        <td style="text-align:left">{dede:field.errtxt /}</td>
+        <td style="text-align:left">{dede:field.oktxt /}</td>
+        <td style="text-align:left">{dede:field.email /}</td>
+        </tr>
+		{/dede:datalist}
+        <tr align="left" bgcolor="#ffffff" height="28">
+            <td colspan="8">
+            <a href="javascript:selAll()" class="coolbg">全选</a>
+            <a href="javascript:noSelAll()" class="coolbg">取消</a>
+            <a href="javascript:delArc(0)" class="coolbg">&nbsp;删除&nbsp;</a>
+          </td>
+      </tr>
+     <tr align="center" bgcolor="#F9FCEF" height="28"> 
+      <td colspan="88">
+      	{dede:pagelist listsize=5/}
+      </td>
+     </tr>
+   </table>
+   </td>
+</tr>
+</table>
+</form>
+</body>
+</html>

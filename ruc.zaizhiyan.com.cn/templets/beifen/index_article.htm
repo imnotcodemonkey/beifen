@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=gb2312" http-equiv="Content-Type" />
+<meta content="zh-cn" http-equiv="Content-Language" />
+<title>{dede:field.seotitle /}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script type="text/javascript" src="http://i.haiwen.net/js/jquery.min.js"></script>
+<script type="text/javascript" src="/_res/_c2012.js?2012-7-13"></script>
+<link href="/_res/_g2012.css" rel="stylesheet" type="text/css" />
+<link href="/_res/_p.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="channelpage">
+<div id="outA"><div id="outB">
+<div id="wrapper">
+    <div id="header">
+	{dede:include file='head.htm' ismake='yes'/}
+    </div>
+
+<div id="main">
+	<div class="l" id="mainLeft">
+		<div id="place"><strong>当前位置:</strong> {dede:field name='position'/}列表</div>
+		<div id="outBox">
+<div id="content" class="content">{dede:field.content/}</div>
+
+<div id="channel">
+<dl id="picnews" class="mold">
+<dt><strong class="l">图文资讯</strong></dt>
+<dd>
+<ol>
+	{dede:arclist row=5 orderby=pubdate type='image.' imgwidth='124' 
+	imgheight='94'}
+<li><a href="[field:arcurl/]">[field:image/]<span class="title">[field:title/]</span></a></li>{/dede:arclist}
+</ol>
+	<div class="c"></div>
+</dd>
+</dl>
+
+<div id="channelLi">
+	{dede:channelartlist}
+<dl class="mold">
+<dt><a href="{dede:field name='typeurl'/}" class="l">{dede:field name='typename'/}</a><a class="r" href="{dede:field name='typeurl'/}">更多&gt;&gt;</a></dt>
+<dd>
+<ol>
+	{dede:arclist titlelen='160' row='10'}
+<li><span class="date">[field:pubdate function="MyDate('m-d',@me)"/]</span><a href="[field:arcurl /]">[field:title 
+/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+	{/dede:channelartlist}
+	<div class="c"></div>
+	</div>
+</div>
+</div>
+	</div><!--left -->
+
+	<div id="mainRight" class="r">
+<dl id="lianxi">
+<dt><strong>报名咨询</strong></dt>
+<dd>
+{dede:myad name='lianxiWomen'/}
+</dd>
+</dl>
+
+<dl id="subMenu">
+<dt><strong>栏目列表</strong></dt>
+<dd id="subMenuDd">
+<ul>
+	{dede:channel type='son' currentstyle='<li><a href="~typelink~" class="Hover">
+	~typename~</a></li>'}
+<li><a href="[field:typeurl/]">[field:typename/]</a></li>{/dede:channel}
+</ul>
+</dd>
+</dl>
+<dl id="so">
+<dt><strong>站内搜索</strong></dt>
+<dd>
+<form action="{dede:field name='phpurl'/}/search.php" name="formsearch">
+<input name="keyword" id="keyword" type="text" class="searchtxt" />
+<input type="submit" id="sobtn" value="搜索" />
+<input type="hidden" name="kwtype" value="1" />
+<input type="hidden" name="searchtype" id="searchtype" value="titlekeyword" />
+</form>
+</dd>
+</dl>
+
+<!--{dede:myad name='rightCourse'/}-->	
+<dl id="course">
+<dt><strong>热门课程</strong></dt>
+<dd>
+<ol class="c1 ico2">
+	{dede:arclist row=10 orderby=click typeid='5,6,8,9,10,11,12,13,14,15,122' flag='c' }
+<li><span>·</span><a href="[field:arcurl/]">[field:title/]</a></li>
+{/dede:arclist}
+</ol>
+</dd>
+</dl>
+
+</div><!-- right -->
+
+<script type="text/javascript">checkCont()</script>
+<script type="text/javascript">
+pageCount(-1,0);
+</script>
+
+<div class="c"></div>
+</div>
+	{dede:include file='footer.htm' ismake='yes'/}
+	</div>
+</div>
+</div>
+
+</body>
+</html>

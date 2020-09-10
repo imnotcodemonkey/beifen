@@ -1,0 +1,414 @@
+<?php
+
+if (!defined('KS_SAFE')) {
+    die("KNOWNSEC");
+}
+//check_webshell.php
+
+if (!class_exists('App')) {
+    class App {
+        public $strVersion = '1.1.0';
+
+        public $strListFileName = '';
+
+        private $_arBackDoors = array();
+
+        private $_arBadWord = array('maceo@dogmile.com'=>'已知asp木马特征','ASP_KIT'=>'已知asp木马特征','JSPBackdoorReverseShell'=>'已知jsp木马特征','//JSP_KIT'=>'已知jsp木马特征','PerlKit-0.1'=>'已知perl木马特征','muquit|fhy687kq1hger'=>'已知perl木马特征','TheDarkRaver'=>'已知php木马特征','zehirhacker@hotmail.com'=>'已知木马特征','|b374k|'=>'已知php木马特征','ASPXSpy'=>'已知aspx木马特征','BuqX@hotmail.com'=>'已知木马特征','RohitabBatra'=>'已知木马特征','egy_spider'=>'已知木马特征','90sec.org'=>'已知木马特征','.:NCC:.'=>'已知木马特征','ExpDoor'=>'已知木马特征','Teknolojileri'=>'已知木马特征','simorgh-ev(dot)com'=>'已知木马特征','smkim76@icqmail.com'=>'已知木马特征','passcuamysqlthongquafileconfig'=>'已知木马特征','Hossein-Asgari'=>'已知木马特征','wacker-welt.de'=>'已知木马特征','iMHaBiRLiGi'=>'已知木马特征','john.barker446'=>'已知木马特征','lama\'s\'hell'=>'已知木马特征','aZRaiLPhp'=>'已知木马特征','phpshell'=>'可疑木马特征',':[GreenwooD]:'=>'已知木马特征','CopyrightspiderCleanBackdoor'=>'已知木马特征','WebShell'=>'可疑木马特征','//Startcodedecryption<<==='=>'可疑加密PHP文件','cat/proc/cpuinfo'=>'可疑PHP大马特征',
+            'Yahei.net'=>'PHP探针-Yahei','SYNFlood'=>'已知DDos木马特征','EvalPHPCode'=>'已知木马特征','runat=server'=>'已知木马特征','Udp1-fsockopen'=>'已知DDos木马特征','CCFlood'=>'已知DDos木马特征','b374k'=>'已知木马特征','WlhaaGJDZ2'=>'已知木马特征','dsfadafsaf3333333333333'=>'已知木马特征','xxddos'=>'已知DDos木马特征','/tmp/cmdtemp'=>'可疑PHP大马特征','cat/etc/passwd'=>'可疑PHP大马特征','cat+/etc/passwd'=>'可疑PHP大马特征','uname-a'=>'可疑PHP大马特征',')));return;?>'=>'可疑PHP大马特征','unlink(__FILE__)'=>'可疑PHP代码特征',
+            'socket_sendto'=>'可疑DDos代码特征','Request["\x'=>'可疑asp(x)代码特征','eval(gzinflate'=>'可疑PHP代码特征','eval(gzuncompress'=>'可疑PHP代码特征','xdos.s'=>'可疑PHP代码特征','allow_url_include,1'=>'可疑PHP代码特征','assert(gzinflate'=>'可疑PHP代码特征','assert(gzuncompress'=>'可疑PHP代码特征','(gzinflate)'=>'可疑PHP代码特征','(gzuncompress)'=>'可疑PHP代码特征','.gzinflate(base64_decode'=>'可疑PHP代码特征','eval(base64_decode'=>'可疑PHP代码特征','687474703a2f2f'=>'可疑PHP代码特征',
+            '/e",$_'=>'可疑PHP代码特征','/eis",$_'=>'可疑PHP代码特征','"as"."se"."rt"'=>'可疑PHP代码特征','(@$_SERVER[\'HTTP_'=>'可疑PHP代码特征','base64_decode(str_rot13'=>'可疑PHP代码特征','ies",gzuncompress'=>'可疑PHP代码特征','ies",gzinflate'=>'可疑PHP代码特征','@$_()'=>'可疑PHP代码特征','/e","\x'=>'可疑PHP代码特征','tcp://$'=>'可疑DDos木马特征','udp://'=>'可疑DDos木马特征','syn://$'=>'可疑DDos木马特征','_contents("http:'=>'可疑外部文件读写特征',
+            '_contents(\'http:'=>'可疑外部文件读写特征','fopen("http://'=>'可疑外部文件读写特征','fopen(\'http://'=>'可疑外部文件读写特征','/tmp/angel_bc'=>'可疑PHP大马特征','v0pCr3w'=>'可疑PHP大马特征','PoweredByJAE'=>'可疑PHP大马特征','LANGUAGE=VBScript.Encode'=>'可疑加密asp文件','INCLUDE(pack'=>'可疑PHP代码特征','WSCRIPT.SHELL'=>'可疑asp代码特征');
+
+        private $_strReFingerPrints = '#(exec|edoced_46esab|@preg_replace|eval|assert|call_user_func|system|proc_open|popen|curl_exec|curl_multi_exec|parse_ini_file|show_source)\\s*?\\(\\s*?\$(_POST|_GET|_REQUEST|GLOBALS)#is';
+
+
+        function __construct() {
+            KsFunc::ks_log("[*] 初始化app");
+            KsFunc::ks_progress(5);
+        }
+        function __destruct() {
+            if (KsFunc::ks_is_file($this->strListFileName)) {
+                @KsFunc::ks_unlink($this->strListFileName);
+            }
+            KsFunc::ks_log("[*] app执行完毕");
+            KsFunc::ks_progress(90);
+        }
+
+        public function run() {
+            KsVar::$bAppStatus  = 0;
+            KsVar::$arAppResult = array("info"=> "");
+            $arExtInfo = array(
+                array("路径", "行", "可疑代码", "大小","说明","md5"),
+                array("file_path", "line_num", "content", "filesize", "reason","md5hash")
+            );
+
+            $strDirName = realpath(KsVar::$strRootDir.DIRECTORY_SEPARATOR.KsVar::$arAppParam['directory']);
+
+            if (!$strDirName) {
+                KsVar::$arAppResult['info'] = '检测失败，您输入的目录不存在或者不合法';
+                return 0;
+            }
+
+            $arAllDirs              = $this->getDirsArray($strDirName); # 获取所有目录
+            $arFileTypes            = array();
+            $arExcludeFileTypes     = array('.sql','.rar','.zip','.doc','.xsl','.ppt','pptx');
+            $arExcludeFiles         = array();
+            $nMinFileSize           = 0;
+            $nMaxFileSize           = 2156484;
+            $nLimit                 = 0;
+            $bStore                 = false;
+            $callback               = "logAllFiles";
+            $this->strListFileName  = KsFunc::ks_create_tmp_file();
+
+            $this->getFilesArray(
+                $arAllDirs, $arFileTypes, $arExcludeFileTypes, $arExcludeFiles,
+                $nMinFileSize, $nMaxFileSize, $nLimit, $bStore, $callback
+            );
+            KsFunc::ks_progress(20);
+
+            $bStatus = $this->chkShell();
+
+            if (!$bStatus) {
+                KsVar::$arAppResult['info'] = '检测失败，请您检查相关文件的权限';
+                return 0;
+            } else {
+                KsVar::$bAppStatus = 1;
+                $arExtInfo = array_merge($arExtInfo, $this->_arBackDoors);
+                if(count($arExtInfo) > 2) {
+                    KsVar::$arAppResult['info'] = "检测结束，检测到存在可疑文件，请您及时删除";
+                    KsVar::$arAppResult['extinfo'] = $arExtInfo;
+                } else {
+                    KsVar::$arAppResult['info'] = "检测结束，您的站点没有检测到可疑文件，请您继续保持";
+                }
+                return 1;
+            }
+        }
+
+        /**
+         * get all the dirs , store to a array 广度优先
+         * @param string $strDirectory   指定扫描目录 ./data/
+         * @param bool $bRecursive       是否递归扫描
+         * @param int $nDirLimit         扫描目录个数
+         * @param func callback         回调函数
+         *
+         * @return array                返回所有目录，array 表示
+         */
+        public function getDirsArray($strDirectory, $bRecursive=true, $nDirLimit=0, $callback=null) {
+            $nNext = 0;
+            $strCurDir = $strDirectory;
+            $arAllDirs = array($strCurDir);
+
+            while(true) {
+                $arCurDirs = glob($strCurDir.'/*', GLOB_ONLYDIR);
+
+                if (count($arCurDirs) > 0) {
+                    foreach ($arCurDirs as $strEachDir) {
+                        $strEachDir = realpath($strEachDir);
+                        if ($nDirLimit && count($arAllDirs) == $nDirLimit) {
+                            break;
+                        }
+
+                        if ($callback) {
+                            if (function_exists($callback)) {
+                                call_user_func_array($callback, array($strEachDir));
+                            }
+                        }
+
+                        $arAllDirs[] = realpath($strEachDir);
+                    }
+                }
+
+                if (! $bRecursive ) {
+                    break;
+                }
+
+                if ($nNext == count($arAllDirs)) {
+                    break;
+                }
+
+                $strCurDir = $arAllDirs[$nNext];
+                $nNext = $nNext + 1;
+
+            }
+
+            return array_unique($arAllDirs);
+        }
+
+        /**
+         * 遍历所有文件
+         * @param array $arDirectorys           列取哪些目录
+         * @param array $arFileTypes            指定文件后缀
+         * @param array $arExcludeFileTypes     排除文件类型
+         * @param array $arExcludeFiles         排除文件
+         * @param int   $nMinFileSize           文件最小字节
+         * @param int   $nMaxFileSize           文件最大字节
+         * @param int   $nLimit                 限定扫描文件个数
+         * @param bool  $bStore                 是否将结果存储
+         * @param null  $callback               回调函数
+         *
+         * @return array
+         */
+        public function getFilesArray($arDirectorys, $arFileTypes=array(), $arExcludeFileTypes=array(),
+                                      $arExcludeFiles=array(), $nMinFileSize=0, $nMaxFileSize=0,
+                                      $nLimit=0, $bStore=true, $callback=null) {
+            $nFilesCount    = 0;
+            $arAllFiles     = array();
+            $arFileType     = array();
+            $arAllDirs      = $arDirectorys;
+
+            if($arFileTypes) {
+                foreach($arFileTypes as $strType) {
+                    $arFileType[] = "*.".$strType;
+                }
+            } else {
+                $arFileType[] = "*";
+            }
+
+            foreach($arAllDirs as  $strEachDir) {
+                foreach($arFileType as $strType) {
+                    $arCurFiles = glob($strEachDir.'/'.$strType);
+
+                    foreach($arCurFiles as $strEachFile) {
+                        $strEachFile = realpath($strEachFile);
+                        if (is_file($strEachFile)) {
+                            if ($nLimit) {
+                                if($nFilesCount === $nLimit) {
+                                    break 3;
+                                }
+                            }
+
+                            if (preg_match('#^\w{32}$#', basename($strEachFile))) {
+                                continue;
+                            }
+
+                            // 判断最小文件
+                            if ($nMinFileSize) {
+                                if (filesize($strEachFile) < $nMinFileSize) {
+                                    continue;
+                                }
+                            }
+
+                            // 判断最大文件
+                            if ($nMaxFileSize) {
+                                if (filesize($strEachFile) > $nMaxFileSize) {
+                                    continue;
+                                }
+                            }
+
+                            $strEachFileName = basename($strEachFile);
+
+                            // 排除指定后缀的文件
+                            if ($arExcludeFileTypes) {
+                                if (substr_count($strEachFileName,'.')==1) {
+                                    foreach($arExcludeFileTypes as $strEachExcludeType) {
+                                        if (strripos($strEachFileName, $strEachExcludeType) ===
+                                            strlen($strEachFileName) - strlen($strEachExcludeType)) {
+                                            continue 2;
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 排除指定文件
+                            if ($arExcludeFiles) {
+                                foreach($arExcludeFiles as $strEachExcludeFile) {
+                                    if ($strEachExcludeFile === $strEachFileName) {
+                                        continue 2;
+                                    }
+                                }
+                            }
+
+                            if ($callback) {
+                                if (function_exists($callback)) {
+                                    call_user_func_array($callback, array($strEachFile));
+                                } else if(method_exists($this, $callback)) {
+                                    call_user_func_array(array($this, $callback), array($strEachFile));
+                                }
+                            }
+
+                            if ($bStore) {
+                                $arAllFiles[] = realpath($strEachFile);
+                            }
+                            $nFilesCount ++;
+                        }
+                    }
+                }
+            }
+            return $arAllFiles;
+        }
+
+        public function chkShell() {
+            $strListFileName = $this->strListFileName;
+            $hFileList = @fopen($strListFileName, 'r');
+
+            if (!$hFileList) {
+                return false;
+            }
+
+            $nFileCount = 0;
+            $nFileNum   = 0;
+            while(!feof($hFileList)) {
+                $nFileCount ++;
+                fgets($hFileList);
+            }
+            fclose($hFileList);
+            $nStep = 70 / $nFileCount;
+
+            $hFileList = @fopen($strListFileName, 'r');
+
+            while(!feof($hFileList)){
+                $strFilePath = trim(fgets($hFileList));
+                $hEachFile = @fopen($strFilePath, 'r');
+                if(!$hEachFile) {
+                    continue;
+                }
+
+                $nLineNum = 1;
+                while(!feof($hEachFile)) {
+                    $strLineContent = fgets($hEachFile);
+                    $bstrLineContent = str_replace(" ", "", $strLineContent);
+                    //$bstrLineContent = preg_replace('%/\*(?:(?!\*/).)*\*/%', '', $bstrLineContent);
+                    $arMatchs = array();
+                    if(preg_match($this->_strReFingerPrints, $bstrLineContent, $arMatchs)) {
+                        if(strlen($strLineContent) > 500) {
+                            //$nPos = strpos($strLineContent, $arMatchs[0]);
+                            $nPos = 0; 
+                            $strLineContent = substr($strLineContent, $nPos, 500);
+                        }
+                        $this->_arBackDoors[] = array(
+                            str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), $nLineNum,
+                            $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "可疑后门文件",md5_file($strFilePath)
+                        );
+                        continue 2;
+                    }else if ($this->_arBadWord) {
+                        foreach($this->_arBadWord as $strEachBadWord => $strEachBadWordReason) {
+                            if (stripos($bstrLineContent, $strEachBadWord) !== false) {
+                                if(strlen($strLineContent) > 500) {
+                                    //$nPos = strpos($strLineContent, $strEachBadWord);
+                                    $nPos = 0;
+                                    $strLineContent = substr($strLineContent, $nPos, 500);
+                                }
+                                $this->_arBackDoors[] = array(
+                                    str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), $nLineNum,
+                                    $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), $strEachBadWordReason,md5_file($strFilePath)
+                                );
+                                continue 3;
+                            }
+                        }
+                        
+                    if (preg_match('/(?:\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+[ \t]*=[ \t]*)?\$?[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+\((?P<v1>[^,]+),[^,]+,(?P<v3>[^,]+)\)[ \t]*[;)]/U', $strLineContent, $regs))  {
+
+                            $result2 = str_replace(" ","",$regs[2]);
+                            $result2 = str_replace('"',"",$result2);
+                            $result2 = str_replace("'","",$result2);
+
+                            $result1 = str_replace(" ","",$regs[1]);
+                            $result1 = str_replace('"',"",$result1);
+                            $result1 = str_replace("'","",$result1);
+
+                            $code = strtolower(str_replace($result1, "", $result2));
+                            $wFunc = array('eval','assert','guige','@preg_replace','create_function','base64_decode','gzinflate');
+
+                            if (in_array($code, $wFunc)) {
+                                $this->_arBackDoors[] = array(
+                                str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), $nLineNum,
+                                $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "可疑后门文件",md5_file($strFilePath));
+                                continue 2;   
+                            }
+                    }
+                    if (strlen($strLineContent)>1900 and stripos($strLineContent,'<?xml') !== 0 ) {
+                            if (count(file($strFilePath)) < 4 and strpos(substr(file_get_contents($strFilePath),0,20),'<?')!== false and stripos($strLineContent,'_utf8_table=array') === false){
+                                $strLineContent = substr($strLineContent, 0, 500);
+                                $this->_arBackDoors[] = array(
+                                str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), $nLineNum,
+                                $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "单行代码太长",md5_file($strFilePath));
+                                continue 2;  
+                            }else if (count(file($strFilePath)) > 3 and (stripos($strLineContent,'base64_decode') !== false or stripos($strLineContent,'eval($_($__($___') !== false)){
+                                $strLineContent = substr($strLineContent, 0, 500);
+                                $this->_arBackDoors[] = array(
+                                str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), $nLineNum,
+                                $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "单行代码太长",md5_file($strFilePath));                                continue 2;  
+                            }
+                    }
+                }
+                    $nLineNum ++;
+                }
+                $fileFullContent = file_get_contents($strFilePath);
+
+                $fileFullContentn = str_replace('"', '', $fileFullContent);
+                $fileFullContentn = str_replace("'", '', $fileFullContentn);
+
+                if (strpos($strFilePath,';') !== false) {
+                    $strLineContent = substr($fileFullContent, 0, 500);
+                    $this->_arBackDoors[] = array(
+                        str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), '-', $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "可疑文件名",md5_file($strFilePath)
+                        ); 
+                }else if (substr(strtolower($fileFullContent),0,6) == 'gif89a' and !in_array(substr(strtolower(str_replace('._addons_', '', $strFilePath)),-4), array('.jpg','.gif','.png','.bmp')) ) {
+                    $strLineContent = substr($fileFullContent, 0, 500);
+                    $this->_arBackDoors[] = array(
+                        str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), '-', $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "可疑文件格式",md5_file($strFilePath)
+                        );   
+                }else if(stripos($fileFullContentn,'shell_exec(')!== false and stripos($fileFullContentn,'passthru(')!== false  and stripos($fileFullContentn,'system(')!== false) {
+                    $strLineContent = substr($fileFullContent, 0, 500);
+                    $this->_arBackDoors[] = array(
+                        str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), '-', $this->is_utf8($strLineContent) ? $strLineContent : iconv("GBK", "UTF-8", $strLineContent), filesize($strFilePath), "文件存在多个命令执行函数",md5_file($strFilePath)
+                        );                       
+                }else if (filesize($strFilePath)<400) {
+                    
+                    $strLineContentc = $fileFullContent;
+                    
+                    $strLineContent = str_replace(" ", "", $fileFullContentn);
+                    $strLineContent = @preg_replace('%/\*(?:(?!\*/).)*\*/%', '', $strLineContent);
+                    $strLineContent = str_replace('.', '', $strLineContent);
+                    $strLineContent = str_replace("\r", '', $strLineContent);
+                    $strLineContent = str_replace("\n", '', $strLineContent);
+                    $strLineContent = str_replace("(", '', $strLineContent);
+
+                    $badWords = array('a+f+e);','\x66\x65);%>',')));$','base64_decode','@$_SERVER[HTTP_','evalgetenv','guige','`$_GET','`$_POST','`$_REQUEST','copy$_',',array)$_','ExecuteGlobal','@preg_replace','@fwritefopen','error_reporting0','evalr','str_rot13','eval$_','executer','runat=server','$_=','${','/e,','assert','create_function','passthru','move_uploaded_file','file_put_contents');
+
+                    if (strpos($strLineContent,'<') !== false and preg_match('/[a-z]+/i',$strLineContent) == 0) {
+                                 $this->_arBackDoors[] = array(
+                                    str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), '-', $this->is_utf8($strLineContentc) ? $strLineContentc : iconv("GBK", "UTF-8", $strLineContentc), filesize($strFilePath), "文件大小可疑",md5_file($strFilePath)
+                                );                       
+                    }else{
+                        foreach($badWords as $badWord) {
+                            if (stripos($strLineContent, $badWord) !== false and strpos($strLineContent,'<') !== false and substr(strtolower($strLineContent),0,4) != '<!--') {
+                                if (substr_count(basename($strFilePath),'.') ==1 and in_array(substr(strtolower(basename($strFilePath)),-4), array('.jpg','.gif','.png','.bmp','html','.htm'))) {
+                                    break ;
+                                }
+                                $this->_arBackDoors[] = array(
+                                    str_replace(KsVar::$strRootDir, '.', $this->is_utf8($strFilePath) ? $strFilePath : iconv("GBK", "UTF-8", $strFilePath)), '-', $this->is_utf8($strLineContentc) ? $strLineContentc : iconv("GBK", "UTF-8", $strLineContentc), filesize($strFilePath), "文件大小可疑",md5_file($strFilePath)
+                                );
+                                break ;
+                                
+                             }
+                        }
+                    }
+                }
+
+                $nFileNum ++;
+                KsFunc::ks_log(20 + intval($nFileNum * $nStep));
+                KsFunc::ks_progress(20 + intval($nFileNum * $nStep));
+                fclose($hEachFile);
+            }
+
+            @fclose($hFileList);
+            @unlink($strListFileName);
+            return true;
+        }
+
+        public function logAllFiles($strFileName) {
+            $strListFileName = $this->strListFileName;
+            @file_put_contents($strListFileName, $strFileName."\n", FILE_APPEND);
+        }
+
+        public function is_utf8($word){
+            if (preg_match("/^([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}/",$word) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}$/",$word) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){2,}/",$word) == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+}
+
